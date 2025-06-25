@@ -1,0 +1,15 @@
+{
+  "name": "flig_agenda",
+  "version": "1.0.0",
+  "description": "Este projeto tem como objetivo o desenvolvimento de um **site** para **agendamento de serviços** prestados por comércios da cidade de **Piripiri (PI)** e regiões próximas. A plataforma conecta **clientes** a **estabelecimentos locais**, facilitando o gerenciamento de horários, serviços oferecidos e comunicação entre as partes envolvidas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
