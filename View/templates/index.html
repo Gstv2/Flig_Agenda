@@ -8,6 +8,10 @@
 <body>
     <h1>Bem-vindo ao Flask!</h1>
     <p>Esse é um exemplo com template e CSS.</p>
+    <a href="{{ url_for('cadastro') }}">
+        <button>Ir para Cadastro</button>
+    </a>
+
 </body>
 <script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
 </html>
