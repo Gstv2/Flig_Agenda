@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salões em Piripiri</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/saloes.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Overlay e Sidebar -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2>Piripiri</h2>
+      <button class="close-btn" onclick="fecharMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <ul class="sidebar-links">
+      <li><i class="fas fa-home"></i> Início</li>
+      <li><i class="fas fa-cut"></i> Salão de Beleza</li>
+      <li><i class="fas fa-car"></i> Oficina Mecânica</li>
+      <li><i class="fas fa-stethoscope"></i> Clínica</li>
+      <li><i class="fas fa-utensils"></i> Restaurantes</li>
+      <li><i class="fas fa-dumbbell"></i> Academias</li>
+      <li><i class="fas fa-dog"></i> Pet Shops</li>
+      <li><i class="fas fa-search"></i> Buscar</li>
+      <hr />
+      <li><i class="fas fa-info-circle"></i> Sobre Nós</li>
+      <li><i class="fas fa-question-circle"></i> Ajuda & Suporte</li>
+    </ul>
+    <div class="sidebar-bottom">
+      <button class="btn-sidebar"><i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar</button>
+    </div>
+  </aside>
+  <header class="hero">
+    <div class="navbar">
+      <div class="nav-left">
+        <i class="fas fa-bars" onclick="abrirMenu()"></i>
+      </div>
+      <span class="logo">Piripiri</span>
+      <div class="nav-right">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero saloes-hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Encontre Salões de Beleza em Piripiri</h1>
+        <p>Descubra e agende com os melhores profissionais de beleza perto de você</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Busque por salões, serviços ou profissionais...">
+          <button class="btn-green">Buscar</button>
+        </div>
+        <p class="login-hint">Faça login para agendar seus serviços favoritos</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="filtros">
+    <div class="container">
+      <div class="filtros-wrapper">
+        <button class="filtro-btn ativo">Todos os Salões</button>
+        <button class="filtro-btn">Cabelo</button>
+        <button class="filtro-btn">Unhas</button>
+        <button class="filtro-btn">Maquiagem</button>
+        <button class="filtro-btn">Spa</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="empresas">
+    <div class="container">
+      <div class="empresas-grid">
+        <!-- Exemplo de card -->
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Cabeleireira Exemplo</strong>
+          <p><i class="fas fa-map-marker-alt"></i> Av. Exemplo, 124</p>
+          <p><i class="far fa-clock"></i> Aberto até 19:00</p>
+          <p class="tags">Corte · Coloração · Penteado</p>
+          <a href="salao_mock.html" class="btn-green">Agendar Agora</a>
+        </div>
+      </div>
+      <div class="center-btn">
+        <button class="btn-load">Carregar Mais</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Piripiri</h4>
+        <p>Agende seus serviços com facilidade.</p>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li>Salão de Beleza</li>
+          <li>Oficina Mecânica</li>
+          <li>Clínica</li>
+          <li>Prestador de Serviço</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <p>support@piripiri.com</p>
+        <p>+55 (88) 9999-9999</p>
+        <p>Piripiri, PI - Brasil</p>
+      </div>
+    </div>
+    <div class="copy">
+      &copy; 2025 Piripiri. Todos os direitos reservados.
+    </div>
+  </footer>
+  <script src="js/index.js"></script>
+</body>
+</html>

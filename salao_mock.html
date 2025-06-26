@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabeleireira Exemplo</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/empresa.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Overlay e Sidebar -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2>Piripiri</h2>
+      <button class="close-btn" onclick="fecharMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <ul class="sidebar-links">
+      <li><i class="fas fa-home"></i> Início</li>
+      <li><i class="fas fa-cut"></i> Salão de Beleza</li>
+      <li><i class="fas fa-car"></i> Oficina Mecânica</li>
+      <li><i class="fas fa-stethoscope"></i> Clínica</li>
+      <li><i class="fas fa-utensils"></i> Restaurantes</li>
+      <li><i class="fas fa-dumbbell"></i> Academias</li>
+      <li><i class="fas fa-dog"></i> Pet Shops</li>
+      <li><i class="fas fa-search"></i> Buscar</li>
+      <hr />
+      <li><i class="fas fa-info-circle"></i> Sobre Nós</li>
+      <li><i class="fas fa-question-circle"></i> Ajuda & Suporte</li>
+    </ul>
+    <div class="sidebar-bottom">
+      <button class="btn-sidebar"><i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar</button>
+    </div>
+  </aside>
+  <header class="hero">
+    <div class="navbar">
+      <div class="nav-left">
+        <i class="fas fa-bars" onclick="abrirMenu()"></i>
+      </div>
+      <span class="logo">Piripiri</span>
+      <div class="nav-right">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="perfil-banner">
+    <div class="banner-imagem"></div>
+    <div class="banner-container">
+      <div class="banner-info">
+        <a href="saloes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para salões</a>
+        <h1>Cabeleireira Exemplo</h1>
+        <p class="avaliacoes"><i class="fas fa-star"></i> 4.8 (124 avaliações)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="perfil-tabs">
+    <div class="tabs-container">
+      <button class="tab ativo">Informações</button>
+      <button class="tab">Serviços</button>
+      <button class="tab">Avaliações</button>
+      <button class="tab">Agendar</button>
+    </div>
+  </section>
+
+  <section class="perfil-conteudo">
+    <div class="info-principal">
+      <div class="sobre">
+        <h2>Sobre Cabeleireira Exemplo</h2>
+        <p>
+          Cabeleireira Exemplo é um salão de beleza premium que oferece uma ampla gama de serviços, incluindo cortes de cabelo, coloração, penteados e tratamentos. Nossa equipe de profissionais experientes é dedicada a fornecer serviços da mais alta qualidade e garantir a satisfação do cliente.
+        </p>
+        <h3>Galeria</h3>
+        <div class="galeria">
+          <div class="img-placeholder"></div>
+          <div class="img-placeholder"></div>
+          <div class="img-placeholder"></div>
+          <div class="img-placeholder"></div>
+          <div class="img-placeholder"></div>
+          <div class="img-placeholder"></div>
+        </div>
+
+        <h3>Comodidades</h3>
+        <ul class="comodidades">
+          <li><i class="fas fa-check-circle"></i> Wi-Fi Grátis</li>
+          <li><i class="fas fa-check-circle"></i> Estacionamento Disponível</li>
+          <li><i class="fas fa-check-circle"></i> Acessível para Cadeiras</li>
+          <li><i class="fas fa-check-circle"></i> Ar Condicionado</li>
+          <li><i class="fas fa-check-circle"></i> Aceita Cartões</li>
+          <li><i class="fas fa-check-circle"></i> Ambiente Familiar</li>
+        </ul>
+      </div>
+
+      <aside class="contato-card">
+        <h3>Informações de Contato</h3>
+        <p><strong>Endereço</strong><br>Av. Exemplo 124, Centro, Piripiri</p>
+        <p><strong>Horário de Funcionamento</strong><br>Segunda - Sábado: 9:00 - 19:00</p>
+        <p><strong>Telefone</strong><br>+55 (88) 9999-9999</p>
+        <button class="btn-green">Ligar Agora</button>
+        <button class="btn-outline">Ver no Mapa</button>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Piripiri</h4>
+        <p>Agende seus serviços com facilidade.</p>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li>Salão de Beleza</li>
+          <li>Oficina Mecânica</li>
+          <li>Clínica</li>
+          <li>Prestador de Serviço</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <p>support@piripiri.com</p>
+        <p>+55 (88) 9999-9999</p>
+        <p>Piripiri, PI - Brasil</p>
+      </div>
+    </div>
+    <div class="copy">&copy; 2025 Piripiri. Todos os direitos reservados.</div>
+  </footer>
+  <script src="js/index.js"></script>
+</body>
+</html>

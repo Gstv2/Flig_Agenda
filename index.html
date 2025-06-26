@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piripiri - Agende seus serviços</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Overlay e Sidebar -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2>Piripiri</h2>
+      <button class="close-btn" onclick="fecharMenu()"><i class="fas fa-times"></i></button>
+    </div>
+    <ul class="sidebar-links">
+      <li><i class="fas fa-home"></i> Início</li>
+      <li><i class="fas fa-cut"></i> Salão de Beleza</li>
+      <li><i class="fas fa-car"></i> Oficina Mecânica</li>
+      <li><i class="fas fa-stethoscope"></i> Clínica</li>
+      <li><i class="fas fa-utensils"></i> Restaurantes</li>
+      <li><i class="fas fa-dumbbell"></i> Academias</li>
+      <li><i class="fas fa-dog"></i> Pet Shops</li>
+      <li><i class="fas fa-search"></i> Buscar</li>
+      <hr />
+      <li><i class="fas fa-info-circle"></i> Sobre Nós</li>
+      <li><i class="fas fa-question-circle"></i> Ajuda & Suporte</li>
+    </ul>
+    <div class="sidebar-bottom">
+      <button class="btn-sidebar"><i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar</button>
+    </div>
+  </aside>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="navbar">
+      <div class="nav-left">
+        <i class="fas fa-bars" onclick="abrirMenu()"></i>
+      </div>
+      <span class="logo">Piripiri</span>
+      <div class="nav-right">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#"><i class="fas fa-user"></i></a>
+      </div>
+    </div>
+    <div class="hero-content container">
+      <div class="hero-text">
+        <h1>Agende seus serviços<br>em Piripiri com<br><strong>facilidade</strong></h1>
+        <p>Encontre e agende profissionais confiáveis em sua cidade</p>
+        <a href="#" class="btn-green">Começar Agora</a>
+      </div>
+      <div class="hero-image">
+        <img src="assets/hero-img.png" alt="Ilustração Piripiri" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Categorias -->
+  <section class="categorias">
+    <div class="container">
+      <h2>Categorias de Serviços</h2>
+      <div class="categorias-wrapper">
+        <button class="seta"><i class="fas fa-chevron-left"></i></button>
+        <div class="categorias-grid">
+          <a class="categoria" href="saloes.html"><i class="fas fa-cut"></i><span>Salão de Beleza</span></a>
+          <a class="categoria" href="#"><i class="fas fa-car"></i><span>Oficina Mecânica</span></a>
+          <a class="categoria" href="#"><i class="fas fa-stethoscope"></i><span>Clínica</span></a>
+          <a class="categoria" href="#"><i class="fas fa-user-cog"></i><span>Prestador de Serviço</span></a>
+          <a class="categoria" href="#"><i class="fas fa-utensils"></i><span>Restaurantes</span></a>
+          <a class="categoria" href="#"><i class="fas fa-dumbbell"></i><span>Academias</span></a>
+        </div>
+        <button class="seta"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empresas em Destaque -->
+  <section class="empresas">
+    <div class="container">
+      <h2>Empresas em Destaque</h2>
+      <div class="empresas-grid">
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Cabeleireira Exemplo</strong>
+          <p>Especializada em cortes modernos e técnicas de coloração.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Auto Center Piripiri</strong>
+          <p>Serviços completos de mecânica com profissionais certificados.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Clínica Saúde Total</strong>
+          <p>Atendimento médico com especialistas em diversas áreas da saúde.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Tech Support Services</strong>
+          <p>Suporte de TI profissional para empresas e pessoas físicas.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Bella Estética</strong>
+          <p>Tratamentos faciais, massagens e serviços completos de spa.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Mecânica Rápida</strong>
+          <p>Reparos e manutenção automotiva rápidos com preços justos.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Consultório Dr. Silva</strong>
+          <p>Medicina familiar com atendimento personalizado para todas as idades.</p>
+        </div>
+        <div class="empresa-card">
+          <div class="empresa-imagem"></div>
+          <strong>Home Cleaning Pro</strong>
+          <p>Serviços profissionais de limpeza para residências e escritórios.</p>
+        </div>
+      </div>
+      <div class="center-btn">
+        <a href="#" class="btn-green">Ver Todas as Empresas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona -->
+  <section class="como-funciona">
+    <div class="container">
+      <h2>Como Funciona</h2>
+      <div class="etapas">
+        <div class="etapa">
+          <div class="numero">1</div>
+          <h3>Escolha um Serviço</h3>
+          <p>Navegue pelas categorias e encontre o serviço que você precisa.</p>
+        </div>
+        <div class="etapa">
+          <div class="numero">2</div>
+          <h3>Selecione um Profissional</h3>
+          <p>Compare avaliações, comentários e disponibilidade de profissionais confiáveis.</p>
+        </div>
+        <div class="etapa">
+          <div class="numero">3</div>
+          <h3>Agende e Aproveite</h3>
+          <p>Marque seu horário e aproveite um serviço de qualidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Piripiri</h4>
+        <p>Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.</p>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li>Salão de Beleza</li>
+          <li>Oficina Mecânica</li>
+          <li>Clínica</li>
+          <li>Prestador de Serviço</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <p>support@piripiri.com</p>
+        <p>+55 (86) 9999-9999</p>
+        <p>Piripiri, PI - Brasil</p>
+      </div>
+    </div>
+    <div class="copy">
+      © 2025 Piripiri. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/index.js"></script>
+</body>
+</html>

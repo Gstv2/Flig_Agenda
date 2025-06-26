@@ -1,0 +1,237 @@
+/* === Banner da Empresa === */
+.perfil-banner {
+  position: relative;
+  background-color: #e5e5e5;
+  height: 220px;
+  border-bottom: 1px solid #ddd;
+}
+
+.perfil-banner .banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.banner-imagem {
+  position: absolute;
+  inset: 0;
+  background: #ccc center/cover no-repeat;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.banner-info {
+  position: relative;
+  z-index: 1;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.banner-info h1, .banner-info .avaliacoes {
+  text-align: left;
+  width: 100%;
+}
+
+.banner-info h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.avaliacoes {
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.avaliacoes i {
+  color: #f1c40f;
+  margin-right: 0.3rem;
+}
+
+.btn-back {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #0C2D48;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+}
+
+.btn-back:hover {
+  background-color: #f4f4f4;
+}
+
+/* === Abas === */
+.perfil-tabs {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+}
+
+.tabs-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0.75rem 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  color: #1e2d3d;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab:hover {
+  background: #e3eef9;
+  color: #1b4f72;
+}
+
+.tab.ativo {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* === Conteúdo Principal === */
+.perfil-conteudo {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.info-principal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.sobre {
+  flex: 2;
+  min-width: 280px;
+}
+
+.sobre h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.sobre p {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.sobre h3 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.75rem;
+  font-weight: 600;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.img-placeholder {
+  width: 100%;
+  padding-top: 75%;
+  background: #eee;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.comodidades {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.comodidades i {
+  color: #2ecc71;
+  margin-right: 0.5rem;
+}
+
+/* === Cartão de Contato === */
+.contato-card {
+  flex: 1;
+  min-width: 260px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  height: fit-content;
+}
+
+.contato-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.contato-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.btn-outline {
+  background: white;
+  color: #0C2D48;
+  border: 1px solid #ccc;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.btn-outline:hover {
+  background: #f2f2f2;
+}
+
+.hero {
+  background-color: #0C2D48;
+  color: white;
+  padding-bottom: 0.7rem;
+}
