@@ -1,43 +1,55 @@
-# Sistema de Agendamento de Serviços para Piripiri e Região
+## 05/07/2025 - 01:17h
 
-Este projeto tem como objetivo o desenvolvimento de um **site** para **agendamento de serviços** prestados por comércios da cidade de **Piripiri (PI)** e regiões próximas. A plataforma conecta **clientes** a **estabelecimentos locais**, facilitando o gerenciamento de horários, serviços oferecidos e comunicação entre as partes envolvidas.
+## Estrutura do Projeto (temporária)
+```
+Flig_Agenda/
+├── assets/
+│   └── hero-img.png
+├── css/
+│   ├── style.css          # Estilos principais
+│   ├── saloes.css         # Estilos específicos para salões
+│   └── empresa.css        # Estilos específicos para empresas
+├── js/
+│   └── index.js           # Scripts principais
+├── index.html             # Página inicial
+├── saloes.html            # Página de salões
+├── salao_mock.html        # Página de exemplo de salão
+└── README.md              # Documentação
+```
 
-## 🎯 Objetivo
+## Melhorias Implementadas
 
-Oferecer uma solução digital simples, moderna e acessível para:
+### 1. Padronização de Código
+- **Indentação**: Padronizada com 2 espaços
+- **Nomenclatura**: Classes CSS semânticas e consistentes
+- **Estrutura**: HTML organizado com tags semânticas
 
-- **Clientes** que desejam agendar serviços com comodidade e receber lembretes automatizados.
-- **Estabelecimentos** que buscam otimizar seu atendimento, controlar a agenda e melhorar a organização do negócio.
+### 2. HTML Semântico
+- Uso de tags semânticas: `<header>`, `<main>`, `<section>`, `<footer>`, `<nav>`, `<article>`, `<aside>`
+- Atributos de acessibilidade (`aria-label`, `role`)
+- Meta tags para SEO
+- Estrutura hierárquica clara
 
-## 👥 Público-Alvo
+### 3. CSS Organizado
+- **Seções comentadas**: Reset, Utilitários, Componentes, Layout, Responsividade
+- **Estilos unificados**: Eliminação de duplicações
+- **Sistema de cores**: Paleta consistente
+- **Responsividade**: Media queries organizadas
 
-- Cabeleireiros, salões de beleza, clínicas, barbearias, consultórios, oficinas, entre outros comércios que atuam com agendamentos.
-- População de Piripiri e cidades vizinhas que deseja evitar filas e agendar com praticidade.
+### 4. JavaScript Melhorado
+- **Comentários JSDoc**: Documentação clara das funções
+- **Event listeners**: Gerenciamento adequado de eventos
+- **Tratamento de erros**: Verificações de existência de elementos
+- **Funcionalidades extras**: Fechamento com ESC, prevenção de scroll
 
-## 🛠️ Principais Funcionalidades
+### 5. Acessibilidade
+- Atributos `aria-label` em elementos interativos
+- Navegação por teclado (ESC para fechar sidebar)
+- Textos alternativos em imagens
+- Contraste adequado de cores
 
-- Cadastro de clientes e estabelecimentos.
-- Login seguro com recuperação de senha.
-- Cadastro e gerenciamento de serviços.
-- Agendamento de horários com confirmação e bloqueio automático de horários ocupados.
-- Visualização da agenda por dia, semana ou mês.
-- Notificações por e-mail ou push (lembretes e confirmações).
-- Cancelamento e reagendamento de horários.
-- Histórico de agendamentos.
-- Relatórios de atendimento e serviços mais agendados.
+## Páginas Disponíveis
 
-## 📱 Tecnologias Sugeridas
-
-- **Frontend**: HTML + CSS + JS
-- **Backend**: Node.js / Python (Flask ou Django)
-- **Banco de Dados**: MySQL / PostgreSQL
-- **Outros**: Firebase, Notificações Push, OAuth2, API REST, Cloudinary
-
-## 📌 Status
-
-🚧 Projeto em fase de especificação e modelagem.  
-📄 Requisitos já definidos, com casos de uso e diagramas em desenvolvimento.
-
-## 📍 Local de Atuação
-
-Piripiri – Piauí e municípios da região.
+- **`index.html`**: Página inicial com categorias e empresas em destaque
+- **`saloes.html`**: Listagem de salões de beleza com filtros
+- **`salao_mock.html`**: Exemplo de página de perfil de empresa

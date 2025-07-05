@@ -1,12 +1,30 @@
-/* === Banner da Empresa === */
+/* ========================================
+   ESTILOS ESPECÍFICOS PARA PÁGINA DE EMPRESA
+   ======================================== */
+
+/* ========================================
+   BANNER DA EMPRESA
+   ======================================== */
+
 .perfil-banner {
   position: relative;
   background-color: #e5e5e5;
   height: 220px;
   border-bottom: 1px solid #ddd;
+  overflow: hidden;
 }
 
-.perfil-banner .banner-container {
+.banner-imagem {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.banner-container {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -18,14 +36,6 @@
   z-index: 1;
 }
 
-.banner-imagem {
-  position: absolute;
-  inset: 0;
-  background: #ccc center/cover no-repeat;
-  z-index: 0;
-  opacity: 0.25;
-}
-
 .banner-info {
   position: relative;
   z-index: 1;
@@ -33,27 +43,26 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.banner-info h1, .banner-info .avaliacoes {
-  text-align: left;
   width: 100%;
 }
 
 .banner-info h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
 
 .avaliacoes {
   color: #444;
   font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .avaliacoes i {
   color: #f1c40f;
-  margin-right: 0.3rem;
 }
 
 .btn-back {
@@ -69,22 +78,30 @@
   font-size: 0.9rem;
   color: #0C2D48;
   text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: background 0.3s;
-  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 0.75rem;
   z-index: 2;
 }
 
 .btn-back:hover {
   background-color: #f4f4f4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* === Abas === */
+/* ========================================
+   ABAS DE NAVEGAÇÃO
+   ======================================== */
+
 .perfil-tabs {
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .tabs-container {
@@ -93,6 +110,7 @@
   padding: 0.75rem 2rem;
   display: flex;
   gap: 2rem;
+  overflow-x: auto;
 }
 
 .tab {
@@ -103,8 +121,10 @@
   cursor: pointer;
   padding: 0.55rem 1.1rem;
   border-radius: 8px;
-  color: #1e2d3d;
-  transition: background 0.2s, color 0.2s;
+  color: #666;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tab:hover {
@@ -113,13 +133,19 @@
 }
 
 .tab.ativo {
-  background: #ffffff;
-  color: #000000;
+  background: #0C2D48;
+  color: white;
   font-weight: 600;
-  border-radius: 8px;
 }
 
-/* === Conteúdo Principal === */
+.tab.ativo:hover {
+  background: #1a4a6b;
+}
+
+/* ========================================
+   CONTEÚDO PRINCIPAL
+   ======================================== */
+
 .perfil-conteudo {
   max-width: 1200px;
   margin: 2rem auto;
@@ -139,9 +165,10 @@
 }
 
 .sobre h2 {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: #1a1a1a;
 }
 
 .sobre p {
@@ -152,24 +179,40 @@
 }
 
 .sobre h3 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin: 1.5rem 0 0.75rem;
   font-weight: 600;
+  color: #1a1a1a;
 }
+
+/* ========================================
+   GALERIA DE IMAGENS
+   ======================================== */
 
 .galeria {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .img-placeholder {
   width: 100%;
   padding-top: 75%;
-  background: #eee;
+  background: #f5f5f5;
   border-radius: 8px;
   border: 1px solid #ddd;
+  transition: all 0.3s ease;
 }
+
+.img-placeholder:hover {
+  background: #e8e8e8;
+  transform: scale(1.02);
+}
+
+/* ========================================
+   LISTA DE COMODIDADES
+   ======================================== */
 
 .comodidades {
   list-style: none;
@@ -182,12 +225,21 @@
   color: #333;
 }
 
-.comodidades i {
-  color: #2ecc71;
-  margin-right: 0.5rem;
+.comodidades li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* === Cartão de Contato === */
+.comodidades i {
+  color: #2ecc71;
+  width: 16px;
+}
+
+/* ========================================
+   CARTÃO DE CONTATO
+   ======================================== */
+
 .contato-card {
   flex: 1;
   min-width: 260px;
@@ -195,43 +247,111 @@
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   height: fit-content;
+  position: sticky;
+  top: 100px;
 }
 
 .contato-card h3 {
   font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 1rem;
-  font-weight: 700;
+  color: #1a1a1a;
 }
 
 .contato-card p {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-  color: #333;
-  line-height: 1.4;
-}
-
-.btn-outline {
-  background: white;
-  color: #0C2D48;
-  border: 1px solid #ccc;
-  padding: 0.6rem 1rem;
-  font-weight: 600;
   font-size: 0.9rem;
-  border-radius: 8px;
-  margin-top: 0.5rem;
-  cursor: pointer;
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.contato-card p strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.contato-card .btn-green {
   width: 100%;
-  transition: background 0.2s;
+  margin-bottom: 0.75rem;
+  text-align: center;
 }
 
-.btn-outline:hover {
-  background: #f2f2f2;
+.contato-card .btn-outline {
+  width: 100%;
+  text-align: center;
 }
 
-.hero {
-  background-color: #0C2D48;
-  color: white;
-  padding-bottom: 0.7rem;
+/* ========================================
+   RESPONSIVIDADE ESPECÍFICA
+   ======================================== */
+
+@media (max-width: 768px) {
+  .banner-container {
+    padding: 1rem;
+  }
+  
+  .banner-info h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tabs-container {
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+  }
+  
+  .tab {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .perfil-conteudo {
+    padding: 0 1rem;
+  }
+  
+  .info-principal {
+    flex-direction: column;
+  }
+  
+  .sobre {
+    flex: none;
+  }
+  
+  .contato-card {
+    position: static;
+    min-width: auto;
+  }
+  
+  .galeria {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .comodidades {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-banner {
+    height: 180px;
+  }
+  
+  .banner-info h1 {
+    font-size: 1.25rem;
+  }
+  
+  .tabs-container {
+    gap: 0.5rem;
+  }
+  
+  .tab {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .galeria {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+  }
 }

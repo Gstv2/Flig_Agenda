@@ -1,16 +1,77 @@
+/* ========================================
+   RESET E CONFIGURAÇÕES GLOBAIS
+   ======================================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: #ffffff;
   color: #1a1a1a;
+  line-height: 1.6;
+  font-size: 16px;
 }
 
-/* NAVBAR */
+/* ========================================
+   UTILITÁRIOS
+   ======================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.btn-green {
+  background-color: #2ecc71;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.btn-green:hover {
+  background-color: #27ae60;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0C2D48;
+  border: 1px solid #0C2D48;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: #0C2D48;
+  color: white;
+}
+
+/* ========================================
+   COMPONENTES DE NAVEGAÇÃO
+   ======================================== */
+
+/* Navbar Principal */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -23,21 +84,177 @@ body {
 
 .navbar .logo {
   font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .nav-left i,
 .nav-right i {
   font-size: 1.25rem;
   cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.nav-left i:hover,
+.nav-right i:hover {
+  opacity: 0.8;
 }
 
 .nav-right a {
   color: white;
-  margin-left: 1rem;
   text-decoration: none;
+  transition: opacity 0.3s ease;
 }
 
-/* HERO */
+.nav-right a:hover {
+  opacity: 0.8;
+}
+
+/* Estilização do botão de navegação (menu hambúrguer) na navbar */
+.navbar .nav-left button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  outline: none;
+}
+
+.navbar .nav-left button:focus {
+  outline: 2px solid #2ecc71;
+}
+
+/* Sidebar */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: white;
+  z-index: 999;
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar-top h2 {
+  font-weight: 700;
+  color: #0C2D48;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.sidebar-links li {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar-links li:hover {
+  background-color: #f5f5f5;
+}
+
+.sidebar-links li i {
+  width: 20px;
+  color: #666;
+}
+
+.sidebar-links hr {
+  margin: 0.5rem 1.5rem;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.sidebar-bottom {
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.btn-sidebar {
+  width: 100%;
+  background: #0C2D48;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-sidebar:hover {
+  background: #1a4a6b;
+}
+
+/* ========================================
+   SEÇÃO HERO
+   ======================================== */
+
 .hero {
   background-color: #0C2D48;
   color: white;
@@ -70,21 +287,7 @@ body {
 .hero-text p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
-}
-
-.btn-green {
-  background-color: #2ecc71;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: background 0.3s ease;
-}
-
-.btn-green:hover {
-  background-color: #27ae60;
+  opacity: 0.9;
 }
 
 .hero-image {
@@ -97,9 +300,13 @@ body {
 .hero-image img {
   width: 100%;
   max-width: 400px;
+  height: auto;
 }
 
-/* CATEGORIAS */
+/* ========================================
+   SEÇÃO CATEGORIAS
+   ======================================== */
+
 .categorias {
   background: #fff;
   padding: 4rem 1rem;
@@ -110,6 +317,7 @@ body {
   font-size: 1.8rem;
   margin-bottom: 2rem;
   font-weight: 700;
+  color: #1a1a1a;
 }
 
 .categorias-wrapper {
@@ -133,12 +341,12 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  transition: all 0.3s ease;
 }
 
-.categorias-grid::-webkit-scrollbar {
-  display: none;
+.seta:hover {
+  background: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .categorias-grid {
@@ -147,6 +355,12 @@ body {
   overflow-x: auto;
   gap: 1rem;
   padding: 0 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.categorias-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .categoria {
@@ -156,33 +370,21 @@ body {
   border-radius: 12px;
   padding: 1.5rem 1rem;
   text-align: center;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-decoration: none !important;
-  color: inherit !important;
-}
-
-.categoria:visited, .categoria:active {
+  text-decoration: none;
   color: inherit;
-  text-decoration: none;
-}
-
-.categoria span {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #333;
-  text-decoration: none;
-  margin-top: 0.5rem;
 }
 
 .categoria:hover {
   transform: translateY(-3px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-color: #2ecc71;
 }
 
 .categoria i {
@@ -191,7 +393,17 @@ body {
   color: #333;
 }
 
-/* EMPRESAS EM DESTAQUE */
+.categoria span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+/* ========================================
+   SEÇÃO EMPRESAS
+   ======================================== */
+
 .empresas {
   background-color: #f9f9f9;
   padding: 4rem 1rem;
@@ -200,269 +412,291 @@ body {
 .empresas h2 {
   text-align: center;
   font-size: 1.8rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   font-weight: 700;
+  color: #1a1a1a;
 }
 
 .empresas-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+@media (max-width: 900px) {
+  .empresas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .empresas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .empresa-card {
-  background-color: #fff;
+  background: #fff;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 0 1px #eee; /* borda discreta no lugar da sombra */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease;
+  gap: 0.5rem;
 }
 
 .empresa-card:hover {
   transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .empresa-imagem {
-  background-color: #eee;
-  height: 220px;
-  background-position: center;
-  background-size: cover;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  height: 140px;
+  border-radius: 8px;
 }
 
-.empresa-card strong {
-  display: block;
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 1rem 1rem 0.25rem;
-  color: #1a1a1a;
+.empresa-nome {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
 }
 
-.empresa-card p {
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #444;
   font-size: 0.95rem;
-  color: #555;
-  margin: 0 1rem 1rem;
+}
+
+.info-row i {
+  color: #777;
+  font-size: 1rem;
+  width: 16px; /* Garante alinhamento fixo */
+  text-align: center;
+}
+
+.tags {
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+
+.btn-green {
+  margin-top: auto;
+  background-color: #2ecc71;
+  color: white;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.btn-green:hover {
+  background-color: #27ae60;
 }
 
 .center-btn {
   text-align: center;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
-/* COMO FUNCIONA */
+/* ========================================
+   BOTÃO CARREGAR MAIS
+   ======================================== */
+
+.btn-load {
+  background: white;
+  color: #0C2D48;
+  border: 1px solid #ccc;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2rem auto 0;
+  display: block;
+}
+
+.btn-load:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+
+/* ========================================
+   SEÇÃO COMO FUNCIONA
+   ======================================== */
+
 .como-funciona {
-  background-color: #fff;
+  background: #fff;
   padding: 4rem 1rem;
-  text-align: center;
 }
 
 .como-funciona h2 {
+  text-align: center;
   font-size: 1.8rem;
+  margin-bottom: 2rem;
   font-weight: 700;
-  margin-bottom: 2.5rem;
+  color: #1a1a1a;
 }
 
 .etapas {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .etapa {
-  flex: 1;
-  min-width: 220px;
-  max-width: 280px;
+  text-align: center;
   padding: 1rem;
 }
 
 .etapa .numero {
-  width: 48px;
-  height: 48px;
-  background-color: #0C2D48;
+  width: 60px;
+  height: 60px;
+  background: #2ecc71;
   color: white;
-  font-weight: bold;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem auto;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1rem;
 }
 
 .etapa h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
+  color: #1a1a1a;
 }
 
 .etapa p {
-  font-size: 0.95rem;
-  color: #444;
+  color: #666;
+  line-height: 1.6;
 }
 
-/* RODAPÉ */
+/* ========================================
+   RODAPÉ
+   ======================================== */
+
 .footer {
-  background-color: #0C2D48;
-  color: #fff;
-  padding: 4rem 1rem 2rem;
+  background: #0C2D48;
+  color: white;
+  padding: 3rem 1rem 1rem;
 }
 
 .footer-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 2rem;
 }
 
-.footer-grid > div {
-  flex: 1;
-  min-width: 200px;
-}
-
-/* 🔧 Adiciona altura mínima para garantir alinhamento */
 .footer-grid > div:first-child {
-  min-height: 160px;
+  grid-column: 1 / -1;
 }
 
 .footer-grid h4 {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 1rem;
-  font-weight: 700;
+  color: #fff;
 }
 
 .footer-grid ul {
   list-style: none;
-  padding: 0;
 }
 
 .footer-grid ul li {
   margin-bottom: 0.5rem;
-  font-size: 0.95rem;
+  color: #ccc;
 }
 
 .footer-grid p {
-  font-size: 0.95rem;
+  color: #ccc;
   margin-bottom: 0.5rem;
+  line-height: 1.6;
 }
 
 .copy {
   text-align: center;
-  font-size: 0.85rem;
-  color: #ccc;
-  padding-top: 1.5rem;
-  border-top: 1px solid #1a3e63;
   margin-top: 2rem;
-}
-
-/* OVERLAY (fundo escurecido) */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: none;
-  z-index: 99;
-}
-
-.overlay.active {
-  display: block;
-}
-
-/* SIDEBAR */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -280px;
-  width: 260px;
-  height: 100%;
-  background: white;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 100;
-  transition: left 0.3s ease;
-}
-
-.sidebar.active {
-  left: 0;
-}
-
-.sidebar-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sidebar-top h2 {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.sidebar-links {
-  list-style: none;
-  padding: 1.5rem 0;
-  flex-grow: 1;
-}
-
-.sidebar-links li {
-  padding: 0.6rem 0;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: #333;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.sidebar-links li:hover {
-  background-color: #f2f2f2;
-  border-radius: 4px;
-  padding-left: 0.5rem;
-}
-
-.sidebar-links hr {
-  margin: 1rem 0;
-  border: none;
-  border-top: 1px solid #eee;
-}
-
-.sidebar-bottom {
   padding-top: 1rem;
+  border-top: 1px solid #1a4a6b;
+  color: #ccc;
+  font-size: 0.9rem;
 }
 
-.btn-sidebar {
-  width: 100%;
-  background-color: #2ecc71;
-  color: white;
-  border: 2px solid #27ae60;
-  padding: 0.6rem;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .categorias-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .categorias-grid {
+    justify-content: flex-start;
+  }
+  
+  .empresas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .etapas {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
 }
 
-.btn-sidebar:hover {
-  background-color: #27ae60;
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 1.75rem;
+  }
+  
+  .categoria {
+    min-width: 140px;
+    padding: 1rem 0.75rem;
+  }
 }
 
