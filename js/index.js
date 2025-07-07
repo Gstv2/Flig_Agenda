@@ -65,4 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
   closeButtons.forEach(button => {
     button.addEventListener('click', fecharMenu);
   });
+
+  // Alternar seleção do tipo de usuário no login
+  const userTypeLabels = document.querySelectorAll('.user-type');
+  userTypeLabels.forEach(label => {
+    label.addEventListener('click', function() {
+      userTypeLabels.forEach(l => l.classList.remove('selected'));
+      this.classList.add('selected');
+      // Marcar o input correspondente como checked
+      const input = this.querySelector('input[type="radio"]');
+      if (input) input.checked = true;
+    });
+  });
 });

@@ -51,5 +51,5 @@ Flig_Agenda/
 ## Páginas Disponíveis
 
 - **`index.html`**: Página inicial com categorias e empresas em destaque
-- **`saloes.html`**: Listagem de salões de beleza com filtros
+- **`saloes.html`**: Listagem de salões de beleza
 - **`salao_mock.html`**: Exemplo de página de perfil de empresa

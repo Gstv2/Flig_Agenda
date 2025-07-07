@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Encontre e agende com os melhores salões de beleza em Piripiri. Profissionais qualificados para todos os seus cuidados.">
-  <meta name="keywords" content="salão de beleza, cabeleireiro, Piripiri, agendamento, beleza">
-  <title>Salões de Beleza em Piripiri</title>
+  <meta name="description" content="Faça login na sua conta Flig Agenda. Acesse para agendar ou gerenciar seus serviços.">
+  <meta name="keywords" content="login, conta, agendamento, serviços, Piripiri">
+  <title>Login - Flig Agenda</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/saloes.css">
+  <link rel="stylesheet" href="css/auth.css">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,81 +74,64 @@
         <a href="#" aria-label="Buscar">
           <i class="fas fa-search"></i>
         </a>
-        <a href="login.html" aria-label="Perfil do usuário">
+        <a href="#" aria-label="Perfil do usuário">
           <i class="fas fa-user"></i>
         </a>
       </div>
     </nav>
   </header>
 
-  <!-- Seção hero específica para salões -->
-  <section class="hero saloes-hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Encontre Salões de Beleza em Piripiri</h1>
-        <p>Descubra e agende com os melhores profissionais de beleza perto de você</p>
-        
-        <!-- Barra de pesquisa -->
-        <form class="search-bar" role="search">
-          <input 
-            type="text" 
-            placeholder="Busque por salões, serviços ou profissionais..."
-            aria-label="Buscar salões de beleza"
-          >
-          <button type="submit" class="btn-green">Buscar</button>
-        </form>
-        
-        <p class="login-hint">Faça login para agendar seus serviços favoritos</p>
-      </div>
-    </div>
-  </section>
+  <main class="auth-container">
+    <div class="auth-card">
+      <h1>Entrar na sua conta</h1>
+      <p class="subtitle">Acesse para agendar ou gerenciar seus serviços</p>
 
-  <!-- Seção de filtros -->
-  <section class="filtros">
-    <div class="container">
-      <div class="filtros-wrapper">
-        <button class="filtro-btn ativo" aria-label="Mostrar todos os salões">Todos os Salões</button>
-        <button class="filtro-btn" aria-label="Filtrar por serviços de cabelo">Cabelo</button>
-        <button class="filtro-btn" aria-label="Filtrar por serviços de unhas">Unhas</button>
-        <button class="filtro-btn" aria-label="Filtrar por maquiagem">Maquiagem</button>
-        <button class="filtro-btn" aria-label="Filtrar por spa">Spa</button>
-      </div>
-    </div>
-  </section>
+      <form>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="seu@email.com">
 
-  <!-- Seção de empresas -->
-  <section class="empresas">
-    <div class="container">
-      <div class="empresas-grid">
-        <!-- Card de exemplo -->
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Cabeleireira Exemplo"></div>
-          <h3 class="empresa-nome">Cabeleireira Exemplo</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Av. Exemplo, 124</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 19:00</span>
-          </div>
-          <p class="tags">Corte · Coloração · Penteado</p>
-          <a href="salao_mock.html" class="btn-green">Agendar Agora</a>
-        </article>
-      </div>
-      
-      <div class="center-btn">
-        <button class="btn-load" aria-label="Carregar mais salões">Carregar Mais</button>
-      </div>
+        <label for="senha">Senha</label>
+        <input type="password" id="senha">
+
+        <p class="label">Tipo de usuário</p>
+
+        <div class="user-type-options">
+          <label class="user-type selected">
+            <input type="radio" name="tipo" checked>
+            <div class="icon-circle blue"><i class="fas fa-user"></i></div>
+            <div>
+              <strong>Usuário comum</strong>
+              <span>Agende serviços e gerencie seus agendamentos</span>
+            </div>
+          </label>
+
+          <label class="user-type">
+            <input type="radio" name="tipo">
+            <div class="icon-circle purple"><i class="fas fa-building"></i></div>
+            <div>
+              <strong>Empresa</strong>
+              <span>Ofereça seus serviços e gerencie sua agenda</span>
+            </div>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-green">Entrar</button>
+
+        <a href="#" class="forgot-password">Esqueci minha senha</a>
+
+        <div class="divider">ou</div>
+
+        <a href="registro.html" class="btn-sidebar">Criar uma nova conta</a>
+      </form>
     </div>
-  </section>
+  </main>
 
   <!-- Rodapé -->
   <footer class="footer">
     <div class="container footer-grid">
       <div>
         <h4>Piripiri</h4>
-        <p>Agende seus serviços com facilidade.</p>
+        <p>Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.</p>
       </div>
       
       <div>
@@ -164,7 +147,7 @@
       <div>
         <h4>Contato</h4>
         <p>support@piripiri.com</p>
-        <p>+55 (88) 9999-9999</p>
+        <p>+55 (86) 9999-9999</p>
         <p>Piripiri, PI - Brasil</p>
       </div>
     </div>
@@ -177,4 +160,4 @@
   <!-- Scripts -->
   <script src="js/index.js"></script>
 </body>
-</html>
+</html> 
