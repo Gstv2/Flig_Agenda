@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from Controller.usuario_controller import usuario_bp
 
-app = Flask(__name__, template_folder='View/templates', static_folder='View/Static')
+app = Flask(__name__, template_folder='templates', static_folder='Static')
 
 app.register_blueprint(usuario_bp)
 

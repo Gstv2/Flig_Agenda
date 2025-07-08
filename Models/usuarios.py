@@ -1,4 +1,4 @@
-from src.config import supabase
+from config import supabase
 
 class Usuario:
     @staticmethod
