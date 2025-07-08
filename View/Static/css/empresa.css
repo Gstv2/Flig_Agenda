@@ -1,0 +1,359 @@
+/* ========================================
+   ESTILOS ESPECÍFICOS PARA PÁGINA DE EMPRESA
+   ======================================== */
+
+/* ========================================
+   BANNER DA EMPRESA
+   ======================================== */
+
+.perfil-banner {
+  position: relative;
+  background-color: #e5e5e5;
+  height: 220px;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.banner-imagem {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.banner-info {
+  position: relative;
+  z-index: 1;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.banner-info h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.avaliacoes {
+  color: #444;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.avaliacoes i {
+  color: #f1c40f;
+}
+
+.btn-back {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #0C2D48;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 0.75rem;
+  z-index: 2;
+}
+
+.btn-back:hover {
+  background-color: #f4f4f4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   ABAS DE NAVEGAÇÃO
+   ======================================== */
+
+.perfil-tabs {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tabs-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: flex;
+  gap: 2.5rem;
+  overflow-x: auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.55rem 4rem;
+  border-radius: 8px;
+  color: #666;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tab:hover {
+  background: #e3eef9;
+  color: #1b4f72;
+}
+
+.tab.ativo {
+  background: #0C2D48;
+  color: white;
+  font-weight: 600;
+}
+
+.tab.ativo:hover {
+  background: #1a4a6b;
+}
+
+/* ========================================
+   CONTEÚDO PRINCIPAL
+   ======================================== */
+
+.perfil-conteudo {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.info-principal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.sobre {
+  flex: 2;
+  min-width: 280px;
+}
+
+.sobre h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.sobre p {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.sobre h3 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ========================================
+   GALERIA DE IMAGENS
+   ======================================== */
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.img-placeholder {
+  width: 100%;
+  padding-top: 75%;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.img-placeholder:hover {
+  background: #e8e8e8;
+  transform: scale(1.02);
+}
+
+/* ========================================
+   LISTA DE COMODIDADES
+   ======================================== */
+
+.comodidades {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.comodidades li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.comodidades i {
+  color: #2ecc71;
+  width: 16px;
+}
+
+/* ========================================
+   CARTÃO DE CONTATO
+   ======================================== */
+
+.contato-card {
+  flex: 1;
+  min-width: 260px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+.contato-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.contato-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.contato-card p strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.contato-card .btn-green {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.contato-card .btn-outline {
+  width: 100%;
+  text-align: center;
+}
+
+/* ========================================
+   RESPONSIVIDADE ESPECÍFICA
+   ======================================== */
+
+@media (max-width: 768px) {
+  .banner-container {
+    padding: 1rem;
+  }
+  
+  .banner-info h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tabs-container {
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+  }
+  
+  .tab {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .perfil-conteudo {
+    padding: 0 1rem;
+  }
+  
+  .info-principal {
+    flex-direction: column;
+  }
+  
+  .sobre {
+    flex: none;
+  }
+  
+  .contato-card {
+    position: static;
+    min-width: auto;
+  }
+  
+  .galeria {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .comodidades {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-banner {
+    height: 180px;
+  }
+  
+  .banner-info h1 {
+    font-size: 1.25rem;
+  }
+  
+  .tabs-container {
+    gap: 0.5rem;
+  }
+  
+  .tab {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .galeria {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+  }
+}

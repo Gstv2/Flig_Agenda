@@ -1,17 +1,335 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Página Inicial</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.">
+  <meta name="keywords" content="agendamento, serviços, Piripiri, salão de beleza, oficina, clínica">
+  <title>Piripiri - Agende seus serviços</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico')}}">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Bem-vindo ao Flask!</h1>
-    <p>Esse é um exemplo com template e CSS.</p>
-    <a href="{{ url_for('cadastro') }}">
-        <button>Ir para Cadastro</button>
-    </a>
+  <!-- Overlay para fechar sidebar -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
 
+  <!-- Sidebar de navegação -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2>Piripiri</h2>
+      <button class="close-btn" onclick="fecharMenu()" aria-label="Fechar menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <nav class="sidebar-links">
+      <ul>
+        <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{url_for('saloes')}}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
+        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
+        <hr>
+        <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
+      </ul>
+    </nav>
+    
+    <div class="sidebar-bottom">
+      <button class="btn-sidebar">
+        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+      </button>
+    </div>
+  </aside>
+
+  <!-- Cabeçalho principal -->
+  <header class="hero">
+    <!-- Barra de navegação -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <button onclick="abrirMenu()" aria-label="Abrir menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <span class="logo">Piripiri</span>
+      
+      <div class="nav-right">
+        <a href="#" aria-label="Buscar">
+          <i class="fas fa-search"></i>
+        </a>
+        <a href="{{url_for('login')}}" aria-label="Perfil do usuário">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+    
+    <!-- Conteúdo do hero -->
+    <div class="hero-content container">
+      <div class="hero-text">
+        <h1>Agende seus serviços<br>em Piripiri com<br><strong>facilidade</strong></h1>
+        <p>Encontre e agende profissionais confiáveis em sua cidade</p>
+        <a href="#" class="btn-green">Começar Agora</a>
+      </div>
+      
+      <div class="hero-image">
+        <img src="{{ url_for('static', filename='assets/hero-img.png')}}" alt="Ilustração representando agendamento de serviços em Piripiri">
+      </div>
+    </div>
+  </header>
+
+  <!-- Seção de categorias -->
+  <section class="categorias">
+    <div class="container">
+      <h2>Categorias de Serviços</h2>
+      
+      <div class="categorias-wrapper">
+        <button class="seta" aria-label="Categorias anteriores">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="categorias-grid">
+          <a class="categoria" href="{{url_for('saloes')}}">
+            <i class="fas fa-cut"></i>
+            <span>Salão de Beleza</span>
+          </a>
+          <a class="categoria" href="#">
+            <i class="fas fa-car"></i>
+            <span>Oficina Mecânica</span>
+          </a>
+          <a class="categoria" href="#">
+            <i class="fas fa-stethoscope"></i>
+            <span>Clínica</span>
+          </a>
+          <a class="categoria" href="#">
+            <i class="fas fa-user-cog"></i>
+            <span>Prestador de Serviço</span>
+          </a>
+          <a class="categoria" href="#">
+            <i class="fas fa-utensils"></i>
+            <span>Restaurantes</span>
+          </a>
+          <a class="categoria" href="#">
+            <i class="fas fa-dumbbell"></i>
+            <span>Academias</span>
+          </a>
+        </div>
+        
+        <button class="seta" aria-label="Próximas categorias">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de empresas em destaque -->
+  <section class="empresas">
+    <div class="container">
+      <h2>Empresas em Destaque</h2>
+      
+      <div class="empresas-grid">
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem da Cabeleireira Exemplo"></div>
+          <h3 class="empresa-nome">Cabeleireira Exemplo</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Av. Exemplo, 124</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 19:00</span>
+          </div>
+          <p class="tags">Corte · Coloração · Penteado</p>
+          <a href="{{url_for('salao_mock')}}" class="btn-green">Agendar Agora</a>
+        </article>
+
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem do Auto Center Piripiri"></div>
+          <h3 class="empresa-nome">Auto Center Piripiri</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Rua das Oficinas, 200</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 18:00</span>
+          </div>
+          <p class="tags">Mecânica · Pneus · Troca de Óleo</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+        
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem da Clínica Saúde Total"></div>
+          <h3 class="empresa-nome">Clínica Saúde Total</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Av. Central, 321</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 17:00</span>
+          </div>
+          <p class="tags">Clínica Geral · Pediatria · Exames</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+        
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem da Tech Support Services"></div>
+          <h3 class="empresa-nome">Tech Support Services</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Rua da Tecnologia, 45</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 20:00</span>
+          </div>
+          <p class="tags">TI · Suporte · Redes</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+        
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem da Bella Estética"></div>
+          <h3 class="empresa-nome">Bella Estética</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Rua das Flores, 88</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 19:30</span>
+          </div>
+          <p class="tags">Estética · Massagem · Spa</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+        
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem da Mecânica Rápida"></div>
+          <h3 class="empresa-nome">Mecânica Rápida</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Av. dos Mecânicos, 55</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 18:30</span>
+          </div>
+          <p class="tags">Reparos · Manutenção · Elétrica</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+        
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem do Consultório Dr. Silva"></div>
+          <h3 class="empresa-nome">Consultório Dr. Silva</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Rua da Saúde, 12</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 16:00</span>
+          </div>
+          <p class="tags">Medicina · Família · Consultas</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+        
+        <article class="empresa-card">
+          <div class="empresa-imagem" aria-label="Imagem da Home Cleaning Pro"></div>
+          <h3 class="empresa-nome">Home Cleaning Pro</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Rua Limpeza, 99</span>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <span>Aberto até 21:00</span>
+          </div>
+          <p class="tags">Limpeza · Residencial · Escritórios</p>
+          <a href="#" class="btn-green">Agendar Agora</a>
+        </article>
+      </div>
+      
+      <div class="center-btn">
+        <a href="#" class="btn-green">Ver Todas as Empresas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção como funciona -->
+  <section class="como-funciona">
+    <div class="container">
+      <h2>Como Funciona</h2>
+      
+      <div class="etapas">
+        <div class="etapa">
+          <div class="numero">1</div>
+          <h3>Escolha um Serviço</h3>
+          <p>Navegue pelas categorias e encontre o serviço que você precisa.</p>
+        </div>
+        
+        <div class="etapa">
+          <div class="numero">2</div>
+          <h3>Selecione um Profissional</h3>
+          <p>Compare avaliações, comentários e disponibilidade de profissionais confiáveis.</p>
+        </div>
+        
+        <div class="etapa">
+          <div class="numero">3</div>
+          <h3>Agende e Aproveite</h3>
+          <p>Marque seu horário e aproveite um serviço de qualidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Piripiri</h4>
+        <p>Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.</p>
+      </div>
+      
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li>Salão de Beleza</li>
+          <li>Oficina Mecânica</li>
+          <li>Clínica</li>
+          <li>Prestador de Serviço</li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4>Contato</h4>
+        <p>support@piripiri.com</p>
+        <p>+55 (86) 9999-9999</p>
+        <p>Piripiri, PI - Brasil</p>
+      </div>
+    </div>
+    
+    <div class="copy">
+      © 2025 Piripiri. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{url_for('static', filename='js/index.js')}}"></script>
 </body>
-<script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
 </html>
