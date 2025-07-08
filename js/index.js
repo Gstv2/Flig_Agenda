@@ -77,4 +77,25 @@ document.addEventListener('DOMContentLoaded', function() {
       if (input) input.checked = true;
     });
   });
+
+  // Tabs dinâmicas para salao_mock.html
+  const tabButtons = document.querySelectorAll('.tabs-container .tab');
+  const tabContents = {
+    'Informações': document.getElementById('tab-info'),
+    'Serviços': document.getElementById('tab-servicos'),
+    'Avaliações': document.getElementById('tab-avaliacoes'),
+    'Agendar': document.getElementById('tab-agendar')
+  };
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove classe ativo de todos
+      tabButtons.forEach(b => b.classList.remove('ativo'));
+      this.classList.add('ativo');
+      // Esconde todos os conteúdos
+      Object.values(tabContents).forEach(div => div.style.display = 'none');
+      // Mostra o conteúdo correspondente
+      const label = this.textContent.trim();
+      if(tabContents[label]) tabContents[label].style.display = '';
+    });
+  });
 });

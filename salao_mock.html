@@ -109,54 +109,92 @@
 
   <!-- Conteúdo principal -->
   <section class="perfil-conteudo">
-    <div class="info-principal">
-      <!-- Informações sobre a empresa -->
-      <div class="sobre">
-        <h2>Sobre Cabeleireira Exemplo</h2>
-        <p>
-          Cabeleireira Exemplo é um salão de beleza premium que oferece uma ampla gama de serviços, 
-          incluindo cortes de cabelo, coloração, penteados e tratamentos. Nossa equipe de profissionais 
-          experientes é dedicada a fornecer serviços da mais alta qualidade e garantir a satisfação do cliente.
-        </p>
-        
-        <!-- Galeria de imagens -->
-        <h3>Galeria</h3>
-        <div class="galeria">
-          <div class="img-placeholder" aria-label="Imagem do salão 1"></div>
-          <div class="img-placeholder" aria-label="Imagem do salão 2"></div>
-          <div class="img-placeholder" aria-label="Imagem do salão 3"></div>
-          <div class="img-placeholder" aria-label="Imagem do salão 4"></div>
-          <div class="img-placeholder" aria-label="Imagem do salão 5"></div>
-          <div class="img-placeholder" aria-label="Imagem do salão 6"></div>
+    <!-- Aba: Informações -->
+    <div id="tab-info" class="tab-content">
+      <div class="info-principal">
+        <div class="sobre">
+          <h2>Sobre Cabeleireira Exemplo</h2>
+          <p>
+            Cabeleireira Exemplo é um salão de beleza premium que oferece uma ampla gama de serviços, 
+            incluindo cortes de cabelo, coloração, penteados e tratamentos. Nossa equipe de profissionais 
+            experientes é dedicada a fornecer serviços da mais alta qualidade e garantir a satisfação do cliente.
+          </p>
+          <!-- Galeria de imagens -->
+          <h3>Galeria</h3>
+          <div class="galeria">
+            <div class="img-placeholder" aria-label="Imagem do salão 1"></div>
+            <div class="img-placeholder" aria-label="Imagem do salão 2"></div>
+            <div class="img-placeholder" aria-label="Imagem do salão 3"></div>
+            <div class="img-placeholder" aria-label="Imagem do salão 4"></div>
+            <div class="img-placeholder" aria-label="Imagem do salão 5"></div>
+            <div class="img-placeholder" aria-label="Imagem do salão 6"></div>
+          </div>
+          <!-- Lista de comodidades -->
+          <h3>Comodidades</h3>
+          <ul class="comodidades">
+            <li><i class="fas fa-check-circle"></i> Wi-Fi Grátis</li>
+            <li><i class="fas fa-check-circle"></i> Estacionamento Disponível</li>
+            <li><i class="fas fa-check-circle"></i> Acessível para Cadeiras</li>
+            <li><i class="fas fa-check-circle"></i> Ar Condicionado</li>
+            <li><i class="fas fa-check-circle"></i> Aceita Cartões</li>
+            <li><i class="fas fa-check-circle"></i> Ambiente Familiar</li>
+          </ul>
         </div>
-
-        <!-- Lista de comodidades -->
-        <h3>Comodidades</h3>
-        <ul class="comodidades">
-          <li><i class="fas fa-check-circle"></i> Wi-Fi Grátis</li>
-          <li><i class="fas fa-check-circle"></i> Estacionamento Disponível</li>
-          <li><i class="fas fa-check-circle"></i> Acessível para Cadeiras</li>
-          <li><i class="fas fa-check-circle"></i> Ar Condicionado</li>
-          <li><i class="fas fa-check-circle"></i> Aceita Cartões</li>
-          <li><i class="fas fa-check-circle"></i> Ambiente Familiar</li>
+        <aside class="contato-card">
+          <h3>Informações de Contato</h3>
+          <div class="info-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Endereço</strong>
+              <p>Av. Exemplo 124, Centro, Piripiri</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="far fa-clock"></i>
+            <div>
+              <strong>Horário de Funcionamento</strong>
+              <p>Segunda - Sábado: 9:00 - 19:00</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="fas fa-phone"></i>
+            <div>
+              <strong>Telefone</strong>
+              <p>+55 (86) 9999-9999</p>
+            </div>
+          </div>
+          <a href="tel:+5586999999999" class="btn-green" style="width:100%;margin-bottom:8px;">Ligar Agora</a>
+          <a href="https://maps.google.com/?q=Av.+Exemplo+124,+Piripiri" target="_blank" class="btn-outline" style="width:100%;">Ver no Mapa</a>
+        </aside>
+      </div>
+    </div>
+    <!-- Aba: Serviços -->
+    <div id="tab-servicos" class="tab-content" style="display:none">
+      <div class="sobre">
+        <h2>Serviços</h2>
+        <ul>
+          <li>Corte de cabelo feminino</li>
+          <li>Corte de cabelo masculino</li>
+          <li>Coloração</li>
+          <li>Penteados</li>
+          <li>Tratamentos capilares</li>
+          <li>Design de sobrancelhas</li>
         </ul>
       </div>
-
-      <!-- Cartão de contato -->
-      <article class="empresa-card">
-        <div class="empresa-imagem" aria-label="Imagem da Cabeleireira Exemplo"></div>
-        <h3 class="empresa-nome">Cabeleireira Exemplo</h3>
-        <div class="info-row">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Av. Exemplo, 124</span>
-        </div>
-        <div class="info-row">
-          <i class="far fa-clock"></i>
-          <span>Aberto até 19:00</span>
-        </div>
-        <p class="tags">Corte · Coloração · Penteado</p>
-        <a href="#" class="btn-green">Agendar Agora</a>
-      </article>
+    </div>
+    <!-- Aba: Avaliações -->
+    <div id="tab-avaliacoes" class="tab-content" style="display:none">
+      <div class="sobre">
+        <h2>Avaliações</h2>
+        <p>Em breve, avaliações de clientes aparecerão aqui.</p>
+      </div>
+    </div>
+    <!-- Aba: Agendar -->
+    <div id="tab-agendar" class="tab-content" style="display:none">
+      <div class="sobre">
+        <h2>Agendar</h2>
+        <p>Em breve, será possível agendar seu horário por aqui!</p>
+      </div>
     </div>
   </section>
 
