@@ -13,3 +13,5 @@ def cadastro():
         return redirect(url_for('usuario.cadastro'))
 
     return render_template('cadastro.html')
+
+

@@ -1,3 +1,4 @@
+#Models/usuarios.py
 from config import supabase
 
 class Usuario:
