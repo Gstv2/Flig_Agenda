@@ -31,7 +31,7 @@ def index():  # Nomeie como 'index' para usar no url_for
 # Página de salões de beleza
 @app.route('/saloes')
 def saloes():
-    return render_template('../saloes.html')
+    return render_template('saloes.html')
 
 # Página mock de um salão específico
 @app.route('/salao-mock')
