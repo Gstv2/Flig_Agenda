@@ -16,7 +16,7 @@ def cadastro():
         
         if erro:
             flash(f"Erro no cadastro: {erro}", 'error')
-            return redirect(url_for('registro'))  # Usando blueprint
+            return redirect(url_for('auth.cadatro'))  # Usando blueprint
         
         flash("Cadastro realizado com sucesso! Faça login.", 'success')
         return redirect(url_for('index'))  # Redireciona para a rota raiz
@@ -33,7 +33,7 @@ def login():
         
         if erro:
             flash(f"Erro no login: {erro}", 'error')
-            return redirect(url_for('login'))  # Usando blueprint
+            return redirect(url_for('auth.login'))  # Usando blueprint
         
         session['user_token'] = sessao.session.access_token
         flash("Login realizado com sucesso!", 'success')

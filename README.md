@@ -41,3 +41,11 @@ Oferecer uma solução digital simples, moderna e acessível para:
 ## 📍 Local de Atuação
 
 Piripiri – Piauí e municípios da região.
+
+## Modo de Usar:
+
+Baixe o projeto Primeiramente, em seguida para a criação do ambiente e instalação das bibliotecas e frameworks use:
+``` 
+npm i  
+pip install -r requirements.txt
+```

@@ -1,8 +1,14 @@
 from config import supabase
 
 class Usuario:
+    def __init__(self, id=None, nome=None, email=None, senha=None, created_at=None):
+        self.id = id
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+        
     @staticmethod
-    def cadastrar(nome, email, senha):
+    def criar_usuario(nome, email, senha):
         # 1. Cadastra no Auth (com segurança total)
         resultado_auth = supabase.auth.sign_up({
             "email": email,
