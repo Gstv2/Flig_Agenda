@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, session, flash
 from functools import wraps
-from ..Controller.usuario_controller import usuario_bp
-from ..Controller.auth_controller import auth_bp
+from Controller.usuario_controller import usuario_bp
+from Controller.auth_controller import auth_bp
 
 app = Flask(__name__, template_folder='../templates', static_folder='../Static')
 app.secret_key = '2895c134719b7d446e1a6f72746b500c33fcb93874b7a604965dad9dfa3d038d'
