@@ -38,6 +38,10 @@ def saloes():
 def salao_mock():
     return render_template('salao_mock.html')
 
+@app.route('/editar-perfil')
+def editar_perfil():
+    return render_template('editar_perfil.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

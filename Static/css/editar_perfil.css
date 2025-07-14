@@ -1,0 +1,136 @@
+.edit-profile-main {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  padding: 0 1rem 2rem 1rem;
+}
+.edit-profile-back {
+  color: #0C2D48;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  display: inline-block;
+}
+.edit-profile-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.edit-profile-subtitle {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.edit-profile-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.edit-profile-section-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.edit-profile-section-desc {
+  color: #888;
+  font-size: 0.98rem;
+  margin-bottom: 1.1rem;
+}
+.edit-profile-avatar-block {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.edit-profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.edit-profile-upload-label {
+  cursor: pointer;
+}
+.edit-profile-upload-btn {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 0.98rem;
+  color: #222;
+  display: inline-block;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+}
+.edit-profile-upload-info {
+  font-size: 0.85rem;
+  color: #888;
+}
+.edit-profile-fields {
+  display: flex;
+  gap: 1.2rem;
+}
+.edit-profile-field-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.edit-profile-field-group label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+.edit-profile-field-group input,
+.edit-profile-field-group textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  transition: border 0.2s;
+}
+.edit-profile-field-group input:focus,
+.edit-profile-field-group textarea:focus {
+  border-color: #2ecc71;
+  outline: none;
+}
+.edit-profile-field-group small {
+  color: #888;
+  font-size: 0.85rem;
+}
+.edit-profile-password-info {
+  color: #888;
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.edit-profile-password-tips {
+  background: #f5faff;
+  border: 1px solid #b3e0ff;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: #1976d2;
+  font-size: 0.97rem;
+  margin-top: 0.5rem;
+}
+.edit-profile-password-tips ul {
+  margin: 0.5rem 0 0 1.2rem;
+  padding: 0;
+  font-size: 0.97rem;
+}
+.edit-profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}

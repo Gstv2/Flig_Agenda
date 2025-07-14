@@ -30,41 +30,50 @@ body {
   padding: 0 2rem;
 }
 
+.btn-green,
+.btn-outline {
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
 .btn-green {
   background-color: #2ecc71;
   color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
   border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: inline-block;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0C2D48;
+  border: 1px solid #0C2D48;
+  outline: none;
+}
+.btn-outline:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .btn-green:hover {
   background-color: #27ae60;
 }
 
-.btn-outline {
-  background: transparent;
-  color: #0C2D48;
-  border: 0.5px solid #0C2D48;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
 .btn-outline:hover {
   background: #0C2D48;
   color: white;
+}
+
+.btn-outline,
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active {
+  text-decoration: none !important;
 }
 
 /* ========================================
