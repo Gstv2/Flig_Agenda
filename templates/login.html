@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Faça login na sua conta Flig Agenda. Acesse para agendar ou gerenciar seus serviços.">
-  <meta name="keywords" content="login, conta, agendamento, serviços, Piripiri">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Faça login na sua conta Flig Agenda. Acesse para agendar ou gerenciar seus serviços." />
+  <meta name="keywords" content="login, conta, agendamento, serviços, Piripiri" />
   <title>Login - Flig Agenda</title>
-  
+
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-  
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+
   <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/auth.css">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
+
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+
   <!-- Icons -->
   <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
 </head>
@@ -34,25 +34,25 @@
         <i class="fas fa-times"></i>
       </button>
     </div>
-    
+
     <nav class="sidebar-links">
       <ul>
-        <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="saloes.html"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
         <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
         <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
         <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
         <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
         <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
         <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
-        <hr>
+        <hr />
         <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
         <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
       </ul>
     </nav>
-    
+
     <div class="sidebar-bottom">
-      <button class="btn-sidebar">
+      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
         <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
       </button>
     </div>
@@ -67,9 +67,9 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
-      
+
       <span class="logo">Piripiri</span>
-      
+
       <div class="nav-right">
         <a href="#" aria-label="Buscar">
           <i class="fas fa-search"></i>
@@ -82,22 +82,29 @@
   </header>
 
   <main class="auth-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
     <div class="auth-card">
       <h1>Entrar na sua conta</h1>
       <p class="subtitle">Acesse para agendar ou gerenciar seus serviços</p>
 
-      <form>
+      <form method="POST" action="{{ url_for('auth.login') }}">
         <label for="email">E-mail</label>
-        <input type="email" id="email" placeholder="seu@email.com">
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required/>
 
         <label for="senha">Senha</label>
-        <input type="password" id="senha">
+        <input type="password" id="senha" name="senha" required/>
 
         <p class="label">Tipo de usuário</p>
 
         <div class="user-type-options">
           <label class="user-type selected">
-            <input type="radio" name="tipo" checked>
+            <input type="radio" name="tipo" checked />
             <div class="icon-circle blue"><i class="fas fa-user"></i></div>
             <div>
               <strong>Usuário comum</strong>
@@ -106,7 +113,7 @@
           </label>
 
           <label class="user-type">
-            <input type="radio" name="tipo">
+            <input type="radio" name="tipo" />
             <div class="icon-circle purple"><i class="fas fa-building"></i></div>
             <div>
               <strong>Empresa</strong>
@@ -121,7 +128,7 @@
 
         <div class="divider">ou</div>
 
-        <a href="registro.html" class="btn-sidebar">Criar uma nova conta</a>
+        <a href="{{ url_for('auth.cadastro') }}" class="forgot-password">Criar uma nova conta</a>
       </form>
     </div>
   </main>
@@ -133,7 +140,7 @@
         <h4>Piripiri</h4>
         <p>Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.</p>
       </div>
-      
+
       <div>
         <h4>Serviços</h4>
         <ul>
@@ -143,7 +150,7 @@
           <li>Prestador de Serviço</li>
         </ul>
       </div>
-      
+
       <div>
         <h4>Contato</h4>
         <p>support@piripiri.com</p>
@@ -151,13 +158,13 @@
         <p>Piripiri, PI - Brasil</p>
       </div>
     </div>
-    
+
     <div class="copy">
       © 2025 Piripiri. Todos os direitos reservados.
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="js/index.js"></script>
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
-</html> 
+</html>

@@ -8,10 +8,10 @@
   <title>Piripiri - Agende seus serviços</title>
   
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico')}}">
   
   <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
   
   <!-- Fonts -->
@@ -37,8 +37,8 @@
     
     <nav class="sidebar-links">
       <ul>
-        <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="saloes.html"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{url_for('saloes')}}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
         <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
         <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
         <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
@@ -52,7 +52,7 @@
     </nav>
     
     <div class="sidebar-bottom">
-      <button class="btn-sidebar">
+      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
         <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
       </button>
     </div>
@@ -74,7 +74,7 @@
         <a href="#" aria-label="Buscar">
           <i class="fas fa-search"></i>
         </a>
-        <a href="login.html" aria-label="Perfil do usuário">
+        <a href="{{url_for('auth.login')}}" aria-label="Perfil do usuário">
           <i class="fas fa-user"></i>
         </a>
       </div>
@@ -89,7 +89,7 @@
       </div>
       
       <div class="hero-image">
-        <img src="assets/hero-img.png" alt="Ilustração representando agendamento de serviços em Piripiri">
+        <img src="{{ url_for('static', filename='assets/hero-img.png')}}" alt="Ilustração representando agendamento de serviços em Piripiri">
       </div>
     </div>
   </header>
@@ -105,7 +105,7 @@
         </button>
         
         <div class="categorias-grid">
-          <a class="categoria" href="saloes.html">
+          <a class="categoria" href="{{url_for('saloes')}}">
             <i class="fas fa-cut"></i>
             <span>Salão de Beleza</span>
           </a>
@@ -156,7 +156,7 @@
             <span>Aberto até 19:00</span>
           </div>
           <p class="tags">Corte · Coloração · Penteado</p>
-          <a href="salao_mock.html" class="btn-green">Agendar Agora</a>
+          <a href="{{url_for('salao_mock')}}" class="btn-green">Agendar Agora</a>
         </article>
 
         <article class="empresa-card">
@@ -330,6 +330,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/index.js"></script>
+  <script src="{{url_for('static', filename='js/index.js')}}"></script>
 </body>
 </html>
