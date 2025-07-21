@@ -5,6 +5,11 @@
 /* ========================================
    HERO ESPECÍFICO PARA SALÕES
    ======================================== */
+.hero {
+   background: #0C2D48; 
+   min-height: 64px; 
+   padding-bottom: 0;
+}
 
 .saloes-hero {
   background-color: #0C2D48;

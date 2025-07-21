@@ -1,0 +1,185 @@
+.hero {
+   background: #0C2D48; 
+   min-height: 64px; 
+   padding-bottom: 0;
+}
+
+body {
+  background: #f7f8fa;
+}
+.cadastrar-empresa-main {
+  max-width: 900px;
+  margin: 48px auto 0 auto;
+  padding: 0 1rem 2rem 1rem;
+}
+.cadastrar-empresa-back {
+  color: #222;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+.cadastrar-empresa-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #222;
+}
+.cadastrar-empresa-subtitle {
+  color: #8a94a6;
+  font-size: 1.08rem;
+  margin-bottom: 2.2rem;
+}
+.cadastrar-empresa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+.cadastrar-empresa-card {
+  background: #fff;
+  border: 1px solid #e3e7ed;
+  border-radius: 12px;
+  box-shadow: none;
+  padding: 2rem 2.2rem 1.5rem 2.2rem;
+  margin-bottom: 0.5rem;
+}
+.cadastrar-empresa-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.cadastrar-empresa-section-title i {
+  color: #0C2D48;
+  font-size: 1.1rem;
+}
+.cadastrar-empresa-section-desc {
+  color: #8a94a6;
+  font-size: 1rem;
+  margin-bottom: 1.1rem;
+}
+.cadastrar-empresa-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem 2rem;
+}
+.cadastrar-empresa-field-group {
+  display: flex;
+  flex-direction: column;
+}
+.cadastrar-empresa-field-group label {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.3rem;
+  font-size: 1.01rem;
+}
+.cadastrar-empresa-field-group input,
+.cadastrar-empresa-field-group textarea,
+.cadastrar-empresa-field-group select {
+  border: 1.5px solid #e3e7ed;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  background: #f9fafb;
+  transition: border 0.2s, background 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.cadastrar-empresa-field-group input:focus,
+.cadastrar-empresa-field-group textarea:focus,
+.cadastrar-empresa-field-group select:focus {
+  border-color: #2ecc71;
+  background: #fff;
+  outline: none;
+}
+.cadastrar-empresa-field-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.cadastrar-empresa-banner-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+.cadastrar-empresa-banner-dropzone {
+  border: 1.5px dashed #2ecc71;
+  border-radius: 12px;
+  background: #f9fafb;
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  gap: 0.7rem;
+}
+.cadastrar-empresa-banner-dropzone i {
+  font-size: 2.5rem;
+  color: #b3e0ff;
+  margin-bottom: 0.5rem;
+}
+.cadastrar-empresa-banner-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #222;
+}
+.cadastrar-empresa-banner-desc {
+  color: #8a94a6;
+  font-size: 0.98rem;
+}
+.cadastrar-empresa-upload-label {
+  cursor: pointer;
+}
+.cadastrar-empresa-upload-btn {
+  background: #fff;
+  border: 1.5px solid #e3e7ed;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  color: #222;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: border 0.2s, background 0.2s;
+}
+.cadastrar-empresa-upload-btn:hover {
+  border-color: #2ecc71;
+  background: #f7f8fa;
+}
+.cadastrar-empresa-banner-info {
+  font-size: 0.93rem;
+  color: #8a94a6;
+  margin-top: 0.2rem;
+}
+.cadastrar-empresa-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+@media (max-width: 900px) {
+  .cadastrar-empresa-main {
+    max-width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .cadastrar-empresa-fields {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .cadastrar-empresa-card {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+} 

@@ -1,4 +1,10 @@
 /* Modal de Perfil do Usuário - estilos exclusivos */
+.hero {
+   background: #0C2D48; 
+   min-height: 64px; 
+   padding-bottom: 0;
+}
+
 .user-modal-container {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;

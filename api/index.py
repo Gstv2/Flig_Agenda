@@ -42,6 +42,13 @@ def salao_mock():
 def editar_perfil():
     return render_template('editar_perfil.html')
 
+@app.route('/minhas-empresas')
+def minhas_empresas():
+    return render_template('minhas_empresas.html')
+
+@app.route('/cadastrar-empresa')
+def cadastrar_empresa():
+    return render_template('cadastrar_empresa.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
