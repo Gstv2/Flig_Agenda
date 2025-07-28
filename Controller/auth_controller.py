@@ -1,5 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, flash, session, render_template
 from Models.auth import Auth
+from functools import wraps
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -16,7 +17,7 @@ def cadastro():
         
         if erro:
             flash(f"Erro no cadastro: {erro}", 'error')
-            return redirect(url_for('auth.cadatro'))  # Usando blueprint
+            return redirect(url_for('auth.cadastro'))  # Usando blueprint
         
         flash("Cadastro realizado com sucesso! Faça login.", 'success')
         return redirect(url_for('index'))  # Redireciona para a rota raiz
@@ -41,9 +42,21 @@ def login():
     
     return render_template('login.html')  # Renderiza diretamente
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        from Models.auth import Auth
+        user = Auth.get_usuario_atual()
+        if user is None:
+            flash("Você precisa estar logado para acessar esta página", "warning")
+            return redirect(url_for('auth.login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 @auth_bp.route('/logout')
 def logout():
+    print("teste")
     Auth.logout()
     session.pop('user_token', None)
     flash("Você foi deslogado com sucesso.", 'info')
-    return redirect(url_for('index'))  # Redireciona para a rota raiz
+    return redirect(url_for('auth.login'))  # Redireciona para a rota raiz

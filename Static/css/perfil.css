@@ -1,0 +1,120 @@
+/* Modal de Perfil do Usuário - estilos exclusivos */
+.hero {
+   background: #0C2D48; 
+   min-height: 64px; 
+   padding-bottom: 0;
+}
+
+.user-modal-container {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-modal-content {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-modal-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.user-modal-close:hover {
+  color: #222;
+}
+.user-modal-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem auto;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #666;
+  overflow: hidden;
+}
+.user-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.user-modal-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #222;
+}
+.user-modal-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 1.2rem;
+}
+.user-modal-nome {
+  margin: 0.5rem 0 0.2rem 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+}
+.user-modal-email {
+  color: #888;
+  font-size: 0.98rem;
+  margin-bottom: 0.7rem;
+}
+.user-modal-bio {
+  color: #444;
+  font-size: 1.01rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.user-modal-empresas {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+/* Corrigir largura dos botões: só no modal */
+.user-modal-content .btn-green,
+.user-modal-content .btn-outline {
+  width: 100%;
+  margin-bottom: 0.7rem;
+}
+.user-modal-sair {
+  width: 100%;
+  margin-bottom: 0.7rem;
+  background: none;
+  color: #e74c3c;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.user-modal-sair:hover {
+  color: #b71c1c;
+} 
