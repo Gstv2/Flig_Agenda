@@ -1,0 +1,131 @@
+/* Layout principal da página de empresas */
+.hero {
+   background: #0C2D48; 
+   min-height: 64px; 
+   padding-bottom: 0;
+}
+
+.empresas-main {
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  padding: 0 1.5rem 2rem 1.5rem;
+  background: #f7f8fa;
+}
+
+.empresas-back {
+  color: #222;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.empresas-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #222;
+}
+
+.empresas-subtitle {
+  color: #8a94a6;
+  font-size: 1.08rem;
+  margin-bottom: 2.2rem;
+}
+
+/* Cards de estatísticas */
+.empresas-stats-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.empresas-stat-card {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e3e7ed;
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  min-width: 180px;
+}
+
+.empresas-stat-label {
+  color: #8a94a6;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.empresas-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.empresas-stat-icon {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
+/* Status do card de empresa */
+.empresa-card-status.ativo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e6f9ed;
+  color: #2ecc71;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+}
+
+/* Botão de cadastrar nova empresa */
+.empresas-cadastrar-btn-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.empresas-cadastrar-btn {
+  min-width: 220px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.center-btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1000px) {
+  .empresas-cards-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .empresas-cards-row {
+    grid-template-columns: 1fr;
+  }
+  .empresas-stats-row {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+} 

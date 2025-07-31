@@ -99,3 +99,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+function abrirUserModal() {
+  document.getElementById('user-modal-container').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function fecharUserModal() {
+  document.getElementById('user-modal-container').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const userIcon = document.querySelector('.nav-right a[aria-label="Perfil do usuário"]');
+  if (userIcon) {
+    userIcon.addEventListener('click', function(e) {
+      e.preventDefault();
+      abrirUserModal();
+    });
+  }
+});

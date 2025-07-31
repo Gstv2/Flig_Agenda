@@ -56,9 +56,14 @@ class Auth:
             return None, str(e)
 
     @staticmethod
-    def get_usuario_atual():
-        """Obtém usuário logado atualmente"""
-        return supabase.auth.get_user()
+    def get_usuario_atual(access_token):
+        # exemplo de como pegar usuário com Supabase
+        try:
+            usuario_response = supabase.auth.get_user(access_token)
+            return usuario_response.user
+        except Exception as e:
+            print(f"Erro ao obter usuário: {e}")
+            return None
 
     @staticmethod
     def logout():

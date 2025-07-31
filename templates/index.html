@@ -12,7 +12,7 @@
   
   <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,9 +52,9 @@
     </nav>
     
     <div class="sidebar-bottom">
-      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
+      <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
         <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
-      </button>
+      </a>
     </div>
   </aside>
 
@@ -74,7 +74,8 @@
         <a href="#" aria-label="Buscar">
           <i class="fas fa-search"></i>
         </a>
-        <a href="{{url_for('auth.login')}}" aria-label="Perfil do usuário">
+        <!-- link antigo {{url_for('auth.login')}}-->
+        <a href="#" aria-label="Perfil do usuário">
           <i class="fas fa-user"></i>
         </a>
       </div>
@@ -142,127 +143,152 @@
   <section class="empresas">
     <div class="container">
       <h2>Empresas em Destaque</h2>
+      <div class="empresas-grid">
+        {% if empresas %} 
+          {% for empresa in empresas %}
+            <article class="empresa-card">
+              <div class="empresa-imagem" aria-label="Imagem da {{ empresa.nome }}"></div>
+              <h3 class="empresa-nome">{{ empresa.nome }}</h3>
+              <div class="info-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ empresa.endereco }}</span>
+              </div>
+              <div class="info-row">
+                <i class="far fa-clock"></i>
+                <span>{{ empresa.horario_funcionamento }}</span>
+              </div>
+              <p class="tags">{{ empresa.servicos | join(' · ') }}</p>
+              <a href="{{url_for('salao_mock')}}" class="btn-green">Agendar Agora</a>
+            </article>
+          {% endfor %}
+        {% else %}
+          <!-- Conteúdo estático padrão -->
+            <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Cabeleireira Exemplo"></div>
+            <h3 class="empresa-nome">Cabeleireira Exemplo</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Av. Exemplo, 124</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 19:00</span>
+            </div>
+            <p class="tags">Corte · Coloração · Penteado</p>
+            <a href="{{url_for('salao_mock')}}" class="btn-green">Agendar Agora</a>
+          </article>
+
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem do Auto Center Piripiri"></div>
+            <h3 class="empresa-nome">Auto Center Piripiri</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Rua das Oficinas, 200</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 18:00</span>
+            </div>
+            <p class="tags">Mecânica · Pneus · Troca de Óleo</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+          
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Clínica Saúde Total"></div>
+            <h3 class="empresa-nome">Clínica Saúde Total</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Av. Central, 321</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 17:00</span>
+            </div>
+            <p class="tags">Clínica Geral · Pediatria · Exames</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+          
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Tech Support Services"></div>
+            <h3 class="empresa-nome">Tech Support Services</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Rua da Tecnologia, 45</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 20:00</span>
+            </div>
+            <p class="tags">TI · Suporte · Redes</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+          
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Bella Estética"></div>
+            <h3 class="empresa-nome">Bella Estética</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Rua das Flores, 88</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 19:30</span>
+            </div>
+            <p class="tags">Estética · Massagem · Spa</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+          
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Mecânica Rápida"></div>
+            <h3 class="empresa-nome">Mecânica Rápida</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Av. dos Mecânicos, 55</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 18:30</span>
+            </div>
+            <p class="tags">Reparos · Manutenção · Elétrica</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+          
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem do Consultório Dr. Silva"></div>
+            <h3 class="empresa-nome">Consultório Dr. Silva</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Rua da Saúde, 12</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 16:00</span>
+            </div>
+            <p class="tags">Medicina · Família · Consultas</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+          
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Home Cleaning Pro"></div>
+            <h3 class="empresa-nome">Home Cleaning Pro</h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Rua Limpeza, 99</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 21:00</span>
+            </div>
+            <p class="tags">Limpeza · Residencial · Escritórios</p>
+            <a href="#" class="btn-green">Agendar Agora</a>
+          </article>
+        {% endif %}
+      </div>
+
+
       
       <div class="empresas-grid">
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Cabeleireira Exemplo"></div>
-          <h3 class="empresa-nome">Cabeleireira Exemplo</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Av. Exemplo, 124</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 19:00</span>
-          </div>
-          <p class="tags">Corte · Coloração · Penteado</p>
-          <a href="{{url_for('salao_mock')}}" class="btn-green">Agendar Agora</a>
-        </article>
 
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem do Auto Center Piripiri"></div>
-          <h3 class="empresa-nome">Auto Center Piripiri</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Rua das Oficinas, 200</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 18:00</span>
-          </div>
-          <p class="tags">Mecânica · Pneus · Troca de Óleo</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
-        
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Clínica Saúde Total"></div>
-          <h3 class="empresa-nome">Clínica Saúde Total</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Av. Central, 321</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 17:00</span>
-          </div>
-          <p class="tags">Clínica Geral · Pediatria · Exames</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
-        
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Tech Support Services"></div>
-          <h3 class="empresa-nome">Tech Support Services</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Rua da Tecnologia, 45</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 20:00</span>
-          </div>
-          <p class="tags">TI · Suporte · Redes</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
-        
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Bella Estética"></div>
-          <h3 class="empresa-nome">Bella Estética</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Rua das Flores, 88</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 19:30</span>
-          </div>
-          <p class="tags">Estética · Massagem · Spa</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
-        
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Mecânica Rápida"></div>
-          <h3 class="empresa-nome">Mecânica Rápida</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Av. dos Mecânicos, 55</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 18:30</span>
-          </div>
-          <p class="tags">Reparos · Manutenção · Elétrica</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
-        
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem do Consultório Dr. Silva"></div>
-          <h3 class="empresa-nome">Consultório Dr. Silva</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Rua da Saúde, 12</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 16:00</span>
-          </div>
-          <p class="tags">Medicina · Família · Consultas</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
-        
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Home Cleaning Pro"></div>
-          <h3 class="empresa-nome">Home Cleaning Pro</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Rua Limpeza, 99</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 21:00</span>
-          </div>
-          <p class="tags">Limpeza · Residencial · Escritórios</p>
-          <a href="#" class="btn-green">Agendar Agora</a>
-        </article>
       </div>
       
       <div class="center-btn">
@@ -331,5 +357,28 @@
 
   <!-- Scripts -->
   <script src="{{url_for('static', filename='js/index.js')}}"></script>
+
+<!-- Modal de Perfil do Usuário -->
+<div id="user-modal-container" class="user-modal-container" style="display:none;">
+  <div class="user-modal-content">
+    <button class="user-modal-close" onclick="fecharUserModal()" aria-label="Fechar modal">&times;</button>
+    <h2 class="user-modal-title">Perfil do Usuário</h2>
+    <p class="user-modal-subtitle">Informações da sua conta</p>
+    <div class="user-modal-avatar">
+      JS
+    </div>
+    <h3 class="user-modal-nome">João Silva</h3>
+    <p class="user-modal-email">joao.silva@email.com</p>
+    <p class="user-modal-bio">Empreendedor apaixonado por conectar pessoas aos melhores serviços da cidade. Sempre em busca de novas oportunidades de negócio.</p>
+    <div class="user-modal-empresas">
+      <i class="fas fa-building"></i> 3 empresas
+    </div>
+    <a href="{{ url_for('minhas_empresas') }}" class="btn-green">
+      <i class="fas fa-building"></i> Ver Minhas Empresas
+    </a>
+    <a href="{{ url_for('editar_perfil') }}" class="btn-outline">Editar Perfil</a>
+    <a href="{{ url_for('auth.logout') }}" class="user-modal-sair">logout</a>
+  </div>
+</div>
 </body>
 </html>

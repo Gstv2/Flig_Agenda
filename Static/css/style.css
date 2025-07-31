@@ -418,6 +418,15 @@ body {
   margin-top: 0.5rem;
 }
 
+.senha-requisitos {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+
 /* ========================================
    SEÇÃO EMPRESAS
    ======================================== */

@@ -1,14 +1,29 @@
 # models/estabelecimentos.py
 from config import supabase
 
-class Estabelecimento(db.Model):
-    __tablename__ = 'estabelecimentos'
-
-    id = Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    endereco = db.Column(db.String(200), nullable=False)
-    telefone = db.Column(db.String(20), nullable=False)
+class Estabelecimento():
+    @staticmethod
+    def criar_empresas():
+        try:
+            response = supabase.table('empresas').insert({
+            "usuario_id": 'usuario_id',
+            "nome_fantasia": 'nome_fantasia',
+            "cnpj": 'cnpj',
+            "descricao": 'descricao',
+            "endereco": 'endereco',
+            "telefone": 'telefone'
+            }).execute()
+            return response.data
+        except Exception as e:
+            print(f"Erro ao cadastrar empresa: {e}")
+            return None
 
     @staticmethod
-    def listar_todos():
-        return Estabelecimento.query.all()
+    def buscar_empresas():
+        try:
+            response = supabase.table('empresas').select('*').execute()
+            print(response)
+            return response.data
+        except Exception as e:
+            print(f"Erro ao buscar empresas: {e}")
+            return None

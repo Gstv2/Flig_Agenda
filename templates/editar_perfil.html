@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Edite seu perfil no Flig Agenda." />
+  <meta name="keywords" content="editar perfil, conta, agendamento, serviços, Piripiri" />
+  <title>Editar Perfil - Flig Agenda</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_perfil.css') }}" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Overlay para fechar sidebar -->
+  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
+  <!-- Sidebar de navegação -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2>Piripiri</h2>
+      <button class="close-btn" onclick="fecharMenu()" aria-label="Fechar menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="sidebar-links">
+      <ul>
+        <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
+        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
+        <hr />
+        <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
+        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+      </button>
+    </div>
+  </aside>
+
+  <!-- Cabeçalho principal -->
+  <header class="hero">
+    <nav class="navbar">
+      <div class="nav-left">
+        <button onclick="abrirMenu()" aria-label="Abrir menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <span class="logo">Piripiri</span>
+      <div class="nav-right">
+        <a href="#" aria-label="Buscar">
+          <i class="fas fa-search"></i>
+        </a>
+        <a href="#" aria-label="Perfil do usuário">
+          <i class="fas fa-user"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="edit-profile-main">
+    <a href="{{ url_for('index') }}" class="edit-profile-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <h1 class="edit-profile-title">Editar Perfil</h1>
+    <p class="edit-profile-subtitle">Atualize suas informações pessoais e de contato</p>
+
+    <form class="edit-profile-form">
+      <!-- Foto de Perfil -->
+      <section class="edit-profile-card">
+        <h2 class="edit-profile-section-title">Foto de Perfil</h2>
+        <p class="edit-profile-section-desc">Clique na foto para alterar sua imagem de perfil</p>
+        <div class="edit-profile-avatar-block">
+          <div class="edit-profile-avatar">
+            JS
+            <label class="edit-profile-avatar-camera">
+              <input type="file" accept="image/*" style="display:none;">
+              <i class="fas fa-camera"></i>
+            </label>
+          </div>
+          <div class="edit-profile-avatar-info">
+            <div class="edit-profile-avatar-title">Alterar foto</div>
+            <div class="edit-profile-upload-info">JPG, PNG ou GIF. Máximo 2MB.</div>
+            <label class="edit-profile-upload-label">
+              <span class="edit-profile-upload-btn"><i class="fas fa-upload"></i> Escolher arquivo</span>
+              <input type="file" accept="image/*" style="display:none;">
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Informações Pessoais -->
+      <section class="edit-profile-card">
+        <h2 class="edit-profile-section-title">Informações Pessoais</h2>
+        <p class="edit-profile-section-desc">Suas informações básicas de identificação</p>
+        <div class="edit-profile-fields">
+          <div class="edit-profile-field-group">
+            <label>Nome Completo *</label>
+            <input type="text" value="João Silva" required>
+          </div>
+          <div class="edit-profile-field-group">
+            <label>E-mail *</label>
+            <input type="email" value="joao.silva@email.com" required>
+          </div>
+        </div>
+        <div class="edit-profile-field-group">
+          <label>Telefone</label>
+          <input type="text" value="(86) 99999-9999">
+        </div>
+        <div class="edit-profile-field-group">
+          <label>Descrição</label>
+          <textarea rows="3">Empreendedor apaixonado por conectar pessoas aos melhores serviços da cidade. Sempre em busca de novas oportunidades de negócio.</textarea>
+          <small>Esta descrição aparecerá no seu perfil público.</small>
+        </div>
+      </section>
+
+      <!-- Segurança -->
+      <section class="edit-profile-card">
+        <h2 class="edit-profile-section-title">Segurança</h2>
+        <p class="edit-profile-section-desc">Altere sua senha para manter sua conta segura</p>
+        <div class="edit-profile-field-group">
+          <label>Senha Atual *</label>
+          <input type="password" placeholder="Digite sua senha atual" required>
+        </div>
+        <div class="edit-profile-fields">
+          <div class="edit-profile-field-group">
+            <label>Nova Senha *</label>
+            <input type="password" placeholder="Digite a nova senha" required>
+          </div>
+          <div class="edit-profile-field-group">
+            <label>Confirmar Nova Senha *</label>
+            <input type="password" placeholder="Confirme a nova senha" required>
+          </div>
+        </div>
+        <small class="edit-profile-password-info">Mínimo 8 caracteres</small>
+        <div class="edit-profile-password-tips">
+          <i class="fas fa-info-circle"></i>
+          <ul>
+            <li>Use pelo menos 8 caracteres</li>
+            <li>Combine letras maiúsculas e minúsculas</li>
+            <li>Inclua números e símbolos</li>
+            <li>Evite informações pessoais óbvias</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="edit-profile-actions">
+        <button type="button" class="btn-outline">Cancelar</button>
+        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar Alterações</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Piripiri</h4>
+        <p>Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.</p>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li>Salão de Beleza</li>
+          <li>Oficina Mecânica</li>
+          <li>Clínica</li>
+          <li>Prestador de Serviço</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <p>support@piripiri.com</p>
+        <p>+55 (86) 9999-9999</p>
+        <p>Piripiri, PI - Brasil</p>
+      </div>
+    </div>
+    <div class="copy">
+      © 2025 Piripiri. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html> 
