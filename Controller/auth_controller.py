@@ -37,14 +37,15 @@ def cadastro():
             'id': usuario.id,
             'email': usuario.email,
             'nome': usuario.user_metadata.get('nome'),
+            'bio': usuario.user_metadata.get('bio'),  # ← aqui
             'access_token': sessao.session.access_token
         }
+
 
         flash("Cadastro e login realizados com sucesso!", 'success')
         return redirect(url_for('index'))
     
     return render_template('registro.html')
-
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -65,22 +66,33 @@ def login():
             return redirect(url_for('auth.login'))
 
         print("Acessando a rota principal")
-        # Pega dados do usuário
+        # Pega dados do usuário via token
         usuario = Auth.get_usuario_atual(sessao.session.access_token)
-
         
-        # Armazena dados na sessão
+        # Armazena dados básicos da sessão do Supabase Auth
         session['user'] = {
             'id': usuario.id,
             'email': usuario.email,
-            'nome': usuario.user_metadata.get('nome'),
             'access_token': sessao.session.access_token
         }
 
-        flash("Login realizado com sucesso!", 'success')
-        return redirect(url_for('index'))
+        # Busca dados extras da tabela 'usuarios' no Supabase
+        dados_usuario = Auth.buscar_usuario(usuario)
+
+        if dados_usuario.data:
+            session['user'].update({
+                'nome': dados_usuario.data.get('nome'),
+                'bio': dados_usuario.data.get('bio'),
+                'foto_perfil': dados_usuario.data.get('foto_perfil'),
+                'telefone': dados_usuario.data.get('telefone')
+            })
+            flash("Login realizado com sucesso!", 'success')
+            return redirect(url_for('index'))
+        else:
+            print("Usuário não encontrado na tabela 'usuarios'.")
     
     return render_template('login.html')
+
 
 
 def login_required(f):

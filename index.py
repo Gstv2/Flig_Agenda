@@ -18,12 +18,10 @@ def index():  # Nomeie como 'index' para usar no url_for
 
 @app.route('/home')
 def home():  # Nomeie como 'index' para usar no url_for
-    user = session.get('user')  # Debug: Verifica se o usuário está na sessão
+    user = session.get('user')
+    print(user)# Debug: Verifica se o usuário está na sessão
     if user:
         empresas = buscar_empresas()
-        print('CU')  # Chama a função para buscar empresas
-        print( empresas )  # Debug: Verifica se as empresas foram carregadas corretasmente
-        
         return render_template('index.html', empresas=empresas, user=user)
     else:
         print('CU')

@@ -69,3 +69,12 @@ class Auth:
     def logout():
         """Desloga o usuário"""
         return supabase.auth.sign_out()
+    
+    
+    @staticmethod
+    def buscar_usuario(usuario):
+        """"
+            Faz busca pelo usuario usando o email
+        """
+        dados_usuario = supabase.table('usuarios').select('*').eq('email', usuario.email).single().execute()
+        return  dados_usuario

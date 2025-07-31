@@ -13,7 +13,7 @@ def cadastrar_empresa():
         descricao = request.form.get('descricao')
         endereco = request.form.get('endereco')
         telefone = request.form.get('telefone')
-        usuario_id = session['user']['id']  # Assumindo que o login salva isso
+        usuario_id = session['user']['id']
 
         dados_empresa = {
             "usuario_id": usuario_id,
@@ -24,11 +24,13 @@ def cadastrar_empresa():
             "telefone": telefone
         }
 
+        print("Dados recebidos do formulário:", dados_empresa)  # Debug
+
         try:
             resultado = Estabelecimento.criar_empresas(dados_empresa)
             if resultado:
                 flash("Estabelecimento cadastrado com sucesso!", "success")
-                return redirect('minhas_empresas')  # Altere se necessário
+                return redirect(url_for('minhas_empresas'))  # Use url_for corretamente
             else:
                 flash("Erro ao cadastrar estabelecimento.", "error")
         except Exception as e:

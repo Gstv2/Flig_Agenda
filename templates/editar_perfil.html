@@ -82,7 +82,7 @@
     <h1 class="edit-profile-title">Editar Perfil</h1>
     <p class="edit-profile-subtitle">Atualize suas informações pessoais e de contato</p>
 
-    <form class="edit-profile-form">
+    <form class="edit-profile-form" action="{{ url_for('usuario.atualizar_dados_usuario') }}" method="post" enctype="multipart/form-data">
       <!-- Foto de Perfil -->
       <section class="edit-profile-card">
         <h2 class="edit-profile-section-title">Foto de Perfil</h2>
@@ -91,7 +91,7 @@
           <div class="edit-profile-avatar">
             JS
             <label class="edit-profile-avatar-camera">
-              <input type="file" accept="image/*" style="display:none;">
+              <input type="file" name="foto_perfil" accept="image/*" style="display:none;">
               <i class="fas fa-camera"></i>
             </label>
           </div>
@@ -100,7 +100,7 @@
             <div class="edit-profile-upload-info">JPG, PNG ou GIF. Máximo 2MB.</div>
             <label class="edit-profile-upload-label">
               <span class="edit-profile-upload-btn"><i class="fas fa-upload"></i> Escolher arquivo</span>
-              <input type="file" accept="image/*" style="display:none;">
+              <input type="file" name="foto_perfil" accept="image/*" style="display:none;">
             </label>
           </div>
         </div>
@@ -113,11 +113,7 @@
         <div class="edit-profile-fields">
           <div class="edit-profile-field-group">
             <label>Nome Completo *</label>
-            <input type="text" value="João Silva" required>
-          </div>
-          <div class="edit-profile-field-group">
-            <label>E-mail *</label>
-            <input type="email" value="joao.silva@email.com" required>
+            <input type="text" name="nome" value="João Silva" required>
           </div>
         </div>
         <div class="edit-profile-field-group">
@@ -125,30 +121,39 @@
           <input type="text" value="(86) 99999-9999">
         </div>
         <div class="edit-profile-field-group">
-          <label>Descrição</label>
-          <textarea rows="3">Empreendedor apaixonado por conectar pessoas aos melhores serviços da cidade. Sempre em busca de novas oportunidades de negócio.</textarea>
+          <label>bio</label>
+          <textarea rows="3" name="bio">Empreendedor apaixonado por conectar pessoas aos melhores serviços da cidade. Sempre em busca de novas oportunidades de negócio.</textarea>
           <small>Esta descrição aparecerá no seu perfil público.</small>
         </div>
       </section>
+      <div class="edit-profile-actions">
+        <button type="button" class="btn-outline">Cancelar</button>
+        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar Alterações</button>
+      </div>
+    </form>
 
-      <!-- Segurança -->
+    <!-- Segurança -->
+    <form action="{{ url_for('usuario.alterar_senha') }}" method="post">
       <section class="edit-profile-card">
         <h2 class="edit-profile-section-title">Segurança</h2>
         <p class="edit-profile-section-desc">Altere sua senha para manter sua conta segura</p>
+
         <div class="edit-profile-field-group">
           <label>Senha Atual *</label>
-          <input type="password" placeholder="Digite sua senha atual" required>
+          <input type="password" name="senha_atual" placeholder="Digite sua senha atual" required>
         </div>
+
         <div class="edit-profile-fields">
           <div class="edit-profile-field-group">
             <label>Nova Senha *</label>
-            <input type="password" placeholder="Digite a nova senha" required>
+            <input type="password" name="nova_senha" placeholder="Digite a nova senha" required>
           </div>
           <div class="edit-profile-field-group">
             <label>Confirmar Nova Senha *</label>
-            <input type="password" placeholder="Confirme a nova senha" required>
+            <input type="password" name="confirmar_senha" placeholder="Confirme a nova senha" required>
           </div>
         </div>
+
         <small class="edit-profile-password-info">Mínimo 8 caracteres</small>
         <div class="edit-profile-password-tips">
           <i class="fas fa-info-circle"></i>
@@ -163,7 +168,7 @@
 
       <div class="edit-profile-actions">
         <button type="button" class="btn-outline">Cancelar</button>
-        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar Alterações</button>
+        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar nova Senha</button>
       </div>
     </form>
   </main>

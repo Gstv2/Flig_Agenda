@@ -3,16 +3,9 @@ from config import supabase
 
 class Estabelecimento():
     @staticmethod
-    def criar_empresas():
+    def criar_empresas(dados_empresa):
         try:
-            response = supabase.table('empresas').insert({
-            "usuario_id": 'usuario_id',
-            "nome_fantasia": 'nome_fantasia',
-            "cnpj": 'cnpj',
-            "descricao": 'descricao',
-            "endereco": 'endereco',
-            "telefone": 'telefone'
-            }).execute()
+            response = supabase.table('empresas').insert(dados_empresa).execute()
             return response.data
         except Exception as e:
             print(f"Erro ao cadastrar empresa: {e}")
