@@ -82,29 +82,29 @@
     <h1 class="edit-profile-title">Editar Perfil</h1>
     <p class="edit-profile-subtitle">Atualize suas informações pessoais e de contato</p>
 
-    <form class="edit-profile-form" action="{{ url_for('usuario.atualizar_dados_usuario') }}" method="post" enctype="multipart/form-data">
+    <form class="edit-profile-form" action="{{ url_for('usuario.atualizar_dados_usuario') }}" method="POST" enctype="multipart/form-data">
       <!-- Foto de Perfil -->
-      <section class="edit-profile-card">
-        <h2 class="edit-profile-section-title">Foto de Perfil</h2>
-        <p class="edit-profile-section-desc">Clique na foto para alterar sua imagem de perfil</p>
-        <div class="edit-profile-avatar-block">
-          <div class="edit-profile-avatar">
-            JS
-            <label class="edit-profile-avatar-camera">
-              <input type="file" name="foto_perfil" accept="image/*" style="display:none;">
-              <i class="fas fa-camera"></i>
-            </label>
-          </div>
-          <div class="edit-profile-avatar-info">
-            <div class="edit-profile-avatar-title">Alterar foto</div>
-            <div class="edit-profile-upload-info">JPG, PNG ou GIF. Máximo 2MB.</div>
-            <label class="edit-profile-upload-label">
-              <span class="edit-profile-upload-btn"><i class="fas fa-upload"></i> Escolher arquivo</span>
-              <input type="file" name="foto_perfil" accept="image/*" style="display:none;">
-            </label>
-          </div>
+    <section class="edit-profile-card">
+      <h2 class="edit-profile-section-title">Foto de Perfil</h2>
+      <p class="edit-profile-section-desc">Clique na foto para alterar sua imagem de perfil</p>
+      <div class="edit-profile-avatar-block">
+        <div class="edit-profile-avatar" id="avatar-preview">
+            <!-- Ícone inicial ou imagem atual -->
+            <span id="avatar-initials"><i class="fas fa-camera"></i></span>
+            <img id="avatar-image" src="" alt="Preview" style="display:none;">
+            <label for="foto_perfil" class="edit-profile-avatar-camera"></label>
         </div>
-      </section>
+        <div class="edit-profile-avatar-info">
+            <div class="edit-profile-avatar-title">Alterar foto</div>
+            <div class="edit-profile-upload-info" id="file-info">JPG, PNG ou GIF. Máximo 2MB.</div>
+            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" style="display:none;">
+            <label for="foto_perfil" class="btn-upload">Escolher imagem</label>
+            <div id="file-selected-message" style="display:none; color:green; margin-top:5px;">
+                <i class="fas fa-check-circle"></i> Imagem selecionada
+            </div>
+        </div>
+      </div>
+    </section>
 
       <!-- Informações Pessoais -->
       <section class="edit-profile-card">
@@ -113,16 +113,16 @@
         <div class="edit-profile-fields">
           <div class="edit-profile-field-group">
             <label>Nome Completo *</label>
-            <input type="text" name="nome" value="João Silva" required>
+            <input type="text" name="nome" value="{{ user.nome }}">
           </div>
         </div>
         <div class="edit-profile-field-group">
           <label>Telefone</label>
-          <input type="text" value="(86) 99999-9999">
+          <input type="text" name="telefone" value="{{ user.telefone }}" placeholder="(00) 00000-0000">
         </div>
         <div class="edit-profile-field-group">
           <label>bio</label>
-          <textarea rows="3" name="bio">Empreendedor apaixonado por conectar pessoas aos melhores serviços da cidade. Sempre em busca de novas oportunidades de negócio.</textarea>
+          <textarea rows="3" name="bio">{{ user.bio }}</textarea>
           <small>Esta descrição aparecerá no seu perfil público.</small>
         </div>
       </section>
@@ -204,4 +204,58 @@
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const fileInput = document.getElementById("fotoPerfilInput");
+
+    const avatarCameraLabel = document.querySelector(".edit-profile-avatar-camera");
+    const uploadLabel = document.querySelector(".edit-profile-upload-label");
+
+    avatarCameraLabel?.addEventListener("click", () => fileInput.click());
+    uploadLabel?.addEventListener("click", () => fileInput.click());
+  });
+
+
+
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('foto_perfil');
+    const fileInfo = document.getElementById('file-info');
+    const fileMessage = document.getElementById('file-selected-message');
+    const avatarImage = document.getElementById('avatar-image');
+    const avatarInitials = document.getElementById('avatar-initials');
+
+    fileInput.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            // Atualiza o texto de informação
+            fileInfo.textContent = this.files[0].name;
+            fileMessage.style.display = 'block';
+            
+            // Cria preview da imagem
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                avatarImage.src = e.target.result;
+                avatarImage.style.display = 'block';
+                avatarInitials.style.display = 'none';
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+            
+            // Esconde a mensagem após 3 segundos
+            setTimeout(() => {
+                fileMessage.style.display = 'none';
+            }, 3000);
+        } else {
+            fileInfo.textContent = 'JPG, PNG ou GIF. Máximo 2MB.';
+            fileMessage.style.display = 'none';
+        }
+    });
+  });
+
+
+
+</script>
 </html> 

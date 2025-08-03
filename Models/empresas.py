@@ -1,7 +1,7 @@
 # models/estabelecimentos.py
 from config import supabase
 
-class Estabelecimento():
+class Empresas():
     @staticmethod
     def criar_empresas(dados_empresa):
         try:
@@ -20,3 +20,4 @@ class Estabelecimento():
         except Exception as e:
             print(f"Erro ao buscar empresas: {e}")
             return None
+    

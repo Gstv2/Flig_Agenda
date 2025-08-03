@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 
 class Auth:
     @staticmethod
-    def cadastrar_usuario(email: str, senha: str, dados_extras: dict = None):
+    def cadastrar_usuario(email: str, senha: str, nome: str, bio:str):
         """
         Cadastra novo usuário usando Supabase Auth
         Args:
@@ -14,27 +14,35 @@ class Auth:
             Tuple (dict, error): Dados do usuário e erro (se houver)
         """
         try:
-            # 1. Cria usuário no Auth do Supabase
+            # 1. Cadastro no sistema de autenticação
             auth_response = supabase.auth.sign_up({
-                'email': email,
-                'password': senha,
+                "email": email,
+                "password": senha
             })
+
+            # 2. Cadastro na tabela de usuários
+            user_data = {
+                "email": email,
+                "nome": nome,
+                "bio": bio
+            }
             
-            if auth_response.user is None:
-                return None, "Erro ao criar usuário"
+            # 3. Insere na tabela de perfis
+            profile_response = supabase.table('usuarios').insert(user_data).execute()
             
-            # 2. Salva dados extras na tabela de perfis (se fornecido)
-            if dados_extras:
-                dados_extras['email'] = email
-                
-                profile_response = supabase.table('usuarios').insert(dados_extras).execute()
-                
-                if not profile_response.data:
-                    # Rollback: remove usuário do Auth se falhar ao criar perfil
-                    supabase.auth.admin.delete_user(auth_response.user.id)
-                    return None, "Erro ao criar perfil do usuário"
+            if not profile_response.data:
+                # Rollback se falhar
+                supabase.auth.admin.delete_user(auth_response.user.id)
+                return None, "Erro ao criar perfil do usuário"
             
-            return auth_response.user, None
+            # 4. Retorna os dados formatados
+            return {
+                "id": auth_response.user.id,
+                "email": email,
+                "nome": nome,
+                "bio": bio,
+                "auth_user": auth_response.user  # Mantém o objeto original se necessário
+            }, None
             
         except Exception as e:
             return None, str(e)

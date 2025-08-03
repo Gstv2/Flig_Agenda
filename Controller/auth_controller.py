@@ -10,37 +10,33 @@ def cadastro():
         nome = request.form.get('nome')
         email = request.form.get('email')
         senha = request.form.get('senha')
-        
-        dados_extras = {'nome': nome}
 
-        # Primeiro, tenta cadastrar
-        usuario, erro = Auth.cadastrar_usuario(email, senha, dados_extras)
+        # Cadastra o usuário
+        usuario, erro = Auth.cadastrar_usuario(email, senha, nome, bio='')
         
         if erro:
             if 'User already registered' in erro:
                 flash("Este e-mail já está em uso. Tente fazer login ou recupere sua senha.", 'error')
             elif 'Password should contain at least' in erro:
-                flash("A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos especiais.", 'error')
+                flash("A senha deve ter no mínimo 8 caracteres.", 'error')
             else:
                 flash(f"Erro ao cadastrar: {erro}", 'error')
             return redirect(url_for('auth.cadastro'))
 
-        # Depois do cadastro, tenta fazer login
+        # Faz login automático
         sessao, erro_login = Auth.login(email, senha)
-
         if erro_login:
-            flash("Cadastro feito, mas houve um erro ao logar. Faça login manualmente.", "warning")
+            flash("Cadastro realizado! Faça login para continuar.", "success")
             return redirect(url_for('auth.login'))
 
-        # Armazena dados na sessão
+        # Armazena dados na sessão - FORMA CORRETA
         session['user'] = {
-            'id': usuario.id,
-            'email': usuario.email,
-            'nome': usuario.user_metadata.get('nome'),
-            'bio': usuario.user_metadata.get('bio'),  # ← aqui
+            'id': usuario['id'],  # Agora é garantido ser um dicionário
+            'email': usuario['email'],
+            'nome': usuario['nome'],
+            'bio': usuario.get('bio', ''),
             'access_token': sessao.session.access_token
         }
-
 
         flash("Cadastro e login realizados com sucesso!", 'success')
         return redirect(url_for('index'))

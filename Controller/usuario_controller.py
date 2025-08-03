@@ -1,44 +1,50 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, request, session, flash, redirect, url_for
 from Models.usuarios import Usuario
-from Controller.auth_controller import login_required
+import logging
 
 usuario_bp = Blueprint('usuario', __name__)
+logger = logging.getLogger(__name__)
 
-@usuario_bp.route('/atualizar_dados', methods=['POST'])
+@usuario_bp.route('/atualizar_dados_usuario', methods=['POST'])
 def atualizar_dados_usuario():
-    nome = request.form.get('nome')
-    bio = request.form.get('bio')
-    telefone = request.form.get('telefone')
-    file = request.files.get('foto_perfil')
+    try:
+        if 'user' not in session:
+            flash("Faça login primeiro", 'error')
+            return redirect(url_for('login'))
 
-    url_foto = None
-    if file and file.filename != "":
-        url_foto, erro_upload = Usuario.upload_foto_perfil(file)
-        if erro_upload:
-            flash(f"Erro ao enviar foto de perfil: {erro_upload}", 'error')
+        nome = request.form.get('nome')
+        bio = request.form.get('bio')
+        telefone = request.form.get('telefone')
+        file = request.files.get('foto_perfil')
+        
+        # Se enviou nova foto
+        if file and file.filename != '':
+            url_foto, erro_upload = Usuario.upload_foto_perfil(file)
+            if erro_upload:
+                flash(f"Erro ao atualizar foto: {erro_upload}", 'error')
+                return redirect(url_for('editar_perfil'))
+            
+            # Atualiza sessão imediatamente
+            session['user']['foto_perfil'] = url_foto
+            flash("Foto atualizada com sucesso!", 'success')
+        # Atualiza os dados no Supabase
+        resultado, erro = Usuario.atualizar_dados(nome, bio, telefone, url_foto)
+
+        if erro:
+            flash(f"Erro ao atualizar dados: {erro}", 'error')
+        else:
+            # Atualiza a sessão diretamente com os dados fornecidos
+            session['user'].update({
+                'nome': nome,
+                'bio': bio,
+                'telefone': telefone,
+            })
+            flash("Dados atualizados com sucesso!", 'success')
             return redirect(url_for('index'))
 
-    # Atualiza os dados no Supabase
-    resultado, erro = Usuario.atualizar_dados(nome, bio, telefone, url_foto)
-
-    if erro:
-        flash(f"Erro ao atualizar dados: {erro}", 'error')
-    else:
-        # Atualiza a sessão diretamente com os dados fornecidos
-        session['user'].update({
-            'nome': nome,
-            'bio': bio,
-            'telefone': telefone,
-        })
-
-        if url_foto:
-            session['user']['foto_perfil'] = url_foto
-
-        flash("Dados atualizados com sucesso!", 'success')
-
-    return redirect(url_for('index'))
-
-
+    except Exception as e:
+        flash("Erro interno ao atualizar foto", 'error')
+        return redirect(url_for('editar_perfil'))
 
 @usuario_bp.route('/alterar_senha', methods=['POST'])
 def alterar_senha():
