@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cabeleireira Exemplo - Salão de beleza em Piripiri. Especializada em cortes modernos, coloração e penteados. Agende seu horário online.">
+    <meta name="keywords" content="cabeleireira, salão de beleza, Piripiri, corte, coloração, penteado">
+    <title>{{ empresa.nome_fantasia }} - em Piripiri</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/empresa.css') }}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Overlay para fechar sidebar -->
+    <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+
+    <!-- Sidebar de navegação -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+        <h2>Piripiri</h2>
+        <button class="close-btn" onclick="fecharMenu()" aria-label="Fechar menu">
+            <i class="fas fa-times"></i>
+        </button>
+        </div>
+        
+        <nav class="sidebar-links">
+        <ul>
+            <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+            <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+            <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+            <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+            <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
+            <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
+            <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
+            <hr>
+            <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
+        </ul>
+        </nav>
+        
+        <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.login') }}" class="btn-sidebar">
+            <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+        </a>
+        </div>
+    </aside>
+    {% include 'base/header_empresas.html' %}
+    
+    <main>
+        {% block content %}
+        <!-- Conteúdo específico de cada página virá aqui -->
+        {% endblock %}
+    </main>
+    
+    {% include 'base/footer_empresas.html' %}
+    
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

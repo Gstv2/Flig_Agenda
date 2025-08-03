@@ -1,85 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cabeleireira Exemplo - Salão de beleza em Piripiri. Especializada em cortes modernos, coloração e penteados. Agende seu horário online.">
-  <meta name="keywords" content="cabeleireira, salão de beleza, Piripiri, corte, coloração, penteado">
-  <title>Cabeleireira Exemplo - Salão de Beleza em Piripiri</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/empresa.css') }}">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Icons -->
-  <script src="https://kit.fontawesome.com/01bfd408f3.js" crossorigin="anonymous"></script>
-</head>
-<body>
-  <!-- Overlay para fechar sidebar -->
-  <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+{% extends "base/base.html" %}
 
-  <!-- Sidebar de navegação -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-top">
-      <h2>Piripiri</h2>
-      <button class="close-btn" onclick="fecharMenu()" aria-label="Fechar menu">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <nav class="sidebar-links">
-      <ul>
-        <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
-        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
-        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
-        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
-        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
-        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
-        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
-        <hr>
-        <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
-        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
-      </ul>
-    </nav>
-    
-    <div class="sidebar-bottom">
-      <a href="{{ url_for('auth.login') }}" class="btn-sidebar">
-        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
-      </a>
-    </div>
-  </aside>
+{% block title %}Página Inicial{% endblock %}
 
-  <!-- Cabeçalho principal -->
-  <header class="hero">
-    <nav class="navbar">
-      <div class="nav-left">
-        <button onclick="abrirMenu()" aria-label="Abrir menu">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-      
-      <span class="logo">Piripiri</span>
-      
-      <div class="nav-right">
-        <a href="#" aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="{{ url_for('auth.login') }}" aria-label="Perfil do usuário">
-          <i class="fas fa-user"></i>
-        </a>
-      </div>
-    </nav>
-  </header>
-
+{% block content %}
   <!-- Banner do perfil da empresa -->
   <section class="perfil-banner">
     <div class="banner-imagem" aria-label="Imagem de fundo do salão"></div>
@@ -88,7 +11,7 @@
         <a href="{{ url_for('saloes') }}" class="btn-back">
           <i class="fas fa-arrow-left"></i> Voltar para salões
         </a>
-        <h1>Cabeleireira Exemplo</h1>
+        <h1>{{ empresa.nome_fantasia }}</h1>
         <p class="avaliacoes">
           <i class="fas fa-star"></i> 4.8 (124 avaliações)
         </p>
@@ -112,12 +35,8 @@
     <div id="tab-info" class="tab-content">
       <div class="info-principal">
         <div class="sobre">
-          <h2>Sobre Cabeleireira Exemplo</h2>
-          <p>
-            Cabeleireira Exemplo é um salão de beleza premium que oferece uma ampla gama de serviços, 
-            incluindo cortes de cabelo, coloração, penteados e tratamentos. Nossa equipe de profissionais 
-            experientes é dedicada a fornecer serviços da mais alta qualidade e garantir a satisfação do cliente.
-          </p>
+          <h2>Sobre {{ empresa.nome_fantasia }}</h2>
+          <p>{{ empresa.descricao }}</p>
           <h3>Galeria</h3>
           <div class="galeria">
             <div class="img-placeholder" aria-label="Imagem do salão 1"></div>
@@ -143,7 +62,7 @@
             <i class="fas fa-map-marker-alt"></i>
             <div>
               <strong>Endereço</strong>
-              <p>Av. Exemplo 124, Centro, Piripiri</p>
+              <p>{{ empresa.endereco }}</p>
             </div>
           </div>
           <div class="info-row">
@@ -157,11 +76,11 @@
             <i class="fas fa-phone"></i>
             <div>
               <strong>Telefone</strong>
-              <p>+55 (86) 9999-9999</p>
+              <p>{{ empresa.telefone }}</p>
             </div>
           </div>
-          <a href="tel:+5586999999999" class="btn-green" style="width:100%;margin-bottom:8px;">Ligar Agora</a>
-          <a href="https://maps.google.com/?q=Av.+Exemplo+124,+Piripiri" target="_blank" class="btn-outline" style="width:100%;">Ver no Mapa</a>
+          <a href="tel:{{ empresa.telefone }}" class="btn-green" style="width:100%;margin-bottom:8px;">Ligar Agora</a>
+          <a href="https://maps.google.com/?q={{ empresa.endereco }}" target="_blank" class="btn-outline" style="width:100%;">Ver no Mapa</a>
         </aside>
       </div>
     </div>
@@ -192,36 +111,4 @@
       </div>
     </div>
   </section>
-
-  <!-- Rodapé -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>Piripiri</h4>
-        <p>Agende seus serviços com facilidade.</p>
-      </div>
-      <div>
-        <h4>Serviços</h4>
-        <ul>
-          <li>Salão de Beleza</li>
-          <li>Oficina Mecânica</li>
-          <li>Clínica</li>
-          <li>Prestador de Serviço</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contato</h4>
-        <p>support@piripiri.com</p>
-        <p>+55 (88) 9999-9999</p>
-        <p>Piripiri, PI - Brasil</p>
-      </div>
-    </div>
-    <div class="copy">
-      © 2025 Piripiri. Todos os direitos reservados.
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-</body>
-</html>
+{% endblock %}

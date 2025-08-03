@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash, session
 from Models.empresas import Empresas
 from Controller.auth_controller import login_required
 
@@ -38,9 +38,22 @@ def cadastrar_empresa():
 
     return render_template('cadastrar_empresa.html')
 
+# Rotas corrigidas:
 @empresas_bp.route('/buscar_empresas', methods=['GET'])
 @login_required
 def buscar_empresas():
-    empresas = Empresas.buscar_empresas()
+    empresas = Empresas.buscar_empresas()  # Nota: Esta função não está definida no código mostrado
     return empresas
 
+@empresas_bp.route('/buscar_empresa_id/<int:id>', methods=['GET'])  # Correção: incluir parâmetro na rota
+@login_required
+def buscar_empresa_id(id):  # Renomeada para evitar confusão
+    empresa = Empresas.buscar_empresa_id(id)
+    print(empresa)
+    return empresa
+
+@empresas_bp.route('/buscar_empresa_id_usuario/<int:id_usuario>', methods=['GET'])  # Correção: incluir parâmetro na rota
+@login_required
+def buscar_empresa_por_id(id_usuario):  # Renomeada para evitar confusão
+    empresa = Empresas.buscar_empresas_por_usuario(id_usuario)
+    return jsonify(empresa) if empresa else jsonify({"error": "Empresa não encontrada"}), 404
