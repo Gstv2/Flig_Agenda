@@ -50,5 +50,9 @@ def minhas_empresas():
 def cadastrar_empresa():
     return render_template('cadastrar_empresa.html')
 
+@app.route('/dashboard-empresa')
+def dashboard_empresa():
+    return render_template('dashboard_empresa.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
