@@ -98,14 +98,14 @@
           <div class="cadastrar-empresa-field-group">
             <label>Categoria *</label>
             <select name="categoria" required>
-              <option value="">Selecione uma categoria</option>
-              <option>Salão de Beleza</option>
-              <option>Oficina Mecânica</option>
-              <option>Clínica Médica</option>
-              <option>Restaurante</option>
-              <option>Academia</option>
-              <option>Pet Shop</option>
-              <option>Outro</option>
+              <option>Selecione uma categoria</option>
+              <option value="Salão de Beleza">Salão de Beleza</option>
+              <option value="Oficina Mecânica">Oficina Mecânica</option>
+              <option value="Clínica Médica">Clínica Médica</option>
+              <option value="Restaurante">Restaurante</option>
+              <option value="Academia">Academia</option>
+              <option value="Pet Shop">Pet Shop</option>
+              <option value="Outro">Outro</option>
             </select>
           </div>
           <div class="cadastrar-empresa-field-group">
@@ -143,20 +143,241 @@
         </div>
       </section>
 
+
       <!-- Banner da Empresa -->
       <section class="cadastrar-empresa-card">
         <h2 class="cadastrar-empresa-section-title">Banner da Empresa</h2>
         <p class="cadastrar-empresa-section-desc">Adicione uma imagem que represente sua empresa</p>
         <div class="cadastrar-empresa-banner-upload">
-          <div class="cadastrar-empresa-banner-dropzone">
+          <div class="cadastrar-empresa-banner-dropzone" id="bannerDropzone">
             <i class="fas fa-upload"></i>
             <div class="cadastrar-empresa-banner-title">Upload do Banner</div>
             <div class="cadastrar-empresa-banner-desc">Arraste e solte uma imagem aqui, ou clique para selecionar</div>
             <label class="cadastrar-empresa-upload-label">
-              <input type="file" accept="image/*" style="display:none;">
+              <input type="file" name="banner" id="bannerInput" accept="image/*" style="display:none;">
               <span class="cadastrar-empresa-upload-btn"><i class="fas fa-upload"></i> Escolher Arquivo</span>
             </label>
             <div class="cadastrar-empresa-banner-info">PNG, JPG ou GIF. Máximo 5MB. Recomendado: 1200×400px</div>
+          </div>
+          <div id="bannerPreview" style="display:none; margin-top:20px;">
+            <img id="previewImage" src="#" alt="Pré-visualização do banner" style="max-width:100%; max-height:200px; border-radius:8px;">
+          </div>
+        </div>
+      </section>
+
+      <section class="cadastrar-empresa-card">
+        <h2 class="cadastrar-empresa-section-title"><i class="fas fa-clock"></i> Horário de Funcionamento</h2>
+        <p class="cadastrar-empresa-section-desc">Defina os horários em que sua empresa atende</p>
+        
+        <div class="horario-funcionamento-container">
+          <!-- Linha de cabeçalho -->
+          <div class="horario-header">
+            <div class="horario-dia">Dia</div>
+            <div class="horario-manha">Manhã</div>
+            <div class="horario-tarde">Tarde</div>
+            <div class="horario-noite">Noite</div>
+          </div>
+          
+          <!-- Dias da semana -->
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="segunda" name="dias[]" value="1" checked>
+              <label for="segunda">Segunda</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="segunda_manha_inicio" > às
+              <input type="time" name="segunda_manha_fim" >
+              <button type="button" class="btn-toggle-horario" data-dia="segunda" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="segunda_tarde_inicio"> às
+              <input type="time" name="segunda_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="segunda" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="segunda_noite_inicio"> às
+              <input type="time" name="segunda_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="segunda" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Repetir para os outros dias (terça a domingo) - vou mostrar apenas um exemplo -->
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="terca" name="dias[]" value="2" checked>
+              <label for="terca">Terça</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="terca_manha_inicio"> às
+              <input type="time" name="terca_manha_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="terca" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="terca_tarde_inicio"> às
+              <input type="time" name="terca_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="terca" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="terca_noite_inicio"> às
+              <input type="time" name="terca_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="terca" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="Quarta" name="dias[]" value="3" checked>
+              <label for="Quarta">Quarta</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="Quarta_manha_inicio"> às
+              <input type="time" name="Quarta_manha_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Quarta" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="Quarta_tarde_inicio"> às
+              <input type="time" name="Quarta_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Quarta" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="Quarta_noite_inicio"> às
+              <input type="time" name="Quarta_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Quarta" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="Quinta" name="dias[]" value="4" checked>
+              <label for="Quinta">Quinta</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="Quinta_manha_inicio"> às
+              <input type="time" name="Quinta_manha_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Quinta" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="Quinta_tarde_inicio"> às
+              <input type="time" name="Quinta_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Quinta" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="Quinta_noite_inicio"> às
+              <input type="time" name="Quinta_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Quinta" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
+          </div>
+
+
+
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="Sexta" name="dias[]" value="5" checked>
+              <label for="Sexta">Sexta</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="Sexta_manha_inicio"> às
+              <input type="time" name="Sexta_manha_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Sexta" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="Sexta_tarde_inicio"> às
+              <input type="time" name="Sexta_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Sexta" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="Sexta_noite_inicio"> às
+              <input type="time" name="Sexta_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Sexta" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
+          </div>
+
+
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="Sabado" name="dias[]" value="6" checked>
+              <label for="Sabado">Sabádo</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="Sabado_manha_inicio"> às
+              <input type="time" name="Sabado_manha_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Sabado" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="Sabado_tarde_inicio"> às
+              <input type="time" name="Sabado_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Sabado" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="Sabado_noite_inicio"> às
+              <input type="time" name="Sabado_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Sabado" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
+          </div>
+
+
+          <div class="horario-dia-row">
+            <div class="horario-dia">
+              <input type="checkbox" id="Domingo" name="dias[]" value="7" checked>
+              <label for="Domingo">Domingo</label>
+            </div>
+            <div class="horario-manha">
+              <input type="time" name="Domingo_manha_inicio"> às
+              <input type="time" name="Domingo_manha_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Domingo" data-periodo="manha">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-tarde">
+              <input type="time" name="Domingo_tarde_inicio"> às
+              <input type="time" name="Domingo_tarde_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Domingo" data-periodo="tarde">
+                <i class="fas fa-toggle-on"></i>
+              </button>
+            </div>
+            <div class="horario-noite">
+              <input type="time" name="Domingo_noite_inicio"> às
+              <input type="time" name="Domingo_noite_fim">
+              <button type="button" class="btn-toggle-horario" data-dia="Domingo" data-periodo="noite">
+                <i class="fas fa-toggle-off"></i>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -198,5 +419,6 @@
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/cadastrar_empresa.js') }}"></script>
 </body>
 </html> 

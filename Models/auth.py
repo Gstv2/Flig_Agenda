@@ -86,3 +86,11 @@ class Auth:
         """
         dados_usuario = supabase.table('usuarios').select('*').eq('email', usuario.email).single().execute()
         return  dados_usuario
+    
+    @staticmethod
+    def buscar_usuario_email(email):
+        """"
+            Faz busca pelo usuario usando o email
+        """
+        dados_usuario = supabase.table('usuarios').select('id').eq('email', email).single().execute()
+        return  dados_usuario

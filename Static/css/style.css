@@ -24,6 +24,9 @@ body {
   flex-direction: column; 
 }
 
+
+
+
 /* ========================================
    UTILITÁRIOS
    ======================================== */
@@ -730,4 +733,28 @@ body {
     min-width: 140px;
     padding: 1rem 0.75rem;
   }
+}
+
+
+
+/* Estilo para o container da senha */
+.password-container {
+  position: relative;
+}
+
+/* Estilo para o ícone do olho */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+/* Ajuste para o input de senha */
+.password-container input[type="password"],
+.password-container input[type="text"] {
+  padding-right: 40px; /* Espaço para o ícone */
+  width: 100%;
 }

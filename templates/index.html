@@ -100,6 +100,7 @@
       </div>
     </div>
   </header>
+  <img src="https://lvwpmfmxncajaiotlajk.supabase.co/storage/v1/object/public/fotosperfil/profile_nerysilva2006@gmail.com_5b6e235b-26c3-44ae-8b0b-f1dc52110bd1.jpeg">
 
   <!-- Seção de categorias -->
   <section class="categorias">
@@ -163,7 +164,7 @@
                 <i class="far fa-clock"></i>
                 <span>{{ empresa.horario_funcionamento }}</span>
               </div>
-              <p class="tags">{{ empresa.servicos | join(' · ') }}</p>
+              <p class="tags">{{ empresa.categoria }}</p>
               <a href="{{ url_for('selecionar_empresa', id_empresa=empresa.id) }}" class="btn-green">Agendar Agora</a>
             </article>
           {% endfor %}
