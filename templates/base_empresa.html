@@ -5,11 +5,11 @@
 {% block content %}
   <!-- Banner do perfil da empresa -->
   <section class="perfil-banner">
-    <div class="banner-imagem" aria-label="Imagem de fundo do salão"></div>
+    <div class="banner-imagem" aria-label="Imagem de fundo do salão"><img src="{{ empresa.banner_imagem }}" alt="banner"></div>
     <div class="banner-container">
       <div class="banner-info">
-        <a href="{{ url_for('saloes') }}" class="btn-back">
-          <i class="fas fa-arrow-left"></i> Voltar para salões
+        <a href="{{ url_for('index') }}" class="btn-back">
+          <i class="fas fa-arrow-left"></i> Voltar para home
         </a>
         <h1>{{ empresa.nome_fantasia }}</h1>
         <p class="avaliacoes">

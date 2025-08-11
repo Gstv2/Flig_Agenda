@@ -37,25 +37,33 @@
 
     <nav class="sidebar-links">
       <ul>
-        <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
-        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
-        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
-        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
-        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
-        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
-        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
-        <hr />
+        <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Salão de Beleza') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Oficina Mecânica') }}"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Clínica Médica') }}"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Prestador de Serviço') }}"><i class="fas fa-user-cog"></i> Prestador de Serviço</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Restaurante') }}"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Academia') }}"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Pet Shop') }}"><i class="fas fa-paw"></i> Pet Shops</a></li>
+        <hr>
         <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
         <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
       </ul>
     </nav>
-
-    <div class="sidebar-bottom">
-      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
-        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
-      </button>
-    </div>
+    
+    {% if user %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Sair
+        </a>
+      </div>
+    {% else %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.login') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+        </a>
+      </div>
+    {% endif %}
   </aside>
 
   <!-- Cabeçalho principal -->
@@ -71,12 +79,16 @@
       <span class="logo">Piripiri</span>
 
       <div class="nav-right">
-        <a href="#" aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="{{ url_for('auth.login') }}" aria-label="Perfil do usuário">
-          <i class="fas fa-user"></i>
-        </a>
+        <!-- link antigo {{url_for('auth.login')}}-->
+        {% if user %}
+          <a href="#" aria-label="Perfil do usuário">
+            <i class="fas fa-user"></i>
+          </a>
+        {% else %}
+          <a href="{{url_for('auth.login')}}">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
       </div>
     </nav>
   </header>

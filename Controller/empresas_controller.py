@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 @empresas_bp.route('/cadastrar_empresa', methods=['GET', 'POST'])
 @login_required
 def cadastrar_empresa():
+    user = session.get('user', {})
     if request.method == 'POST':
         print("Iniciando processamento do formulário...")  # DEBUG
         
@@ -93,7 +94,7 @@ def cadastrar_empresa():
             logger.error(f"Erro ao cadastrar empresa: {str(e)}")
             flash(f"Erro ao processar cadastro: {str(e)}", "error")
 
-    return render_template('cadastrar_empresa.html')
+    return render_template('cadastrar_empresa.html', user=user)
 
 @empresas_bp.route('/atualizar_banner/<int:empresa_id>', methods=['POST'])
 @login_required
@@ -130,3 +131,10 @@ def buscar_empresa_id(id):  # Renomeada para evitar confusão
 def buscar_empresa_por_id(id_usuario):  # Renomeada para evitar confusão
     empresa = Empresas.buscar_empresas_por_usuario(id_usuario)
     return jsonify(empresa) if empresa else jsonify({"error": "Empresa não encontrada"}), 404
+
+@empresas_bp.route('/buscar_empresa_categoria/<categoria>', methods=['GET'])  # Correção: incluir parâmetro na rota
+@login_required
+def buscar_empresa_categoria(categoria):  # Renomeada para evitar confusão
+    empresas = Empresas.buscar_empresa_categoria(categoria)
+    print(empresas)
+    return empresas

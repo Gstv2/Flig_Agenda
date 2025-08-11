@@ -1,9 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, session, flash
+from flask import Flask, render_template, redirect, url_for, session, flash, request
 from Controller.usuario_controller import usuario_bp
 from Controller.auth_controller import auth_bp, login_required
-from Controller.empresas_controller import empresas_bp, buscar_empresas, buscar_empresa_id
+from Controller.empresas_controller import empresas_bp, buscar_empresas, buscar_empresa_id, buscar_empresa_categoria
 
-app = Flask(__name__, template_folder='../templates', static_folder='../Static')
+app = Flask(__name__, template_folder='./templates', static_folder='./Static')
 app.secret_key = '2895c134719b7d446e1a6f72746b500c33fcb93874b7a604965dad9dfa3d038d'
 app.register_blueprint(usuario_bp)
 app.register_blueprint(auth_bp)
@@ -18,9 +18,6 @@ def index():  # Nomeie como 'index' para usar no url_for
 @app.route('/home')
 def home():  # Nomeie como 'index' para usar no url_for
     user = session.get('user', {})
-    print('tomar no cu')
-    print(user.get('email'), user.get('nome'), user.get('bio'))
-    print(user)# Debug: Verifica se o usuário está na sessão
     if user:
         empresas = buscar_empresas()
         return render_template('index.html', empresas=empresas, user=user)
@@ -31,7 +28,8 @@ def home():  # Nomeie como 'index' para usar no url_for
 @app.route('/minhas_empresas')
 @login_required
 def minhas_empresas():  # Nomeie como 'index' para usar no url_for
-    return render_template('minhas_empresas.html')
+    user = session.get('user', {})
+    return render_template('minhas_empresas.html', user=user)
 
 # Rota principal com nome específico
 @app.route('/editar_perfil')
@@ -40,11 +38,11 @@ def editar_perfil():
     user = session.get('user')
     return render_template('editar_perfil.html', user=user)
 
-# Página de salões de beleza
-@app.route('/saloes')
-@login_required
-def saloes():
-    return render_template('saloes.html')
+@app.route("/empresas/<categoria>")
+def empresas_por_categoria(categoria):
+    user = session.get('user', {})
+    empresas = buscar_empresa_categoria(categoria) or []
+    return render_template("empresas.html",empresas=empresas,categoria=categoria, user=user)
 
 @app.route('/empresa/selecionar/<int:id_empresa>')
 @login_required
@@ -80,6 +78,7 @@ def selecionar_empresa(id_empresa):
 @app.route('/empresa/<nome_empresa>')
 @login_required
 def base_empresa(nome_empresa):
+    user = session.get('user', {})
     print(f"Sessão atual: {session}")  # Debug
     id_empresa = session.get('empresa_id')
     
@@ -95,8 +94,12 @@ def base_empresa(nome_empresa):
         flash("Empresa não encontrada", "error")
         return redirect(url_for('home'))
     
-    return render_template('base_empresa.html', empresa=empresa)
+    return render_template('base_empresa.html', empresa=empresa, user=user)
 
+@app.route('/dashboard-empresa')
+def dashboard_empresa():
+    user = session.get('user', {})
+    return render_template('dashboard_empresa.html', user=user)
 
 if __name__ == '__main__':
     app.run(debug=True)

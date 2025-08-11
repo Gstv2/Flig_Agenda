@@ -38,24 +38,32 @@
     <nav class="sidebar-links">
       <ul>
         <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="{{url_for('saloes')}}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
-        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
-        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
-        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
-        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
-        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
-        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Salão de Beleza') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Oficina Mecânica') }}"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Clínica Médica') }}"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Prestador de Serviço') }}"><i class="fas fa-user-cog"></i> Prestador de Serviço</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Restaurante') }}"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Academia') }}"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Pet Shop') }}"><i class="fas fa-paw"></i> Pet Shops</a></li>
         <hr>
         <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
         <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
       </ul>
     </nav>
     
-    <div class="sidebar-bottom">
-      <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
-        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
-      </a>
-    </div>
+    {% if user %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Sair
+        </a>
+      </div>
+    {% else %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.login') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+        </a>
+      </div>
+    {% endif %}
   </aside>
 
   <!-- Cabeçalho principal -->
@@ -71,9 +79,6 @@
       <span class="logo">Piripiri</span>
       
       <div class="nav-right">
-        <a href="#" aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </a>
         <!-- link antigo {{url_for('auth.login')}}-->
         {% if user %}
           <a href="#" aria-label="Perfil do usuário">
@@ -113,29 +118,33 @@
         </button>
         
         <div class="categorias-grid">
-          <a class="categoria" href="{{url_for('saloes')}}">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Salão de Beleza') }}">
             <i class="fas fa-cut"></i>
             <span>Salão de Beleza</span>
           </a>
-          <a class="categoria" href="#">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Oficina Mecânica') }}">
             <i class="fas fa-car"></i>
             <span>Oficina Mecânica</span>
           </a>
-          <a class="categoria" href="#">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Clínica') }}">
             <i class="fas fa-stethoscope"></i>
             <span>Clínica</span>
           </a>
-          <a class="categoria" href="#">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Prestador de Serviço') }}">
             <i class="fas fa-user-cog"></i>
             <span>Prestador de Serviço</span>
           </a>
-          <a class="categoria" href="#">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Restaurantes') }}">
             <i class="fas fa-utensils"></i>
             <span>Restaurantes</span>
           </a>
-          <a class="categoria" href="#">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Academias') }}">
             <i class="fas fa-dumbbell"></i>
             <span>Academias</span>
+          </a>
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Pet Shop') }}">
+            <i class="fas fa-paw fa-2x"></i>
+            <span>Pet Shop</span>
           </a>
         </div>
         
@@ -155,7 +164,7 @@
           {% for empresa in empresas %}
             <article class="empresa-card">
               <img src="{{ empresa.banner_imagem }}" alt="Imagem da {{ empresa.nome }}" class="empresa-imagem" ></img>
-              <h3 class="empresa-nome">{{ empresa.nome }}</h3>
+              <h3 class="empresa-nome">{{ empresa.nome_fantasia }}</h3>
               <div class="info-row">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>{{ empresa.endereco }}</span>
@@ -389,6 +398,20 @@
 
 
 <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('.categorias-grid');
+  const btnPrev = document.querySelectorAll('.seta')[0];
+  const btnNext = document.querySelectorAll('.seta')[1];
+
+  btnPrev.addEventListener('click', () => {
+    grid.scrollBy({ left: -200, behavior: 'smooth' }); // rola para a esquerda
+  });
+
+  btnNext.addEventListener('click', () => {
+    grid.scrollBy({ left: 200, behavior: 'smooth' }); // rola para a direita
+  });
+});
   // Cria o objeto user só se estiver definido no backend
   {% if user %}
     const user = {

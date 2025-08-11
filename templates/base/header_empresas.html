@@ -9,13 +9,17 @@
     
     <span class="logo">Piripiri</span>
     
-    <div class="nav-right">
-    <a href="#" aria-label="Buscar">
-        <i class="fas fa-search"></i>
-    </a>
-    <a href="{{ url_for('auth.login') }}" aria-label="Perfil do usuário">
-        <i class="fas fa-user"></i>
-    </a>
-    </div>
+      <div class="nav-right">
+        <!-- link antigo {{url_for('auth.login')}}-->
+        {% if user %}
+          <a href="#" aria-label="Perfil do usuário">
+            <i class="fas fa-user"></i>
+          </a>
+        {% else %}
+          <a href="{{url_for('auth.login')}}">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
+      </div>
 </nav>
 </header>

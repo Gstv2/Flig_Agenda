@@ -6,6 +6,7 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    user = session.get('user', {})
     if request.method == 'POST':
         nome = request.form.get('nome')
         email = request.form.get('email')
@@ -41,11 +42,12 @@ def cadastro():
         flash("Cadastro e login realizados com sucesso!", 'success')
         return redirect(url_for('index'))
     
-    return render_template('registro.html')
+    return render_template('registro.html', user=user)
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    user = session.get('user', {})
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('senha')
@@ -87,7 +89,7 @@ def login():
         else:
             print("Usuário não encontrado na tabela 'usuarios'.")
     
-    return render_template('login.html')
+    return render_template('login.html', user=user)
 
 
 

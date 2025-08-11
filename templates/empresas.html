@@ -37,25 +37,33 @@
 
     <nav class="sidebar-links">
       <ul>
-        <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
-        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
-        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
-        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
-        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
-        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
-        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
-        <hr />
+        <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Salão de Beleza') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Oficina Mecânica') }}"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Clínica Médica') }}"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Prestador de Serviço') }}"><i class="fas fa-user-cog"></i> Prestador de Serviço</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Restaurante') }}"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Academia') }}"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Pet Shop') }}"><i class="fas fa-paw"></i> Pet Shops</a></li>
+        <hr>
         <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
         <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
       </ul>
     </nav>
 
-    <div class="sidebar-bottom">
-      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
-        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
-      </button>
-    </div>
+    {% if user %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Sair
+        </a>
+      </div>
+    {% else %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.login') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+        </a>
+      </div>
+    {% endif %}
   </aside>
 
   <!-- Cabeçalho principal -->
@@ -70,12 +78,16 @@
       <span class="logo">Piripiri</span>
 
       <div class="nav-right">
-        <a href="#" aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="{{ url_for('auth.login') }}" aria-label="Perfil do usuário">
-          <i class="fas fa-user"></i>
-        </a>
+        <!-- link antigo {{url_for('auth.login')}}-->
+        {% if user %}
+          <a href="#" aria-label="Perfil do usuário">
+            <i class="fas fa-user"></i>
+          </a>
+        {% else %}
+          <a href="{{url_for('auth.login')}}">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
       </div>
     </nav>
   </header>
@@ -84,18 +96,8 @@
   <section class="hero saloes-hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1>Encontre Salões de Beleza em Piripiri</h1>
-        <p>Descubra e agende com os melhores profissionais de beleza perto de você</p>
-
-        <form class="search-bar" role="search">
-          <input 
-            type="text" 
-            placeholder="Busque por salões, serviços ou profissionais..."
-            aria-label="Buscar salões de beleza"
-          />
-          <button type="submit" class="btn-green">Buscar</button>
-        </form>
-
+        <h1>Encontre {{ categoria }} em Piripiri</h1>
+        <p>Descubra e agende com os melhores profissionais perto de você</p>
         <p class="login-hint">Faça login para agendar seus serviços favoritos</p>
       </div>
     </div>
@@ -105,38 +107,42 @@
   <section class="filtros">
     <div class="container">
       <div class="filtros-wrapper">
-        <button class="filtro-btn ativo" aria-label="Mostrar todos os salões">Todos os Salões</button>
-        <button class="filtro-btn" aria-label="Filtrar por serviços de cabelo">Cabelo</button>
-        <button class="filtro-btn" aria-label="Filtrar por serviços de unhas">Unhas</button>
-        <button class="filtro-btn" aria-label="Filtrar por maquiagem">Maquiagem</button>
-        <button class="filtro-btn" aria-label="Filtrar por spa">Spa</button>
+        <button class="filtro-btn ativo" aria-label="Mostrar todos os {{ categoria }}">Todos os {{ categoria }}</button>
       </div>
     </div>
   </section>
+
+
 
   <!-- Seção de empresas -->
   <section class="empresas">
     <div class="container">
       <div class="empresas-grid">
+        {% if empresas %} 
+          {% for empresa in empresas %}
+            <article class="empresa-card">
+              <img src="{{ empresa.banner_imagem }}" alt="Imagem da {{ empresa.nome }}" class="empresa-imagem" ></img>
+              <h3 class="empresa-nome">{{ empresa.nome_fantasia }}</h3>
+              <div class="info-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ empresa.endereco }}</span>
+              </div>
+              <div class="info-row">
+                <i class="far fa-clock"></i>
+                <span>{{ empresa.horario_funcionamento }}</span>
+              </div>
+              <p class="tags">{{ empresa.categoria }}</p>
+              <a href="{{ url_for('selecionar_empresa', id_empresa=empresa.id) }}" class="btn-green">Agendar Agora</a>
+            </article>
+          {% endfor %}
+        {% else %}
         <!-- Card de exemplo -->
-        <article class="empresa-card">
-          <div class="empresa-imagem" aria-label="Imagem da Cabeleireira Exemplo"></div>
-          <h3 class="empresa-nome">Cabeleireira Exemplo</h3>
-          <div class="info-row">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Av. Exemplo, 124</span>
-          </div>
-          <div class="info-row">
-            <i class="far fa-clock"></i>
-            <span>Aberto até 19:00</span>
-          </div>
-          <p class="tags">Corte · Coloração · Penteado</p>
-          <a href="{{url_for('base_empresa')}}" class="btn-green">Agendar Agora</a>
-        </article>
+        <p>Nenhuma empresa encontrada</p>
+        {% endif %}
       </div>
 
       <div class="center-btn">
-        <button class="btn-load" aria-label="Carregar mais salões">Carregar Mais</button>
+          <button class="btn-load" aria-label="Carregar mais salões">Carregar Mais</button>
       </div>
     </div>
   </section>

@@ -149,3 +149,11 @@ class Empresas:
             return response.data[0] if response.data else None, None
         except Exception as e:
             return None, str(e)
+        
+    @staticmethod
+    def buscar_empresa_categoria(categoria):
+        try:
+            response = supabase.table('empresas').select('*').eq("categoria", categoria).execute()
+            return response.data
+        except Exception as e:
+            return None, str(e)
