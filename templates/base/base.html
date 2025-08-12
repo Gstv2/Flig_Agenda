@@ -77,5 +77,25 @@
     
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <!-- Modal de Perfil do Usuário -->
+<div id="user-modal-container" class="user-modal-container" style="display:none;">
+  <div class="user-modal-content">
+    <button class="user-modal-close" onclick="fecharUserModal()" aria-label="Fechar modal">&times;</button>
+    <h2 class="user-modal-title">Perfil do Usuário</h2>
+    <p class="user-modal-subtitle">Informações da sua conta</p>
+    <div class="user-modal-avatar" id="userAvatar"></div>
+    <h3 class="user-modal-nome">{{ user.nome }}</h3>
+    <p class="user-modal-email">{{ user.email }}</p>
+    <p class="user-modal-bio">{{ user.bio }}</p>
+    <div class="user-modal-empresas">
+      <i class="fas fa-building"></i> empresas
+    </div>
+    <a href="{{ url_for('minhas_empresas') }}" class="btn-green">
+      <i class="fas fa-building"></i> Ver Minhas Empresas
+    </a>
+    <a href="{{ url_for('editar_perfil') }}" class="btn-outline">Editar Perfil</a>
+    <a href="{{ url_for('auth.logout') }}" class="user-modal-sair">logout</a>
+  </div>
+</div>
 </body>
 </html>
