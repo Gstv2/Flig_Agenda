@@ -47,7 +47,6 @@ def empresas_por_categoria(categoria):
     return render_template("empresas.html",empresas=empresas,categoria=categoria_decodificada, user=user)
 
 @app.route('/empresa/selecionar/<int:id_empresa>')
-@login_required
 def selecionar_empresa(id_empresa):
     print(f"Buscando empresa ID: {id_empresa}")
     
@@ -78,7 +77,6 @@ def selecionar_empresa(id_empresa):
 
 
 @app.route('/empresa/<nome_empresa>')
-@login_required
 def base_empresa(nome_empresa):
     user = session.get('user', {})
     print(f"Sessão atual: {session}")  # Debug
