@@ -114,26 +114,22 @@ def atualizar_banner(empresa_id):
 
 # Rotas corrigidas:
 @empresas_bp.route('/buscar_empresas', methods=['GET'])
-@login_required
 def buscar_empresas():
     empresas = Empresas.buscar_empresas()  # Nota: Esta função não está definida no código mostrado
     return empresas
 
 @empresas_bp.route('/buscar_empresa_id/<int:id>', methods=['GET'])  # Correção: incluir parâmetro na rota
-@login_required
 def buscar_empresa_id(id):  # Renomeada para evitar confusão
     empresa = Empresas.buscar_empresa_id(id)
     print(empresa)
     return empresa
 
 @empresas_bp.route('/buscar_empresa_id_usuario/<int:id_usuario>', methods=['GET'])  # Correção: incluir parâmetro na rota
-@login_required
 def buscar_empresa_por_id(id_usuario):  # Renomeada para evitar confusão
     empresa = Empresas.buscar_empresas_por_usuario(id_usuario)
     return jsonify(empresa) if empresa else jsonify({"error": "Empresa não encontrada"}), 404
 
 @empresas_bp.route('/buscar_empresa_categoria/<categoria>', methods=['GET'])  # Correção: incluir parâmetro na rota
-@login_required
 def buscar_empresa_categoria(categoria):  # Renomeada para evitar confusão
     empresas = Empresas.buscar_empresa_categoria(categoria)
     print(empresas)

@@ -20,10 +20,17 @@ def index():  # Nomeie como 'index' para usar no url_for
 def home():  # Nomeie como 'index' para usar no url_for
     user = session.get('user', {})
     empresas = buscar_empresas()
-    if user:
+    if user and empresas:
         return render_template('index.html', empresas=empresas, user=user)
-    else:
+    elif empresas:
         return render_template('index.html', user=None, empresas=empresas)
+    elif user:
+        return render_template('index.html', user=user, empresas=None)
+    else:
+        return render_template('index.html', user=None, empresas=None)
+
+
+
 
 # Rota principal com nome específico
 @app.route('/minhas_empresas')
@@ -97,6 +104,7 @@ def base_empresa(nome_empresa):
     return render_template('base_empresa.html', empresa=empresa, user=user)
 
 @app.route('/dashboard-empresa')
+@login_required
 def dashboard_empresa():
     user = session.get('user', {})
     return render_template('dashboard_empresa.html', user=user)
