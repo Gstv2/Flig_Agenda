@@ -127,7 +127,7 @@ class Empresas:
         try:
             response = supabase.table('empresas').select("*").eq("id", id).execute()
             print(response)
-            return response.data[0]
+            return response.data
         except Exception as e:
             print(f"Erro ao buscar empresa: {e}")
             return None

@@ -124,3 +124,9 @@ def logout():
         session.clear()
         flash("Você foi deslogado com sucesso.", 'info')
     return redirect(url_for('auth.login'))
+
+@auth_bp.route('/buscar_usuario_email/<email>', methods=['GET'])  # Correção: incluir parâmetro na rota
+def buscar_usuario_email(email):  # Renomeada para evitar confusão
+    usuario = Auth.buscar_usuario_email(email)
+    print(usuario)
+    return usuario

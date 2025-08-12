@@ -478,6 +478,7 @@ body {
   padding: 1rem;
   text-align: left;
   display: flex;
+  max-width: 340px;
   flex-direction: column;
   gap: 0.5rem;
 }

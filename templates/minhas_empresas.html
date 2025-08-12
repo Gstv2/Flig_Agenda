@@ -98,12 +98,12 @@
     <div class="empresas-stats-row">
       <div class="empresas-stat-card">
         <div class="empresas-stat-label">Total de Empresas</div>
-        <div class="empresas-stat-value">3</div>
+        <div class="empresas-stat-value">{{ countEmpresas }}</div>
         <div class="empresas-stat-icon"><i class="fas fa-cog"></i></div>
       </div>
       <div class="empresas-stat-card">
         <div class="empresas-stat-label">Empresas Ativas</div>
-        <div class="empresas-stat-value">3</div>
+        <div class="empresas-stat-value">{{ countAtivas }}</div>
         <div class="empresas-stat-icon"><i class="fas fa-circle" style="color:#2ecc71;"></i></div>
       </div>
       <div class="empresas-stat-card">
@@ -115,48 +115,34 @@
 
     <!-- Cards de empresas -->
     <div class="empresas-grid">
-      <article class="empresa-card">
-        <div class="empresa-imagem" aria-label="Imagem da Empresa"></div>
-        <h3 class="empresa-nome">Bella Estética <span class="empresa-status ativo">Ativo</span></h3>
-        <div class="info-row">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Av. Principal, 123</span>
-        </div>
-        <div class="info-row">
-          <i class="far fa-clock"></i>
-          <span>Aberto até 19:00</span>
-        </div>
-        <p class="tags">Corte · Coloração · Manicure</p>
-        <a href="#" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
-      </article>
-      <article class="empresa-card">
-        <div class="empresa-imagem" aria-label="Imagem da Empresa"></div>
-        <h3 class="empresa-nome">Auto Center Silva <span class="empresa-status ativo">Ativo</span></h3>
-        <div class="info-row">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Rua das Oficinas, 456</span>
-        </div>
-        <div class="info-row">
-          <i class="far fa-clock"></i>
-          <span>Aberto até 18:00</span>
-        </div>
-        <p class="tags">Mecânica · Elétrica · Pintura</p>
-        <a href="#" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
-      </article>
-      <article class="empresa-card">
-        <div class="empresa-imagem" aria-label="Imagem da Empresa"></div>
-        <h3 class="empresa-nome">Clínica Saúde Total <span class="empresa-status ativo">Ativo</span></h3>
-        <div class="info-row">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Av. da Saúde, 789</span>
-        </div>
-        <div class="info-row">
-          <i class="far fa-clock"></i>
-          <span>Aberto até 17:00</span>
-        </div>
-        <p class="tags">Consultas · Exames · Especialidades</p>
-        <a href="#" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
-      </article>
+
+
+      {% if empresas %} 
+        {% for empresa in empresas %}
+          <article class="empresa-card">
+            <div class="empresa-imagem" aria-label="Imagem da Empresa"></div>
+            <h3 class="empresa-nome">{{ empresa.nome_fantasia }}
+              {% if empresa.Ativo == true %}
+                <span class="empresa-status ativo"> - Ativo</span>
+              {% else %}
+                <span class="empresa-status inativo"> - Inativo</span>
+              {% endif %}
+            </h3>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ empresa.endereco }}</span>
+            </div>
+            <div class="info-row">
+              <i class="far fa-clock"></i>
+              <span>Aberto até 19:00</span>
+            </div>
+            <p class="tags">{{ empresa.categoria }}</p>
+            <a href="#" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
+          </article>
+        {% endfor %}
+      {% else %}
+        <p>Você ainda não tem nenhuma empresa</p>
+      {% endif %}
     </div>
     <div class="center-btn">
       <a href="{{ url_for('empresas.cadastrar_empresa') }}" class="btn-outline empresas-cadastrar-btn"><i class="fas fa-plus"></i> Cadastrar Nova Empresa</a>

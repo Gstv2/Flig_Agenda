@@ -127,10 +127,12 @@ def buscar_empresa_id(id):  # Renomeada para evitar confusão
 @empresas_bp.route('/buscar_empresa_id_usuario/<int:id_usuario>', methods=['GET'])  # Correção: incluir parâmetro na rota
 def buscar_empresa_por_id(id_usuario):  # Renomeada para evitar confusão
     empresa = Empresas.buscar_empresas_por_usuario(id_usuario)
-    return jsonify(empresa) if empresa else jsonify({"error": "Empresa não encontrada"}), 404
+    len(empresa)
+    return empresa
 
 @empresas_bp.route('/buscar_empresa_categoria/<categoria>', methods=['GET'])  # Correção: incluir parâmetro na rota
 def buscar_empresa_categoria(categoria):  # Renomeada para evitar confusão
     empresas = Empresas.buscar_empresa_categoria(categoria)
+    
     print(empresas)
     return empresas

@@ -1,10 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, session, flash, request
 from urllib.parse import unquote  # Adicione no topo do arquivo
 from Controller.usuario_controller import usuario_bp
-from Controller.auth_controller import auth_bp, login_required
-from Controller.empresas_controller import empresas_bp, buscar_empresas, buscar_empresa_id, buscar_empresa_categoria
+from Controller.auth_controller import auth_bp, login_required, buscar_usuario_email
+from Controller.empresas_controller import empresas_bp, buscar_empresas, buscar_empresa_id, buscar_empresa_categoria, buscar_empresa_por_id
 
-app = Flask(__name__, template_folder='../templates', static_folder='../Static')
+app = Flask(__name__, template_folder='./templates', static_folder='./Static')
 app.secret_key = '2895c134719b7d446e1a6f72746b500c33fcb93874b7a604965dad9dfa3d038d'
 app.register_blueprint(usuario_bp)
 app.register_blueprint(auth_bp)
@@ -29,15 +29,38 @@ def home():  # Nomeie como 'index' para usar no url_for
     else:
         return render_template('index.html', user=None, empresas=None)
 
-
-
-
 # Rota principal com nome específico
 @app.route('/minhas_empresas')
 @login_required
 def minhas_empresas():  # Nomeie como 'index' para usar no url_for
     user = session.get('user', {})
-    return render_template('minhas_empresas.html', user=user)
+    user_email = user.get('email')
+    usuario_response = buscar_usuario_email(user_email)
+    
+    if not usuario_response or not usuario_response.data:
+        flash("Usuário não encontrado no banco de dados", "error")
+        return redirect(url_for('auth.login'))
+        
+    usuario_id = usuario_response.data.get('id')
+    if not usuario_id:
+        flash("ID do usuário não encontrado na resposta", "error")
+        return redirect(url_for('auth.login'))
+    print("esse é o ID do user", usuario_id)
+    empresas = buscar_empresa_por_id(usuario_id)
+    print(empresas)
+    print(len(empresas))
+    # Contagem total de empresas
+    countEmpresas = len(empresas)
+    countAtivas = sum(1 for empresa in empresas if empresa.get('Ativo') == True)
+
+    print(countEmpresas)
+        # Ou alternativamente, se 'Ativo' for string:
+        # countAtivas = sum(1 for empresa in empresas if str(empresa.get('Ativo', '')).lower() == 'true')
+    if empresas:
+        return render_template('minhas_empresas.html', user=user, empresas=empresas, countEmpresas=countEmpresas, countAtivas=countAtivas)
+    else:
+        return render_template('minhas_empresas.html', user=user, empresas=None, countEmpresas = 0, countAtivas = 0)
+    
 
 # Rota principal com nome específico
 @app.route('/editar_perfil')
@@ -103,11 +126,12 @@ def base_empresa(nome_empresa):
     
     return render_template('base_empresa.html', empresa=empresa, user=user)
 
-@app.route('/dashboard-empresa')
+@app.route('/dashboard-empresa/<int:id_empresa>')
 @login_required
-def dashboard_empresa():
+def dashboard_empresa(id_empresa):
     user = session.get('user', {})
-    return render_template('dashboard_empresa.html', user=user)
+    empresa = buscar_empresa_id(id_empresa)
+    return render_template('dashboard_empresa.html', user=user, empresas=empresa)
 
 if __name__ == '__main__':
     app.run(debug=True)
