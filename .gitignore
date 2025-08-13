@@ -4,6 +4,7 @@ dist/
 .cache/
 
 # Python (caso use no mesmo projeto)
+venv/
 .venv/
 __pycache__/
 *.py[cod]

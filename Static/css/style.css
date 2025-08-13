@@ -9,6 +9,7 @@
 }
 
 html {
+  height: 100%;
   scroll-behavior: smooth;
 }
 
@@ -18,7 +19,13 @@ body {
   color: #1a1a1a;
   line-height: 1.6;
   font-size: 16px;
+  min-height: 100vh;          /* Garante que o body ocupe toda a altura da tela */
+  display: flex;              /* Ativa flexbox */
+  flex-direction: column; 
 }
+
+
+
 
 /* ========================================
    UTILITÁRIOS
@@ -30,50 +37,41 @@ body {
   padding: 0 2rem;
 }
 
-.btn-green,
-.btn-outline {
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 8px;
-  padding: 0.8rem 1.5rem;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
 .btn-green {
   background-color: #2ecc71;
   color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
   border: none;
-}
-
-.btn-outline {
-  background: transparent;
-  color: #0C2D48;
-  border: 1px solid #0C2D48;
-  outline: none;
-}
-.btn-outline:focus {
-  outline: none;
-  box-shadow: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 .btn-green:hover {
   background-color: #27ae60;
 }
 
+.btn-outline {
+  background: transparent;
+  color: #0C2D48;
+  border: 0.5px solid #0C2D48;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
 .btn-outline:hover {
   background: #0C2D48;
   color: white;
-}
-
-.btn-outline,
-.btn-outline:hover,
-.btn-outline:focus,
-.btn-outline:active {
-  text-decoration: none !important;
 }
 
 /* ========================================
@@ -285,7 +283,7 @@ body {
 .hero {
   background-color: #0C2D48;
   color: white;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
 }
 
 .hero-content {
@@ -427,6 +425,15 @@ body {
   margin-top: 0.5rem;
 }
 
+.senha-requisitos {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+
 /* ========================================
    SEÇÃO EMPRESAS
    ======================================== */
@@ -471,6 +478,7 @@ body {
   padding: 1rem;
   text-align: left;
   display: flex;
+  max-width: 340px;
   flex-direction: column;
   gap: 0.5rem;
 }
@@ -484,6 +492,7 @@ body {
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   height: 140px;
   border-radius: 8px;
+  max-width: 310px;
 }
 
 .empresa-nome {
@@ -622,6 +631,7 @@ body {
    ======================================== */
 
 .footer {
+  margin-top: auto;          /* Empurra o footer para baixo */
   background: #0C2D48;
   color: white;
   padding: 3rem 1rem 1rem;
@@ -725,4 +735,28 @@ body {
     min-width: 140px;
     padding: 1rem 0.75rem;
   }
+}
+
+
+
+/* Estilo para o container da senha */
+.password-container {
+  position: relative;
+}
+
+/* Estilo para o ícone do olho */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+/* Ajuste para o input de senha */
+.password-container input[type="password"],
+.password-container input[type="text"] {
+  padding-right: 40px; /* Espaço para o ícone */
+  width: 100%;
 }

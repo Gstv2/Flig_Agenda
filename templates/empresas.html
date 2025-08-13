@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Veja e gerencie suas empresas cadastradas." />
-  <meta name="keywords" content="empresas, dashboard, gestão, Piripiri" />
-  <title>Minhas Empresas - Flig Agenda</title>
+  <meta name="description" content="Encontre e agende com os melhores salões de beleza em Piripiri. Profissionais qualificados para todos os seus cuidados." />
+  <meta name="keywords" content="salão de beleza, cabeleireiro, Piripiri, agendamento, beleza" />
+  <title>Salões de Beleza em Piripiri</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/minhas_empresas.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/saloes.css') }}" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,6 +35,7 @@
         <i class="fas fa-times"></i>
       </button>
     </div>
+
     <nav class="sidebar-links">
       <ul>
         <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
@@ -65,6 +66,7 @@
       </div>
     {% endif %}
   </aside>
+
   <!-- Cabeçalho principal -->
   <header class="hero">
     <nav class="navbar">
@@ -73,7 +75,9 @@
           <i class="fas fa-bars"></i>
         </button>
       </div>
+
       <span class="logo">Piripiri</span>
+
       <div class="nav-right">
         <!-- link antigo {{url_for('auth.login')}}-->
         {% if user %}
@@ -89,69 +93,69 @@
     </nav>
   </header>
 
-  <main class="empresas-main">
-    <a href="{{ url_for('index') }}" class="empresas-back"><i class="fas fa-arrow-left"></i> Voltar para o Início</a>
-    <h1 class="empresas-title">Minhas Empresas</h1>
-    <p class="empresas-subtitle">Gerencie todas as suas empresas cadastradas na plataforma</p>
-
-    <!-- Cards de estatísticas -->
-    <div class="empresas-stats-row">
-      <div class="empresas-stat-card">
-        <div class="empresas-stat-label">Total de Empresas</div>
-        <div class="empresas-stat-value">{{ countEmpresas }}</div>
-        <div class="empresas-stat-icon"><i class="fas fa-cog"></i></div>
-      </div>
-      <div class="empresas-stat-card">
-        <div class="empresas-stat-label">Empresas Ativas</div>
-        <div class="empresas-stat-value">{{ countAtivas }}</div>
-        <div class="empresas-stat-icon"><i class="fas fa-circle" style="color:#2ecc71;"></i></div>
-      </div>
-      <div class="empresas-stat-card">
-        <div class="empresas-stat-label">Avaliação Média</div>
-        <div class="empresas-stat-value" style="color:#f4b400;">4.8</div>
-        <div class="empresas-stat-icon"><i class="fas fa-star" style="color:#f4b400;"></i></div>
+  <!-- Seção hero específica para salões -->
+  <section class="hero saloes-hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Encontre {{ categoria }} em Piripiri</h1>
+        <p>Descubra e agende com os melhores profissionais perto de você</p>
+        <p class="login-hint">Faça login para agendar seus serviços favoritos</p>
       </div>
     </div>
+  </section>
 
-    <!-- Cards de empresas -->
-    <div class="empresas-grid">
-
-
-      {% if empresas %} 
-        {% for empresa in empresas %}
-          <article class="empresa-card">
-            <div class="empresa-imagem" aria-label="Imagem da Empresa"></div>
-            <h3 class="empresa-nome">{{ empresa.nome_fantasia }}
-              {% if empresa.Ativo == true %}
-                <span class="empresa-status ativo"> - Ativo</span>
-              {% else %}
-                <span class="empresa-status inativo"> - Inativo</span>
-              {% endif %}
-            </h3>
-            <div class="info-row">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>{{ empresa.endereco }}</span>
-            </div>
-            <p class="tags">{{ empresa.categoria }}</p>
-            <a href="{{ url_for('dashboard_empresa', id_empresa=empresa.id) }}" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
-          </article>
-        {% endfor %}
-      {% else %}
-        <p>Você ainda não tem nenhuma empresa</p>
-      {% endif %}
+  <!-- Seção de filtros -->
+  <section class="filtros">
+    <div class="container">
+      <div class="filtros-wrapper">
+        <button class="filtro-btn ativo" aria-label="Mostrar todos os {{ categoria }}">Todos os {{ categoria }}</button>
+      </div>
     </div>
-    <div class="center-btn">
-      <a href="{{ url_for('empresas.cadastrar_empresa') }}" class="btn-outline empresas-cadastrar-btn"><i class="fas fa-plus"></i> Cadastrar Nova Empresa</a>
+  </section>
+
+
+
+  <!-- Seção de empresas -->
+  <section class="empresas">
+    <div class="container">
+      <div class="empresas-grid">
+        {% if empresas %} 
+          {% for empresa in empresas %}
+            <article class="empresa-card">
+              <img src="{{ empresa.banner_imagem }}" alt="Imagem da {{ empresa.nome }}" class="empresa-imagem" ></img>
+              <h3 class="empresa-nome">{{ empresa.nome_fantasia }}</h3>
+              <div class="info-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ empresa.endereco }}</span>
+              </div>
+              <div class="info-row">
+                <i class="far fa-clock"></i>
+                <span>{{ empresa.horario_funcionamento }}</span>
+              </div>
+              <p class="tags">{{ empresa.categoria }}</p>
+              <a href="{{ url_for('selecionar_empresa', id_empresa=empresa.id) }}" class="btn-green">Agendar Agora</a>
+            </article>
+          {% endfor %}
+        {% else %}
+        <!-- Card de exemplo -->
+        <p>Nenhuma empresa encontrada</p>
+        {% endif %}
+      </div>
+
+      <div class="center-btn">
+          <button class="btn-load" aria-label="Carregar mais salões">Carregar Mais</button>
+      </div>
     </div>
-  </main>
+  </section>
 
   <!-- Rodapé -->
   <footer class="footer">
     <div class="container footer-grid">
       <div>
         <h4>Piripiri</h4>
-        <p>Agende seus serviços em Piripiri com facilidade. Encontre e agende profissionais confiáveis em sua cidade.</p>
+        <p>Agende seus serviços com facilidade.</p>
       </div>
+
       <div>
         <h4>Serviços</h4>
         <ul>
@@ -161,13 +165,15 @@
           <li>Prestador de Serviço</li>
         </ul>
       </div>
+
       <div>
         <h4>Contato</h4>
         <p>support@piripiri.com</p>
-        <p>+55 (86) 9999-9999</p>
+        <p>+55 (88) 9999-9999</p>
         <p>Piripiri, PI - Brasil</p>
       </div>
     </div>
+
     <div class="copy">
       © 2025 Piripiri. Todos os direitos reservados.
     </div>
@@ -231,4 +237,4 @@ if (user !== null) {
   }
 }
 </script>
-</html> 
+</html>

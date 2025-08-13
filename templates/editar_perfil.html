@@ -37,24 +37,33 @@
     </div>
     <nav class="sidebar-links">
       <ul>
-        <li><a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="{{ url_for('saloes') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
-        <li><a href="#"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
-        <li><a href="#"><i class="fas fa-stethoscope"></i> Clínica</a></li>
-        <li><a href="#"><i class="fas fa-utensils"></i> Restaurantes</a></li>
-        <li><a href="#"><i class="fas fa-dumbbell"></i> Academias</a></li>
-        <li><a href="#"><i class="fas fa-dog"></i> Pet Shops</a></li>
-        <li><a href="#"><i class="fas fa-search"></i> Buscar</a></li>
-        <hr />
+        <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Salão de Beleza') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Oficina Mecânica') }}"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Clínica Médica') }}"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Prestador de Serviço') }}"><i class="fas fa-user-cog"></i> Prestador de Serviço</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Restaurante') }}"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Academia') }}"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Pet Shop') }}"><i class="fas fa-paw"></i> Pet Shops</a></li>
+        <hr>
         <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
         <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
       </ul>
     </nav>
-    <div class="sidebar-bottom">
-      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
-        <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
-      </button>
-    </div>
+    
+    {% if user %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Sair
+        </a>
+      </div>
+    {% else %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.login') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+        </a>
+      </div>
+    {% endif %}
   </aside>
 
   <!-- Cabeçalho principal -->
@@ -67,12 +76,16 @@
       </div>
       <span class="logo">Piripiri</span>
       <div class="nav-right">
-        <a href="#" aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="#" aria-label="Perfil do usuário">
-          <i class="fas fa-user"></i>
-        </a>
+        <!-- link antigo {{url_for('auth.login')}}-->
+        {% if user %}
+          <a href="#" aria-label="Perfil do usuário">
+            <i class="fas fa-user"></i>
+          </a>
+        {% else %}
+          <a href="{{url_for('auth.login')}}">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
       </div>
     </nav>
   </header>
@@ -82,29 +95,29 @@
     <h1 class="edit-profile-title">Editar Perfil</h1>
     <p class="edit-profile-subtitle">Atualize suas informações pessoais e de contato</p>
 
-    <form class="edit-profile-form">
+    <form class="edit-profile-form" action="{{ url_for('usuario.atualizar_dados_usuario') }}" method="POST" enctype="multipart/form-data">
       <!-- Foto de Perfil -->
-      <section class="edit-profile-card">
-        <h2 class="edit-profile-section-title">Foto de Perfil</h2>
-        <p class="edit-profile-section-desc">Clique na foto para alterar sua imagem de perfil</p>
-        <div class="edit-profile-avatar-block">
-          <div class="edit-profile-avatar">
-            JS
-            <label class="edit-profile-avatar-camera">
-              <input type="file" accept="image/*" style="display:none;">
-              <i class="fas fa-camera"></i>
-            </label>
-          </div>
-          <div class="edit-profile-avatar-info">
-            <div class="edit-profile-avatar-title">Alterar foto</div>
-            <div class="edit-profile-upload-info">JPG, PNG ou GIF. Máximo 2MB.</div>
-            <label class="edit-profile-upload-label">
-              <span class="edit-profile-upload-btn"><i class="fas fa-upload"></i> Escolher arquivo</span>
-              <input type="file" accept="image/*" style="display:none;">
-            </label>
-          </div>
+    <section class="edit-profile-card">
+      <h2 class="edit-profile-section-title">Foto de Perfil</h2>
+      <p class="edit-profile-section-desc">Clique na foto para alterar sua imagem de perfil</p>
+      <div class="edit-profile-avatar-block">
+        <div class="edit-profile-avatar" id="avatar-preview">
+            <!-- Ícone inicial ou imagem atual -->
+            <span id="avatar-initials"><i class="fas fa-camera"></i></span>
+            <img id="avatar-image" src="" alt="Preview" style="display:none;">
+            <label for="foto_perfil" class="edit-profile-avatar-camera"></label>
         </div>
-      </section>
+        <div class="edit-profile-avatar-info">
+            <div class="edit-profile-avatar-title">Alterar foto</div>
+            <div class="edit-profile-upload-info" id="file-info">JPG, PNG ou GIF. Máximo 2MB.</div>
+            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" style="display:none;">
+            <label for="foto_perfil" class="btn-upload">Escolher imagem</label>
+            <div id="file-selected-message" style="display:none; color:green; margin-top:5px;">
+                <i class="fas fa-check-circle"></i> Imagem selecionada
+            </div>
+        </div>
+      </div>
+    </section>
 
       <!-- Informações Pessoais -->
       <section class="edit-profile-card">
@@ -113,42 +126,47 @@
         <div class="edit-profile-fields">
           <div class="edit-profile-field-group">
             <label>Nome Completo *</label>
-            <input type="text" value="João Silva" required>
-          </div>
-          <div class="edit-profile-field-group">
-            <label>E-mail *</label>
-            <input type="email" value="joao.silva@email.com" required>
+            <input type="text" name="nome" value="{{ user.nome }}">
           </div>
         </div>
         <div class="edit-profile-field-group">
           <label>Telefone</label>
-          <input type="text" value="(86) 99999-9999">
+          <input type="text" name="telefone" value="{{ user.telefone }}" placeholder="(00) 00000-0000">
         </div>
         <div class="edit-profile-field-group">
-          <label>Descrição</label>
-          <textarea rows="3">Empreendedor apaixonado por conectar pessoas aos melhores serviços da cidade. Sempre em busca de novas oportunidades de negócio.</textarea>
+          <label>bio</label>
+          <textarea rows="3" name="bio">{{ user.bio }}</textarea>
           <small>Esta descrição aparecerá no seu perfil público.</small>
         </div>
       </section>
+      <div class="edit-profile-actions">
+        <button type="button" class="btn-outline">Cancelar</button>
+        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar Alterações</button>
+      </div>
+    </form>
 
-      <!-- Segurança -->
+    <!-- Segurança -->
+    <form action="{{ url_for('usuario.alterar_senha') }}" method="post">
       <section class="edit-profile-card">
         <h2 class="edit-profile-section-title">Segurança</h2>
         <p class="edit-profile-section-desc">Altere sua senha para manter sua conta segura</p>
+
         <div class="edit-profile-field-group">
           <label>Senha Atual *</label>
-          <input type="password" placeholder="Digite sua senha atual" required>
+          <input type="password" name="senha_atual" placeholder="Digite sua senha atual" required>
         </div>
+
         <div class="edit-profile-fields">
           <div class="edit-profile-field-group">
             <label>Nova Senha *</label>
-            <input type="password" placeholder="Digite a nova senha" required>
+            <input type="password" name="nova_senha" placeholder="Digite a nova senha" required>
           </div>
           <div class="edit-profile-field-group">
             <label>Confirmar Nova Senha *</label>
-            <input type="password" placeholder="Confirme a nova senha" required>
+            <input type="password" name="confirmar_senha" placeholder="Confirme a nova senha" required>
           </div>
         </div>
+
         <small class="edit-profile-password-info">Mínimo 8 caracteres</small>
         <div class="edit-profile-password-tips">
           <i class="fas fa-info-circle"></i>
@@ -163,7 +181,7 @@
 
       <div class="edit-profile-actions">
         <button type="button" class="btn-outline">Cancelar</button>
-        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar Alterações</button>
+        <button type="submit" class="btn-green"><i class="fas fa-save"></i> Salvar nova Senha</button>
       </div>
     </form>
   </main>
@@ -198,5 +216,109 @@
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <!-- Modal de Perfil do Usuário -->
+<div id="user-modal-container" class="user-modal-container" style="display:none;">
+  <div class="user-modal-content">
+    <button class="user-modal-close" onclick="fecharUserModal()" aria-label="Fechar modal">&times;</button>
+    <h2 class="user-modal-title">Perfil do Usuário</h2>
+    <p class="user-modal-subtitle">Informações da sua conta</p>
+    <div class="user-modal-avatar" id="userAvatar"></div>
+    <h3 class="user-modal-nome">{{ user.nome }}</h3>
+    <p class="user-modal-email">{{ user.email }}</p>
+    <p class="user-modal-bio">{{ user.bio }}</p>
+    <div class="user-modal-empresas">
+      <i class="fas fa-building"></i> empresas
+    </div>
+    <a href="{{ url_for('minhas_empresas') }}" class="btn-green">
+      <i class="fas fa-building"></i> Ver Minhas Empresas
+    </a>
+    <a href="{{ url_for('editar_perfil') }}" class="btn-outline">Editar Perfil</a>
+    <a href="{{ url_for('auth.logout') }}" class="user-modal-sair">logout</a>
+  </div>
+</div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const fileInput = document.getElementById("fotoPerfilInput");
+
+    const avatarCameraLabel = document.querySelector(".edit-profile-avatar-camera");
+    const uploadLabel = document.querySelector(".edit-profile-upload-label");
+
+    avatarCameraLabel?.addEventListener("click", () => fileInput.click());
+    uploadLabel?.addEventListener("click", () => fileInput.click());
+  });
+
+
+
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('foto_perfil');
+    const fileInfo = document.getElementById('file-info');
+    const fileMessage = document.getElementById('file-selected-message');
+    const avatarImage = document.getElementById('avatar-image');
+    const avatarInitials = document.getElementById('avatar-initials');
+
+    fileInput.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            // Atualiza o texto de informação
+            fileInfo.textContent = this.files[0].name;
+            fileMessage.style.display = 'block';
+            
+            // Cria preview da imagem
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                avatarImage.src = e.target.result;
+                avatarImage.style.display = 'block';
+                avatarInitials.style.display = 'none';
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+            
+            // Esconde a mensagem após 3 segundos
+            setTimeout(() => {
+                fileMessage.style.display = 'none';
+            }, 3000);
+        } else {
+            fileInfo.textContent = 'JPG, PNG ou GIF. Máximo 2MB.';
+            fileMessage.style.display = 'none';
+        }
+    });
+  })
+  // Cria o objeto user só se estiver definido no backend
+{% if user %}
+  const user = {
+    nome: "{{ user['nome']|e }}",
+    foto_perfil: "{{ user.get('foto_perfil', '')|e }}"
+  };
+{% else %}
+  const user = null;
+{% endif %}
+
+if (user !== null) {
+  const avatarEl = document.getElementById("userAvatar");
+
+  if (user.foto_perfil && user.foto_perfil !== "None" && user.foto_perfil !== "NULL" && user.foto_perfil !== "") {
+    avatarEl.innerHTML = `<img src="${user.foto_perfil}" alt="Foto de perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+  } else {
+    const nomes = user.nome.trim().split(" ");
+    const iniciais = nomes[0][0].toUpperCase() + (nomes[1] ? nomes[1][0].toUpperCase() : "");
+
+    avatarEl.textContent = iniciais;
+    avatarEl.style.backgroundColor = "#2C3E50";
+    avatarEl.style.color = "#FFF";
+    avatarEl.style.fontWeight = "bold";
+    avatarEl.style.fontSize = "1.5rem";
+    avatarEl.style.textAlign = "center";
+    avatarEl.style.display = "flex";
+    avatarEl.style.alignItems = "center";
+    avatarEl.style.justifyContent = "center";
+    avatarEl.style.borderRadius = "50%";
+    avatarEl.style.width = "64px";
+    avatarEl.style.height = "64px";
+  }
+}
+</script>
 </html> 

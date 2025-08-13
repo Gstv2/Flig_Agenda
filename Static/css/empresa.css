@@ -6,16 +6,10 @@
    BANNER DA EMPRESA
    ======================================== */
 
-.hero {
-   background: #0C2D48; 
-   min-height: 64px; 
-   padding-bottom: 0;
-}
-
 .perfil-banner {
   position: relative;
   background-color: #e5e5e5;
-  height: 220px;
+  height: 350px;
   border-bottom: 1px solid #ddd;
   overflow: hidden;
 }

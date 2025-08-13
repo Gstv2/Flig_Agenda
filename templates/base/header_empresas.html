@@ -1,0 +1,25 @@
+<!-- Cabeçalho principal -->
+<header class="hero">
+<nav class="navbar">
+    <div class="nav-left">
+    <button onclick="abrirMenu()" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+    </button>
+    </div>
+    
+    <span class="logo">Piripiri</span>
+    
+      <div class="nav-right">
+        <!-- link antigo {{url_for('auth.login')}}-->
+        {% if user %}
+          <a href="#" aria-label="Perfil do usuário">
+            <i class="fas fa-user"></i>
+          </a>
+        {% else %}
+          <a href="{{url_for('auth.login')}}">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
+      </div>
+</nav>
+</header>

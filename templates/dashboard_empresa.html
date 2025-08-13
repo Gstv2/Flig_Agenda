@@ -6,6 +6,7 @@
   <title>Dashboard da Empresa</title>
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico')}}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css')}}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_empresa.css') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,19 +25,32 @@
     <nav class="sidebar-links">
       <ul>
         <li><a href="{{url_for('index')}}"><i class="fas fa-home"></i> Início</a></li>
-        <li><a href="{{url_for('minhas_empresas')}}"><i class="fas fa-building"></i> Minhas Empresas</a></li>
-        <li><a href="#"><i class="fas fa-calendar"></i> Agendamentos</a></li>
-        <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Salão de Beleza') }}"><i class="fas fa-cut"></i> Salão de Beleza</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Oficina Mecânica') }}"><i class="fas fa-car"></i> Oficina Mecânica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Clínica Médica') }}"><i class="fas fa-stethoscope"></i> Clínica</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Prestador de Serviço') }}"><i class="fas fa-user-cog"></i> Prestador de Serviço</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Restaurante') }}"><i class="fas fa-utensils"></i> Restaurantes</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Academia') }}"><i class="fas fa-dumbbell"></i> Academias</a></li>
+        <li><a href="{{ url_for('empresas_por_categoria', categoria='Pet Shop') }}"><i class="fas fa-paw"></i> Pet Shops</a></li>
         <hr>
         <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
         <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda & Suporte</a></li>
       </ul>
     </nav>
-    <div class="sidebar-bottom">
-      <button class="btn-sidebar" href="{{ url_for('auth.logout') }}">
-        <i class="fas fa-sign-in-alt"></i> Sair
-      </button>
-    </div>
+    
+    {% if user %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.logout') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Sair
+        </a>
+      </div>
+    {% else %}
+      <div class="sidebar-bottom">
+        <a href="{{ url_for('auth.login') }}" class="btn-sidebar" >
+          <i class="fas fa-sign-in-alt"></i> Entrar / Cadastrar
+        </a>
+      </div>
+    {% endif %}
   </aside>
   <header class="hero">
     <nav class="navbar">
@@ -47,18 +61,21 @@
       </div>
       <span class="logo">Piripiri</span>
       <div class="nav-right">
-        <a href="#" aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="#" aria-label="Perfil do usuário">
-          <i class="fas fa-user"></i>
-        </a>
+        {% if user %}
+          <a href="#" aria-label="Perfil do usuário">
+            <i class="fas fa-user"></i>
+          </a>
+        {% else %}
+          <a href="{{url_for('auth.login')}}">
+            <i class="fas fa-user"></i>
+          </a>
+        {% endif %}
       </div>
     </nav>
   </header>
   <main>
     <div class="container dashboard-empresa">
-      <h1 class="dashboard-title">Dashboard</h1>
+      <h1 class="dashboard-title">Dashboard    <a href="{{ url_for('editar_empresa', id_empresa=empresa.id) }}">Editar</a></h1>
       <p class="dashboard-subtitle">Gerencie seus agendamentos e serviços</p>
       <section class="dashboard-cards">
         <div class="card-dashboard">
@@ -124,91 +141,92 @@
       </section>
     </div>
   </main>
+
+  <!-- Seção de Gerenciamento de Serviços -->
   <section class="empresa-gerenciamento container">
     <div class="box-servicos">
-      <div class="servicos-header">
-        <div>
-          <h2>Gerenciamento de Serviços</h2>
-          <p>Gerencie os serviços que você oferece</p>
+      <h2>Gerenciamento de Serviços</h2>
+      <p>Adicione e gerencie os serviços da sua empresa</p>
+
+      <form id="formAdicionarServico" method="POST" action="{{ url_for('servicos.criar_servico', empresa_id=empresa.id) }}">
+        <div class="form-group">
+          <label for="nome">Nome do Serviço</label>
+          <input type="text" id="nome" name="nome" required>
         </div>
-        <button class="btn-green btn-add-servico"><i class="fas fa-plus"></i> Adicionar Serviço</button>
-      </div>
-      <table class="servicos-tabela">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Duração</th>
-            <th>Preço</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Corte Masculino</td>
-            <td>Corte clássico e moderno para homens</td>
-            <td>30 min</td>
-            <td>R$ 50,00</td>
-            <td>
-              <button class="acao" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="acao" title="Excluir"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>Coloração</td>
-            <td>Coloração completa com produtos de qualidade</td>
-            <td>2 horas</td>
-            <td>R$ 150,00</td>
-            <td>
-              <button class="acao" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="acao" title="Excluir"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>Tratamento Capilar</td>
-            <td>Hidratação e reconstrução capilar</td>
-            <td>1 hora</td>
-            <td>R$ 120,00</td>
-            <td>
-              <button class="acao" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="acao" title="Excluir"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <td>Penteado</td>
-            <td>Penteados para eventos especiais</td>
-            <td>45 min</td>
-            <td>R$ 70,00</td>
-            <td>
-              <button class="acao" title="Editar"><i class="fas fa-pen"></i></button>
-              <button class="acao" title="Excluir"><i class="fas fa-trash"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="box-horario">
-      <h2><i class="far fa-clock"></i> Horário de Funcionamento</h2>
-      <p class="horario-desc">Configure os horários e dias de funcionamento da sua empresa</p>
-      <label for="horario-funcionamento" class="label-horario">Horário de Funcionamento</label>
-      <input type="text" id="horario-funcionamento" class="input-horario" value="Segunda a Sexta: 9:00 - 18:00, Sábado: 9:00 - 12:00" readonly>
-      <textarea class="textarea-horario" rows="2" placeholder="Descreva os horários de funcionamento da sua empresa"></textarea>
-      <div class="dias-funcionamento">
-        <label>Dias de Funcionamento</label>
-        <div class="dias-checkboxes">
-          <label><input type="checkbox" checked> Segunda-feira</label>
-          <label><input type="checkbox" checked> Terça-feira</label>
-          <label><input type="checkbox" checked> Quarta-feira</label>
-          <label><input type="checkbox" checked> Quinta-feira</label>
-          <label><input type="checkbox" checked> Sexta-feira</label>
-          <label><input type="checkbox" checked> Sábado</label>
-          <label><input type="checkbox"> Domingo</label>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao"></textarea>
         </div>
-        <span class="dias-desc">Selecione os dias em que sua empresa funciona</span>
+
+        <div class="form-group">
+          <label for="preco">Preço (R$)</label>
+          <input type="number" step="0.01" id="preco" name="preco" required>
+        </div>
+
+        <button type="submit" class="btn-green">Adicionar Serviço</button>
+      </form>
+
+      <hr>
+
+      <!-- Lista de serviços em cards -->
+      <div class="servicos-lista">
+        {% if servicos %}
+          {% for servico in servicos %}
+            <div class="servico-card">
+              <div class="servico-info">
+                <h3>{{ servico.nome }}</h3>
+                <p>{{ servico.descricao }}</p>
+                <span><strong>Preço:</strong> R$ {{ "%.2f"|format(servico.preco) }}</span>
+                <span><strong>ID:</strong> {{ servico.id }}</span>
+              </div>
+
+              <div class="servico-acoes">
+                <!-- Botão que abre o modal -->
+                <button class="btn-edit" onclick="abrirModal({{ servico.id }})">
+                  <i class="fas fa-pen"></i> Editar
+                </button>
+
+                <form method="POST" action="{{ url_for('servicos.deletar_servico', servico_id=servico.id) }}" onsubmit="return confirm('Tem certeza que deseja remover este serviço?')">
+                  <button type="submit" class="btn-delete">
+                    <i class="fas fa-trash"></i> Excluir
+                  </button>
+                </form>
+              </div>
+            </div>
+            <!-- Modal de edição -->
+            <div id="modal-editar-{{ servico.id }}" class="modal" style="display:none;">
+              <div class="modal-content">
+                <span class="close" onclick="fecharModal({{ servico.id }})">&times;</span>
+                <h2>Editar Serviço</h2>
+                <form method="POST" action="{{ url_for('servicos.atualizar_servico', servico_id=servico.id) }}">
+                  <div class="form-group">
+                    <label for="nome-{{ servico.id }}">Nome</label>
+                    <input type="text" id="nome-{{ servico.id }}" name="nome" value="{{ servico.nome }}" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="descricao-{{ servico.id }}">Descrição</label>
+                    <textarea id="descricao-{{ servico.id }}" name="descricao">{{ servico.descricao }}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="preco-{{ servico.id }}">Preço (R$)</label>
+                    <input type="number" step="0.01" id="preco-{{ servico.id }}" name="preco" value="{{ servico.preco }}" required>
+                  </div>
+                  <button type="submit" class="btn-green">Salvar</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+            <p>Nenhum servicos</p>
+        {% endif %}
       </div>
-      <button class="btn-green btn-salvar-horario">Salvar Horários</button>
     </div>
   </section>
+
+
+    <!-- Seção de Horário de Funcionamento -->
+
   <footer class="footer">
     <div class="container footer-grid">
       <div>
@@ -235,6 +253,85 @@
       © 2025 Piripiri. Todos os direitos reservados.
     </div>
   </footer>
+
+  <!-- Modal de Perfil do Usuário -->
+  <div id="user-modal-container" class="user-modal-container" style="display:none;">
+    <div class="user-modal-content">
+      <button class="user-modal-close" onclick="fecharUserModal()" aria-label="Fechar modal">&times;</button>
+      <h2 class="user-modal-title">Perfil do Usuário</h2>
+      <p class="user-modal-subtitle">Informações da sua conta</p>
+      <div class="user-modal-avatar" id="userAvatar"></div>
+      <h3 class="user-modal-nome">{{ user.nome }}</h3>
+      <p class="user-modal-email">{{ user.email }}</p>
+      <p class="user-modal-bio">{{ user.bio }}</p>
+      <div class="user-modal-empresas">
+        <i class="fas fa-building"></i> empresas
+      </div>
+      <a href="{{ url_for('minhas_empresas') }}" class="btn-green">
+        <i class="fas fa-building"></i> Ver Minhas Empresas
+      </a>
+      <a href="{{ url_for('editar_perfil') }}" class="btn-outline">Editar Perfil</a>
+      <a href="{{ url_for('auth.logout') }}" class="user-modal-sair">logout</a>
+    </div>
+  </div>
+
+
+
   <script src="{{url_for('static', filename='js/index.js')}}"></script>
+  <script>
+    // Cria o objeto user só se estiver definido no backend
+    {% if user %}
+      const user = {
+        nome: "{{ user['nome']|e }}",
+        foto_perfil: "{{ user.get('foto_perfil', '')|e }}"
+      };
+    {% else %}
+      const user = null;
+    {% endif %}
+
+    if (user !== null) {
+      const avatarEl = document.getElementById("userAvatar");
+
+      if (user.foto_perfil && user.foto_perfil !== "None" && user.foto_perfil !== "NULL" && user.foto_perfil !== "") {
+        avatarEl.innerHTML = `<img src="${user.foto_perfil}" alt="Foto de perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+      } else {
+        const nomes = user.nome.trim().split(" ");
+        const iniciais = nomes[0][0].toUpperCase() + (nomes[1] ? nomes[1][0].toUpperCase() : "");
+
+        avatarEl.textContent = iniciais;
+        avatarEl.style.backgroundColor = "#2C3E50";
+        avatarEl.style.color = "#FFF";
+        avatarEl.style.fontWeight = "bold";
+        avatarEl.style.fontSize = "1.5rem";
+        avatarEl.style.textAlign = "center";
+        avatarEl.style.display = "flex";
+        avatarEl.style.alignItems = "center";
+        avatarEl.style.justifyContent = "center";
+        avatarEl.style.borderRadius = "50%";
+        avatarEl.style.width = "64px";
+        avatarEl.style.height = "64px";
+      }
+    }
+
+
+
+function abrirModal(id) {
+  document.getElementById('modal-editar-' + id).style.display = 'block';
+}
+
+function fecharModal(id) {
+  document.getElementById('modal-editar-' + id).style.display = 'none';
+}
+
+// Fecha o modal ao clicar fora do conteúdo
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if(event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+  </script>
 </body>
-</html> 
+</html>
