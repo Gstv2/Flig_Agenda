@@ -7,7 +7,7 @@ from Controller.auth_controller import auth_bp, login_required, buscar_usuario_e
 from Controller.empresas_controller import empresas_bp, buscar_empresas, buscar_empresa_id, buscar_empresa_categoria, buscar_empresa_por_id
 from Controller.servicos_controller import servicos_bp, listar_servicos 
 
-app = Flask(__name__, template_folder='./templates', static_folder='./Static')
+app = Flask(__name__, template_folder='../templates', static_folder='../Static')
 app.secret_key = '2895c134719b7d446e1a6f72746b500c33fcb93874b7a604965dad9dfa3d038d'
 app.register_blueprint(usuario_bp)
 app.register_blueprint(auth_bp)
