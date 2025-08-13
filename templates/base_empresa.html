@@ -5,7 +5,9 @@
 {% block content %}
   <!-- Banner do perfil da empresa -->
   <section class="perfil-banner">
-    <div class="banner-imagem" aria-label="Imagem de fundo do salão"><img src="{{ empresa.banner_imagem }}" alt="banner"></div>
+    <div class="banner-imagem" aria-label="Imagem de fundo do salão" 
+        style="background-image: url('{{ empresa.banner_imagem }}');">
+    </div>
     <div class="banner-container">
       <div class="banner-info">
         <a href="{{ url_for('index') }}" class="btn-back">

@@ -80,28 +80,23 @@ def empresas_por_categoria(categoria):
 def selecionar_empresa(id_empresa):
     print(f"Buscando empresa ID: {id_empresa}")
     
-    empresa = buscar_empresa_id(id_empresa)
-    print('teste',empresa)
+    empresas = buscar_empresa_id(id_empresa)  # Agora fica claro que retorna uma lista
+    print('Empresas encontradas:', empresas)
     
-    if not empresa:
+    if not empresas:  # Se a lista estiver vazia
         flash("Empresa não encontrada", "error")
-        print('Empresa não encontrada')
         return redirect(url_for('home'))
     
-    # Verificação adicional de tipo
-    if isinstance(empresa, dict):
-        try:
-            nome_slug = empresa['nome_fantasia']
-            session['empresa_id'] = id_empresa
-            session.modified = True
-            return redirect(url_for('base_empresa', nome_empresa=nome_slug))
-        except KeyError:
-            flash("Dados da empresa incompletos", "error")
-            print('Dados da empresa incompletos')
-            return redirect(url_for('home'))
-    else:
-        flash("Formato de dados inválido para a empresa", "error")
-        print('Formato de dados inválido para a empresa')
+    empresa = empresas[0]  # Pega o primeiro item da lista
+    
+    try:
+        nome_slug = empresa['nome_fantasia']
+        session['empresa_id'] = id_empresa
+        print('mostrando aonde está o erro',session['empresa_id'] )
+        session.modified = True
+        return redirect(url_for('base_empresa', nome_empresa=nome_slug))
+    except KeyError:
+        flash("Dados da empresa incompletos", "error")
         return redirect(url_for('home'))
 
 
@@ -109,22 +104,27 @@ def selecionar_empresa(id_empresa):
 @app.route('/empresa/<nome_empresa>')
 def base_empresa(nome_empresa):
     user = session.get('user', {})
-    print(f"Sessão atual: {session}")  # Debug
     id_empresa = session.get('empresa_id')
     
+    print(f"Dados da sessão: {session}")  # Debug
+    
     if not id_empresa:
-        print("ID não encontrado na sessão")  # Debug
         flash("Sessão expirada, selecione a empresa novamente", "error")
         return redirect(url_for('home'))
     
-    empresa = buscar_empresa_id(id_empresa)
-    print(f"Empresa encontrada: {empresa}")  # Debug
+    empresas = buscar_empresa_id(id_empresa)
     
-    if not empresa:
+    if not empresas:
         flash("Empresa não encontrada", "error")
         return redirect(url_for('home'))
     
-    return render_template('base_empresa.html', empresa=empresa, user=user)
+    empresa = empresas[0]
+    nome_original = session.get('empresa_nome', '')
+    
+    return render_template('base_empresa.html', 
+                         empresa=empresa, 
+                         user=user,
+                         nome_original=nome_original)
 
 @app.route('/dashboard-empresa/<int:id_empresa>')
 @login_required
