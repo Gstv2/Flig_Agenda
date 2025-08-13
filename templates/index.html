@@ -105,7 +105,6 @@
       </div>
     </div>
   </header>
-  <img src="https://lvwpmfmxncajaiotlajk.supabase.co/storage/v1/object/public/fotosperfil/profile_nerysilva2006@gmail.com_5b6e235b-26c3-44ae-8b0b-f1dc52110bd1.jpeg">
 
   <!-- Seção de categorias -->
   <section class="categorias">
@@ -134,11 +133,11 @@
             <i class="fas fa-user-cog"></i>
             <span>Prestador de Serviço</span>
           </a>
-          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Restaurantes') }}">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Restaurante') }}">
             <i class="fas fa-utensils"></i>
             <span>Restaurantes</span>
           </a>
-          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Academias') }}">
+          <a class="categoria" href="{{ url_for('empresas_por_categoria', categoria='Academia') }}">
             <i class="fas fa-dumbbell"></i>
             <span>Academias</span>
           </a>
@@ -169,10 +168,6 @@
                 <i class="fas fa-map-marker-alt"></i>
                 <span>{{ empresa.endereco }}</span>
               </div>
-              <div class="info-row">
-                <i class="far fa-clock"></i>
-                <span>{{ empresa.horario_funcionamento }}</span>
-              </div>
               <p class="tags">{{ empresa.categoria }}</p>
               <a href="{{ url_for('selecionar_empresa', id_empresa=empresa.id) }}" class="btn-green">Agendar Agora</a>
             </article>
@@ -186,10 +181,6 @@
               <i class="fas fa-map-marker-alt"></i>
               <span>Av. Exemplo, 124</span>
             </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 19:00</span>
-            </div>
             <p class="tags">Corte · Coloração · Penteado</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
           </article>
@@ -200,10 +191,6 @@
             <div class="info-row">
               <i class="fas fa-map-marker-alt"></i>
               <span>Rua das Oficinas, 200</span>
-            </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 18:00</span>
             </div>
             <p class="tags">Mecânica · Pneus · Troca de Óleo</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
@@ -216,10 +203,6 @@
               <i class="fas fa-map-marker-alt"></i>
               <span>Av. Central, 321</span>
             </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 17:00</span>
-            </div>
             <p class="tags">Clínica Geral · Pediatria · Exames</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
           </article>
@@ -230,10 +213,6 @@
             <div class="info-row">
               <i class="fas fa-map-marker-alt"></i>
               <span>Rua da Tecnologia, 45</span>
-            </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 20:00</span>
             </div>
             <p class="tags">TI · Suporte · Redes</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
@@ -246,10 +225,6 @@
               <i class="fas fa-map-marker-alt"></i>
               <span>Rua das Flores, 88</span>
             </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 19:30</span>
-            </div>
             <p class="tags">Estética · Massagem · Spa</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
           </article>
@@ -260,10 +235,6 @@
             <div class="info-row">
               <i class="fas fa-map-marker-alt"></i>
               <span>Av. dos Mecânicos, 55</span>
-            </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 18:30</span>
             </div>
             <p class="tags">Reparos · Manutenção · Elétrica</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
@@ -276,10 +247,6 @@
               <i class="fas fa-map-marker-alt"></i>
               <span>Rua da Saúde, 12</span>
             </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 16:00</span>
-            </div>
             <p class="tags">Medicina · Família · Consultas</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>
           </article>
@@ -290,10 +257,6 @@
             <div class="info-row">
               <i class="fas fa-map-marker-alt"></i>
               <span>Rua Limpeza, 99</span>
-            </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 21:00</span>
             </div>
             <p class="tags">Limpeza · Residencial · Escritórios</p>
             <a href="{{ login }}" class="btn-green">Agendar Agora</a>

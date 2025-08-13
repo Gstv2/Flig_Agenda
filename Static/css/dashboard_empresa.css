@@ -1,3 +1,156 @@
+/* ===== Container Geral ===== */
+.empresa-gerenciamento {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ===== Título e Descrição ===== */
+.empresa-gerenciamento h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.empresa-gerenciamento p {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+/* ===== Formulário ===== */
+#formAdicionarServico {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+}
+
+#formAdicionarServico .form-group {
+  margin-bottom: 15px;
+}
+
+#formAdicionarServico label {
+  font-weight: bold;
+  color: #34495e;
+}
+
+#formAdicionarServico input,
+#formAdicionarServico textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.3s;
+}
+
+#formAdicionarServico input:focus,
+#formAdicionarServico textarea:focus {
+  border-color: #27ae60;
+}
+
+#formAdicionarServico button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#formAdicionarServico button:hover {
+  background: #219150;
+}
+
+/* ===== Lista de Cards ===== */
+.servicos-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ===== Card ===== */
+.servico-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.servico-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.12);
+}
+
+/* ===== Info do Card ===== */
+.servico-info h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.servico-info p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-bottom: 8px;
+}
+
+.servico-info span {
+  display: block;
+  font-size: 0.85rem;
+  color: #95a5a6;
+  margin-bottom: 4px;
+}
+
+/* ===== Ações ===== */
+.servico-acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-edit,
+.btn-delete {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-edit {
+  background: #2980b9;
+}
+
+.btn-edit:hover {
+  background: #21618c;
+}
+
+.btn-delete {
+  background: #e74c3c;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+
 .dashboard-empresa {
   margin: 40px auto 0 auto;
   padding-bottom: 40px;

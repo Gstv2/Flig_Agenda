@@ -132,12 +132,8 @@
               <i class="fas fa-map-marker-alt"></i>
               <span>{{ empresa.endereco }}</span>
             </div>
-            <div class="info-row">
-              <i class="far fa-clock"></i>
-              <span>Aberto até 19:00</span>
-            </div>
             <p class="tags">{{ empresa.categoria }}</p>
-            <a href="#" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
+            <a href="{{ url_for('dashboard_empresa', id_empresa=empresa.id) }}" class="btn-green"><i class="fas fa-cogs"></i> Acessar Dashboard</a>
           </article>
         {% endfor %}
       {% else %}

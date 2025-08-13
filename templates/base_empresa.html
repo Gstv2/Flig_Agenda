@@ -68,11 +68,15 @@
             </div>
           </div>
           <div class="info-row">
-            <i class="far fa-clock"></i>
-            <div>
-              <strong>Horário de Funcionamento</strong>
-              <p>Segunda - Sábado: 9:00 - 19:00</p>
-            </div>
+              <i class="far fa-clock"></i>
+              <div>
+                  <strong>Horário de Funcionamento</strong>
+                  {% if horarios %}
+                      <p>{{ horarios|safe }}</p>
+                  {% else %}
+                      <p>Horários não definidos</p>
+                  {% endif %}
+              </div>
           </div>
           <div class="info-row">
             <i class="fas fa-phone"></i>
@@ -90,14 +94,23 @@
     <div id="tab-servicos" class="tab-content" style="display:none">
       <div class="sobre">
         <h2>Serviços</h2>
-        <ul>
-          <li>Corte de cabelo feminino</li>
-          <li>Corte de cabelo masculino</li>
-          <li>Coloração</li>
-          <li>Penteados</li>
-          <li>Tratamentos capilares</li>
-          <li>Design de sobrancelhas</li>
-        </ul>
+        {% if servicos %}
+          <ul class="lista-servicos">
+            {% for servico in servicos %}
+              <li class="servico-item">
+                <div class="servico-info">
+                  <h3>{{ servico.nome }}</h3>
+                  <p>{{ servico.descricao }}</p>
+                  <div class="servico-meta">
+                    <span class="servico-preco">R$ {{ "%.2f"|format(servico.preco) }}</span>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>Esta empresa ainda não cadastrou serviços.</p>
+        {% endif %}
       </div>
     </div>
     <div id="tab-avaliacoes" class="tab-content" style="display:none">
@@ -106,11 +119,260 @@
         <p>Em breve, avaliações de clientes aparecerão aqui.</p>
       </div>
     </div>
-    <div id="tab-agendar" class="tab-content" style="display:none">
-      <div class="sobre">
-        <h2>Agendar</h2>
-        <p>Em breve, será possível agendar seu horário por aqui!</p>
+    <div id="tab-agendar" class="tab-content">
+        <div class="sobre">
+          <h2>Agendar Horário</h2>
+          
+          <div id="agendamento-container">
+            <!-- Passo 1: Selecionar serviço -->
+            <div id="passo-servico" class="passo-agendamento">
+              <h3>1. Selecione o serviço</h3>
+              <select id="servico-select" class="form-select">
+                <option value="">Selecione um serviço...</option>
+                {% for servico in servicos %}
+                <option value="{{ servico.id }}">{{ servico.nome }} - R$ {{ "%.2f"|format(servico.preco) }}</option>
+                {% endfor %}
+              </select>
+              <button id="btn-proximo-data" class="btn btn-primary mt-3" disabled>Próximo</button>
+            </div>
+            
+            <!-- Passo 2: Selecionar data -->
+            <div id="passo-data" class="passo-agendamento" style="display:none;">
+              <h3>2. Selecione a data</h3>
+              <input type="date" id="data-agendamento" class="form-control" min="{{ hoje }}" 
+                    {% if data_agendamento %}value="{{ data_agendamento }}"{% endif %}>
+              <div id="calendario-disponibilidade" class="mt-3"></div>
+              <button id="btn-voltar-servico" class="btn btn-secondary mt-3">Voltar</button>
+              <button id="btn-proximo-horario" class="btn btn-primary mt-3" 
+                      {% if not data_agendamento %}disabled{% endif %}>Próximo</button>
+            </div>
+            
+            <!-- Passo 3: Selecionar horário -->
+            <div id="passo-horario" class="passo-agendamento" style="display:none;">
+              <h3>3. Selecione os horários desejados</h3>
+              <p>Selecione um ou mais horários de 1 hora:</p>
+              <form id="form-horarios">
+                <div id="horarios-disponiveis" class="row mt-3">
+                  {% if horarios_disponiveis and horarios_disponiveis.slots %}
+                    {% for slot in horarios_disponiveis.slots %}
+                      <div class="col-md-3 mb-3">
+                        <div class="form-check">
+                          <input type="checkbox" 
+                                class="form-check-input slot-horario" 
+                                id="horario-{{ slot.inicio }}" 
+                                value="{{ slot.inicio }}"
+                                {% if not slot.disponivel %}disabled{% endif %}>
+                          <label class="form-check-label {% if not slot.disponivel %}text-muted{% endif %}" 
+                                for="horario-{{ slot.inicio }}">
+                            {{ slot.inicio }} - {{ slot.fim }}
+                            {% if not slot.disponivel %}(Indisponível){% endif %}
+                          </label>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    <div class="col-12">
+                      <div class="alert alert-info">
+                        {% if horarios_disponiveis and horarios_disponiveis.data %}
+                          Nenhum horário disponível para {{ horarios_disponiveis.data|format_data_br }}
+                        {% else %}
+                          Selecione uma data para ver os horários disponíveis
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </form>
+              <button id="btn-voltar-data" class="btn btn-secondary mt-3">Voltar</button>
+              <button id="btn-confirmar-selecao" class="btn btn-primary mt-3">Confirmar Seleção</button>
+            </div>
+            
+            <!-- Passo 4: Confirmar agendamento -->
+            <div id="passo-confirmacao" class="passo-agendamento" style="display:none;">
+              <h3>4. Confirme seu agendamento</h3>
+              <div class="card">
+                <div class="card-body">
+                  <p><strong>Serviço:</strong> <span id="confirmacao-servico"></span></p>
+                  <p><strong>Data:</strong> <span id="confirmacao-data"></span></p>
+                  <p><strong>Horários selecionados:</strong></p>
+                  <ul id="confirmacao-horarios"></ul>
+                </div>
+              </div>
+              <button id="btn-voltar-horario" class="btn btn-secondary mt-3">Voltar</button>
+              <button id="btn-confirmar-agendamento" class="btn btn-success mt-3">Confirmar Agendamento</button>
+            </div>
+          </div>
+          
+          <div id="agendamento-sucesso" style="display:none;">
+            <div class="alert alert-success">
+              <h4>Agendamento realizado com sucesso!</h4>
+              <p id="resumo-agendamento"></p>
+              <a href="/meus-agendamentos" class="btn btn-primary">Ver meus agendamentos</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Variáveis globais
+    let servicoSelecionado = null;
+    let dataSelecionada = "{{ data_agendamento if data_agendamento else '' }}";
+    let horariosSelecionados = [];
+    
+    // Elementos
+    const servicoSelect = document.getElementById('servico-select');
+    const btnProximoData = document.getElementById('btn-proximo-data');
+    const btnVoltarServico = document.getElementById('btn-voltar-servico');
+    const btnProximoHorario = document.getElementById('btn-proximo-horario');
+    const btnVoltarData = document.getElementById('btn-voltar-data');
+    const btnConfirmarSelecao = document.getElementById('btn-confirmar-selecao');
+    const btnVoltarHorario = document.getElementById('btn-voltar-horario');
+    const btnConfirmarAgendamento = document.getElementById('btn-confirmar-agendamento');
+    const dataAgendamento = document.getElementById('data-agendamento');
+    
+    // Se já tiver data selecionada (via Jinja2), mostrar passo 2
+    if (dataSelecionada) {
+      document.getElementById('passo-servico').style.display = 'none';
+      document.getElementById('passo-data').style.display = 'block';
+      document.getElementById('passo-horario').style.display = 'none';
+      btnProximoHorario.disabled = false;
+    }
+    
+    // Event Listeners
+    servicoSelect.addEventListener('change', function() {
+      servicoSelecionado = this.value;
+      btnProximoData.disabled = !this.value;
+    });
+    
+    btnProximoData.addEventListener('click', function() {
+      document.getElementById('passo-servico').style.display = 'none';
+      document.getElementById('passo-data').style.display = 'block';
+      document.getElementById('passo-horario').style.display = 'none';
+    });
+    
+    btnVoltarServico.addEventListener('click', function() {
+      document.getElementById('passo-data').style.display = 'none';
+      document.getElementById('passo-servico').style.display = 'block';
+      document.getElementById('passo-horario').style.display = 'none';
+    });
+    
+    dataAgendamento.addEventListener('change', function() {
+      dataSelecionada = this.value;
+      btnProximoHorario.disabled = !this.value;
+      
+      if (this.value) {
+        // Recarregar a página com a nova data para renderizar os slots via Jinja2
+        window.location.href = `?data=${this.value}`;
+      }
+    });
+    
+    btnProximoHorario.addEventListener('click', function() {
+      document.getElementById('passo-data').style.display = 'none';
+      document.getElementById('passo-horario').style.display = 'block';
+    });
+    
+    btnVoltarData.addEventListener('click', function() {
+      document.getElementById('passo-horario').style.display = 'none';
+      document.getElementById('passo-data').style.display = 'block';
+    });
+    
+    btnConfirmarSelecao.addEventListener('click', function() {
+      // Coletar horários selecionados
+      horariosSelecionados = [];
+      const checkboxes = document.querySelectorAll('#form-horarios input[type="checkbox"]:checked');
+      
+      checkboxes.forEach(checkbox => {
+        horariosSelecionados.push({
+          inicio: checkbox.value,
+          fim: (parseInt(checkbox.value.split(':')[0]) + 1) + ':00'
+        });
+      });
+      
+      if (horariosSelecionados.length === 0) {
+        alert('Selecione pelo menos um horário');
+        return;
+      }
+      
+      // Atualizar tela de confirmação
+      document.getElementById('confirmacao-servico').textContent = 
+        servicoSelect.options[servicoSelect.selectedIndex].text;
+      document.getElementById('confirmacao-data').textContent = 
+        formatarDataBr(dataSelecionada);
+      
+      const listaHorarios = document.getElementById('confirmacao-horarios');
+      listaHorarios.innerHTML = '';
+      
+      horariosSelecionados.forEach(horario => {
+        const li = document.createElement('li');
+        li.textContent = `${horario.inicio} - ${horario.fim}`;
+        listaHorarios.appendChild(li);
+      });
+      
+      document.getElementById('passo-horario').style.display = 'none';
+      document.getElementById('passo-confirmacao').style.display = 'block';
+    });
+    
+    btnVoltarHorario.addEventListener('click', function() {
+      document.getElementById('passo-confirmacao').style.display = 'none';
+      document.getElementById('passo-horario').style.display = 'block';
+    });
+    
+    btnConfirmarAgendamento.addEventListener('click', function() {
+      if (!servicoSelecionado || !dataSelecionada || horariosSelecionados.length === 0) {
+        alert('Dados incompletos');
+        return;
+      }
+      
+      const empresaId = {{ empresa.id }};
+      
+      // Enviar agendamentos para o servidor
+      fetch('/horarios/agendar-multiplos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          empresa_id: empresaId,
+          servico_id: servicoSelecionado,
+          data: dataSelecionada,
+          slots: horariosSelecionados
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        
+        // Mostrar mensagem de sucesso
+        document.getElementById('agendamento-container').style.display = 'none';
+        
+        const resumo = document.getElementById('resumo-agendamento');
+        resumo.innerHTML = `
+          <p><strong>Serviço:</strong> ${servicoSelect.options[servicoSelect.selectedIndex].text}</p>
+          <p><strong>Data:</strong> ${formatarDataBr(dataSelecionada)}</p>
+          <p><strong>Horários:</strong></p>
+          <ul>
+            ${horariosSelecionados.map(h => `<li>${h.inicio} - ${h.fim}</li>`).join('')}
+          </ul>
+        `;
+        
+        document.getElementById('agendamento-sucesso').style.display = 'block';
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao agendar: ' + error.message);
+      });
+    });
+    
+    // Função auxiliar para formatar data
+    function formatarDataBr(dataStr) {
+      if (!dataStr) return '';
+      const [ano, mes, dia] = dataStr.split('-');
+      return `${dia}/${mes}/${ano}`;
+    }
+  });
+
+  </script>
 {% endblock %}

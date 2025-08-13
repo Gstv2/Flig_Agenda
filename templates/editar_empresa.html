@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Cadastrar nova empresa na plataforma." />
   <meta name="keywords" content="cadastrar empresa, gestão, Piripiri" />
-  <title>Cadastrar Nova Empresa - Flig Agenda</title>
+  <title>Editar Empresa - Flig Agenda</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
@@ -95,7 +95,7 @@
     <h1 class="cadastrar-empresa-title">Cadastrar Nova Empresa</h1>
     <p class="cadastrar-empresa-subtitle">Preencha as informações da sua empresa para começar a receber agendamentos</p>
 
-    <form class="cadastrar-empresa-form" action="{{ url_for('empresas.cadastrar_empresa') }}" method="POST" enctype="multipart/form-data">
+    <form class="cadastrar-empresa-form" action="{{ url_for('empresas.editar_empresa', id_empresa=empresa.id) }}" method="POST" enctype="multipart/form-data">
       <!-- Informações Básicas -->
       <section class="cadastrar-empresa-card">
         <h2 class="cadastrar-empresa-section-title"><i class="fas fa-building"></i> Informações Básicas</h2>
@@ -103,15 +103,15 @@
         <div class="cadastrar-empresa-fields">
           <div class="cadastrar-empresa-field-group" style="grid-column: 1 / -1;">
             <label>Nome Fantasia *</label>
-            <input type="text" name="nome_fantasia" placeholder="Ex: Bella Estética" required>
+            <input type="text" name="nome_fantasia" placeholder="Ex: Bella Estética" value="{{ empresa.nome_fantasia}}" required>
           </div>
           <div class="cadastrar-empresa-field-group">
             <label>CNPJ *</label>
-            <input type="text" name="cnpj" placeholder="00.000.000/0000-00" required>
+            <input type="text" name="cnpj" placeholder="00.000.000/0000-00" value="{{ empresa.cnpj }}" required>
           </div>
           <div class="cadastrar-empresa-field-group">
             <label>Categoria *</label>
-            <select name="categoria" required>
+            <select name="categoria" value="{{ empresa.categoria }}" required>
               <option>Selecione uma categoria</option>
               <option value="Salão de Beleza">Salão de Beleza</option>
               <option value="Oficina Mecânica">Oficina Mecânica</option>
@@ -124,15 +124,15 @@
           </div>
           <div class="cadastrar-empresa-field-group">
             <label>Responsável *</label>
-            <input type="text" name="responsavel" placeholder="Nome do responsável" required>
+            <input type="text" name="responsavel" placeholder="Nome do responsável" value="{{ empresa.Responsavel }}" required>
           </div>
           <div class="cadastrar-empresa-field-group">
             <label>CPF do Responsável *</label>
-            <input type="text" name="cpf_responsavel" placeholder="000.000.000-00" required>
+            <input type="text" name="cpf_responsavel" placeholder="000.000.000-00" value="{{ empresa.cpf_responsavel }}" required>
           </div>
           <div class="cadastrar-empresa-field-group" style="grid-column: 1 / -1;">
             <label>Descrição *</label>
-            <textarea name="descricao" rows="3" placeholder="Descreva sua empresa..." required></textarea>
+            <textarea name="descricao" rows="3" placeholder="Descreva sua empresa..." required>{{ empresa.descricao }}</textarea>
           </div>
         </div>
       </section>
@@ -144,15 +144,15 @@
         <div class="cadastrar-empresa-fields">
           <div class="cadastrar-empresa-field-group">
             <label>E-mail *</label>
-            <input type="email" name="email" placeholder="contato@empresa.com" required>
+            <input type="email" name="email" placeholder="contato@empresa.com" value="{{ empresa.email}}" required>
           </div>
           <div class="cadastrar-empresa-field-group">
             <label>Telefone *</label>
-            <input type="text" name="telefone" placeholder="(86) 99999-9999" required>
+            <input type="text" name="telefone" placeholder="(86) 99999-9999" value="{{ empresa.telefone }}" required>
           </div>
           <div class="cadastrar-empresa-field-group" style="grid-column: 1 / -1;">
             <label>Endereço Completo *</label>
-            <input type="text" name="endereco" placeholder="Rua, número, bairro, cidade - Estado, CEP" required>
+            <input type="text" name="endereco" placeholder="Rua, número, bairro, cidade - Estado, CEP" value="{{ empresa.endereco }}" required>
           </div>
         </div>
       </section>
@@ -168,17 +168,16 @@
             <div class="cadastrar-empresa-banner-title">Upload do Banner</div>
             <div class="cadastrar-empresa-banner-desc">Arraste e solte uma imagem aqui, ou clique para selecionar</div>
             <label class="cadastrar-empresa-upload-label">
-              <input type="file" name="banner" id="bannerInput" accept="image/*" style="display:none;">
+              <input type="file" name="banner" id="bannerInput" accept="image/*" style="display:none;" value="{{ empresa.banner_imagem }}" >
               <span class="cadastrar-empresa-upload-btn"><i class="fas fa-upload"></i> Escolher Arquivo</span>
             </label>
             <div class="cadastrar-empresa-banner-info">PNG, JPG ou GIF. Máximo 5MB. Recomendado: 1200×400px</div>
           </div>
           <div id="bannerPreview" style="display:none; margin-top:20px;">
-            <img id="previewImage" src="#" alt="Pré-visualização do banner" style="max-width:100%; max-height:200px; border-radius:8px;">
+            <img id="previewImage" src="{{ empresa.banner_imagem }}" alt="Pré-visualização do banner" style="max-width:100%; max-height:200px; border-radius:8px;" >
           </div>
         </div>
       </section>
-
       <section class="cadastrar-empresa-card">
           <h2 class="cadastrar-empresa-section-title"><i class="fas fa-clock"></i> Horário de Funcionamento</h2>
           <p class="cadastrar-empresa-section-desc">Defina os horários em que sua empresa atende</p>
@@ -411,40 +410,10 @@
               </div>
           </div>
       </section>
-      <section class="cadastrar-empresa-card">
-        <h2 class="cadastrar-empresa-section-title"><i class="fas fa-concierge-bell"></i> Serviços Oferecidos</h2>
-        <p class="cadastrar-empresa-section-desc">Adicione os serviços que sua empresa oferece</p>
-        
-        <div class="servicos-container" id="servicosContainer">
-            <!-- Serviços serão adicionados aqui dinamicamente -->
-            <div class="servico-item">
-                <div class="servico-field-group">
-                    <label>Nome do Serviço *</label>
-                    <input type="text" name="servicos[0][nome]" placeholder="Ex: Corte de Cabelo" required>
-                </div>
-                <div class="servico-field-group">
-                    <label>Preço (R$) *</label>
-                    <input type="number" name="servicos[0][preco]" placeholder="Ex: 50.00" min="0" step="0.01" required>
-                </div>
-                <div class="servico-field-group">
-                    <label>Descrição</label>
-                    <textarea name="servicos[0][descricao]" rows="2" placeholder="Descreva o serviço..."></textarea>
-                </div>
-                <button type="button" class="btn-remove-servico" onclick="removerServico(this)">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        </div>
-        
-        <button type="button" class="btn-add-servico" onclick="adicionarServico()">
-            <i class="fas fa-plus"></i> Adicionar Serviço
-        </button>
-    </section>
-
 
       <div class="cadastrar-empresa-actions">
-        <a  class="btn-outline" href="{{ url_for('minhas_empresas')}}">Cancelar</a>
-        <button type="submit" class="btn-green"><i class="fas fa-building"></i> Criar Empresa</button>
+        <a  class="btn-outline" href="{{ url_for( 'empresas.excluir_empresa', id_empresa=empresa.id )}}">Excluir</a>
+        <button type="submit" class="btn-green"><i class="fas fa-building"></i> Salvar Empresa</button>
       </div>
     </form>
   </main>
@@ -479,6 +448,7 @@
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/editar_empresa.js') }}"></script>
   <script src="{{ url_for('static', filename='js/cadastrar_empresa.js') }}"></script>
   <!-- Modal de Perfil do Usuário -->
 <div id="user-modal-container" class="user-modal-container" style="display:none;">

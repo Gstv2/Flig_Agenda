@@ -1,14 +1,19 @@
+from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, session, flash, request
 from urllib.parse import unquote  # Adicione no topo do arquivo
 from Controller.usuario_controller import usuario_bp
+from Controller.horarios_controller import get_horarios_disponiveis, horario_bp, get_horarios_empresa, formatar_horarios, horarios_disponiveis_dict
 from Controller.auth_controller import auth_bp, login_required, buscar_usuario_email
 from Controller.empresas_controller import empresas_bp, buscar_empresas, buscar_empresa_id, buscar_empresa_categoria, buscar_empresa_por_id
+from Controller.servicos_controller import servicos_bp, listar_servicos 
 
-app = Flask(__name__, template_folder='../templates', static_folder='../Static')
+app = Flask(__name__, template_folder='./templates', static_folder='./Static')
 app.secret_key = '2895c134719b7d446e1a6f72746b500c33fcb93874b7a604965dad9dfa3d038d'
 app.register_blueprint(usuario_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(empresas_bp)
+app.register_blueprint(horario_bp)
+app.register_blueprint(servicos_bp)
 
 
 # Rota principal com nome específico
@@ -20,6 +25,7 @@ def index():  # Nomeie como 'index' para usar no url_for
 def home():  # Nomeie como 'index' para usar no url_for
     user = session.get('user', {})
     empresas = buscar_empresas()
+    
     if user and empresas:
         return render_template('index.html', empresas=empresas, user=user)
     elif empresas:
@@ -106,8 +112,6 @@ def base_empresa(nome_empresa):
     user = session.get('user', {})
     id_empresa = session.get('empresa_id')
     
-    print(f"Dados da sessão: {session}")  # Debug
-    
     if not id_empresa:
         flash("Sessão expirada, selecione a empresa novamente", "error")
         return redirect(url_for('home'))
@@ -119,19 +123,58 @@ def base_empresa(nome_empresa):
         return redirect(url_for('home'))
     
     empresa = empresas[0]
-    nome_original = session.get('empresa_nome', '')
+    
+    # Buscar horários de funcionamento
+    horarios = get_horarios_empresa(id_empresa)
+    
+    # Formatar horários para exibição
+    horarios_formatados = formatar_horarios(horarios) if horarios else None
+    
+    # Buscar serviços da empresa (você precisará implementar esta função)
+    servicos = listar_servicos(id_empresa)
+    
+    data_agendamento = request.args.get('data')
+    horarios_disponiveis = []
+    
+    if data_agendamento:
+        dados = horarios_disponiveis_dict(id_empresa, data_agendamento)
+        if dados and 'slots' in dados:
+            horarios_disponiveis = dados['slots']
     
     return render_template('base_empresa.html', 
                          empresa=empresa, 
                          user=user,
-                         nome_original=nome_original)
+                         horarios=horarios_formatados,
+                         servicos=servicos,
+                         horarios_disponiveis=horarios_disponiveis,
+                         data_agendamento=data_agendamento)
+    
+@app.template_filter('format_data_br')
+def format_data_br(value):
+    """Filtro para formatar data no formato brasileiro"""
+    if not value:
+        return ''
+    try:
+        data = datetime.strptime(value, '%Y-%m-%d')
+        return data.strftime('%d/%m/%Y')
+    except ValueError:
+        return value
+    
 
 @app.route('/dashboard-empresa/<int:id_empresa>')
 @login_required
 def dashboard_empresa(id_empresa):
     user = session.get('user', {})
-    empresa = buscar_empresa_id(id_empresa)
-    return render_template('dashboard_empresa.html', user=user, empresas=empresa)
+    empresa = buscar_empresa_id(id_empresa)[0]
+    servicos = listar_servicos(id_empresa)
+    return render_template('dashboard_empresa.html', user=user, empresa=empresa, servicos=servicos)
+
+@app.route('/editar-empresa/<int:id_empresa>')
+@login_required
+def editar_empresa(id_empresa):
+    user = session.get('user', {})
+    empresa = buscar_empresa_id(id_empresa)[0]
+    return render_template('editar_empresa.html', user=user, empresa=empresa)
 
 if __name__ == '__main__':
     app.run(debug=True)

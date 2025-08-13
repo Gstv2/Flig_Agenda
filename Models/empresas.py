@@ -157,3 +157,25 @@ class Empresas:
             return response.data
         except Exception as e:
             return None, str(e)
+        
+    # Adicione este método ao seu Empresas model
+    @staticmethod
+    def deletar_empresa(empresa_id):
+        """Remove uma empresa do banco de dados"""
+        try:
+            # Primeiro remove o banner se existir
+            empresa = Empresas.buscar_empresa_id(empresa_id)
+            if empresa and empresa[0].get('banner_imagem'):
+                try:
+                    old_url = empresa[0]['banner_imagem']
+                    old_filename = old_url.split('/')[-1].split('?')[0]
+                    supabase.storage.from_('bannerempresas').remove([old_filename])
+                except Exception as e:
+                    print(f"Erro ao remover banner: {str(e)}")
+            
+            # Depois remove a empresa
+            response = supabase.table('empresas').delete().eq('id', empresa_id).execute()
+            return True if response.data else False
+        except Exception as e:
+            print(f"Erro ao deletar empresa: {e}")
+            return False

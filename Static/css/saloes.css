@@ -6,6 +6,27 @@
    HERO ESPECÍFICO PARA SALÕES
    ======================================== */
 
+
+/* Adicione ao seu arquivo CSS */
+.form-check-input {
+  margin-right: 8px;
+}
+
+.form-check-label {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.form-check-input:checked + .form-check-label {
+  background-color: #e9f7ef;
+}
+
+.form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
 .saloes-hero {
   background-color: #0C2D48;
   color: white;

@@ -301,3 +301,69 @@ horario-funcionamento-container {
     color: #666;
     margin-top: 10px;
 }
+
+
+/* Estilos para a seção de serviços */
+.servicos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.servico-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    position: relative;
+}
+
+.servico-field-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.servico-field-group label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.btn-add-servico {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-add-servico:hover {
+    background-color: #45a049;
+}
+
+.btn-remove-servico {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.btn-remove-servico:hover {
+    background-color: #d32f2f;
+}
