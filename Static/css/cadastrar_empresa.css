@@ -244,18 +244,176 @@ horario-funcionamento-container {
 
 
 
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 1200px) {
+  .cadastrar-empresa-main {
+    max-width: 100%;
+    padding: 0 1.5rem;
+  }
+  
+  .cadastrar-empresa-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
 @media (max-width: 900px) {
   .cadastrar-empresa-main {
     max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .cadastrar-empresa-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .cadastrar-empresa-fields {
+    gap: 1.25rem;
+  }
+  
+  .servico-item {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .servico-field-group:nth-child(3),
+  .servico-field-group:nth-child(4) {
+    grid-column: span 1;
   }
 }
+
+@media (max-width: 768px) {
+  .cadastrar-empresa-main {
+    padding: 0 0.75rem;
+  }
+  
+  .cadastrar-empresa-card {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .cadastrar-empresa-fields {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .servico-item {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .servico-field-group {
+    margin-bottom: 0.5rem;
+  }
+  
+  .cadastrar-empresa-banner-dropzone {
+    padding: 1rem;
+  }
+  
+  .cadastrar-empresa-upload-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 700px) {
   .cadastrar-empresa-fields {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+  
   .cadastrar-empresa-card {
     padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+  
+  .cadastrar-empresa-main h1 {
+    font-size: 1.5rem;
+  }
+  
+  .cadastrar-empresa-main h2 {
+    font-size: 1.25rem;
+  }
+  
+  .cadastrar-empresa-main label {
+    font-size: 0.9rem;
+  }
+  
+  .cadastrar-empresa-main input,
+  .cadastrar-empresa-main select,
+  .cadastrar-empresa-main textarea {
+    font-size: 16px; /* Evita zoom no iOS */
+    padding: 0.75rem 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cadastrar-empresa-main {
+    padding: 0 0.5rem;
+  }
+  
+  .cadastrar-empresa-card {
+    padding: 1rem 0.5rem;
+  }
+  
+  .cadastrar-empresa-main h1 {
+    font-size: 1.25rem;
+  }
+  
+  .cadastrar-empresa-main h2 {
+    font-size: 1.125rem;
+  }
+  
+  .cadastrar-empresa-main label {
+    font-size: 0.85rem;
+  }
+  
+  .cadastrar-empresa-main input,
+  .cadastrar-empresa-main select,
+  .cadastrar-empresa-main textarea {
+    padding: 0.625rem 0.75rem;
+    font-size: 16px;
+  }
+  
+  .servico-item {
+    padding: 0.75rem;
+  }
+  
+  .cadastrar-empresa-banner-dropzone {
+    padding: 0.75rem;
+  }
+  
+  .cadastrar-empresa-upload-btn {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.85rem;
+  }
+  
+  .btn-add-servico,
+  .btn-remove-servico {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .cadastrar-empresa-main {
+    padding: 0 0.25rem;
+  }
+  
+  .cadastrar-empresa-card {
+    padding: 0.875rem 0.25rem;
+  }
+  
+  .cadastrar-empresa-main h1 {
+    font-size: 1.125rem;
+  }
+  
+  .cadastrar-empresa-main h2 {
+    font-size: 1rem;
+  }
+  
+  .servico-item {
+    padding: 0.5rem;
   }
 } 
 

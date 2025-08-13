@@ -115,17 +115,168 @@
   margin-top: 2rem;
 }
 
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 1200px) {
+  .minhas-empresas-main {
+    padding: 0 1.5rem;
+  }
+  
+  .empresas-stats-row {
+    gap: 1.5rem;
+  }
+  
+  .empresas-stat-card {
+    padding: 1rem 1.25rem;
+  }
+}
+
 @media (max-width: 1000px) {
   .empresas-cards-row {
     grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  
+  .empresas-stats-row {
+    gap: 1.25rem;
+  }
+  
+  .empresas-stat-card {
+    min-width: 160px;
   }
 }
+
+@media (max-width: 768px) {
+  .minhas-empresas-main {
+    padding: 0 1rem;
+  }
+  
+  .empresas-title {
+    font-size: 1.5rem;
+  }
+  
+  .empresas-subtitle {
+    font-size: 1rem;
+  }
+  
+  .empresas-stats-row {
+    gap: 1rem;
+  }
+  
+  .empresas-stat-card {
+    padding: 0.875rem 1rem;
+    min-width: 140px;
+  }
+  
+  .empresas-stat-label {
+    font-size: 0.9rem;
+  }
+  
+  .empresas-stat-value {
+    font-size: 1.75rem;
+  }
+  
+  .empresas-stat-icon {
+    font-size: 1.125rem;
+  }
+}
+
 @media (max-width: 700px) {
   .empresas-cards-row {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
+  
   .empresas-stats-row {
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
+  }
+  
+  .empresas-stat-card {
+    min-width: auto;
+  }
+  
+  .empresas-cadastrar-btn {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .minhas-empresas-main {
+    padding: 0 0.75rem;
+  }
+  
+  .empresas-title {
+    font-size: 1.25rem;
+  }
+  
+  .empresas-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .empresas-stats-row {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .empresas-stat-card {
+    padding: 0.75rem;
+  }
+  
+  .empresas-stat-label {
+    font-size: 0.85rem;
+  }
+  
+  .empresas-stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .empresas-stat-icon {
+    font-size: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .empresas-cadastrar-btn {
+    font-size: 0.95rem;
+    padding: 0.625rem 1rem;
+  }
+  
+  .empresa-card-status.ativo {
+    font-size: 0.8rem;
+    padding: 0.125rem 0.625rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .minhas-empresas-main {
+    padding: 0 0.5rem;
+  }
+  
+  .empresas-title {
+    font-size: 1.125rem;
+  }
+  
+  .empresas-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .empresas-stat-card {
+    padding: 0.625rem;
+  }
+  
+  .empresas-stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .empresas-cadastrar-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.875rem;
   }
 } 

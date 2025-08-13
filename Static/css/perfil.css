@@ -7,13 +7,19 @@
 
 .user-modal-container {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 2000;
+  inset: 0;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
+
 .user-modal-content {
   background: #fff;
   border-radius: 20px;
@@ -26,7 +32,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: min(420px, 100%);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
+
+/* Respeitar áreas seguras em iOS */
+.user-modal-container { 
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
 .user-modal-close {
   position: absolute;
   top: 18px; right: 18px;
@@ -38,9 +58,11 @@
   font-weight: bold;
   transition: color 0.2s;
 }
+
 .user-modal-close:hover {
   color: #222;
 }
+
 .user-modal-avatar {
   width: 90px;
   height: 90px;
@@ -55,40 +77,47 @@
   color: #666;
   overflow: hidden;
 }
+
 .user-modal-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
+
 .user-modal-title {
   font-size: 1.35rem;
   font-weight: 700;
   margin-bottom: 0.2rem;
   color: #222;
 }
+
 .user-modal-subtitle {
   font-size: 1rem;
   color: #6c757d;
   margin-bottom: 1.2rem;
 }
+
 .user-modal-nome {
   margin: 0.5rem 0 0.2rem 0;
   font-size: 1.15rem;
   font-weight: 700;
   color: #222;
 }
+
 .user-modal-email {
   color: #888;
   font-size: 0.98rem;
   margin-bottom: 0.7rem;
 }
+
 .user-modal-bio {
   color: #444;
   font-size: 1.01rem;
   margin-bottom: 1.2rem;
   line-height: 1.5;
 }
+
 .user-modal-empresas {
   color: #444;
   font-size: 1rem;
@@ -98,12 +127,14 @@
   justify-content: center;
   gap: 0.4rem;
 }
+
 /* Corrigir largura dos botões: só no modal */
 .user-modal-content .btn-green,
 .user-modal-content .btn-outline {
   width: 100%;
   margin-bottom: 0.7rem;
 }
+
 .user-modal-sair {
   width: 100%;
   margin-bottom: 0.7rem;
@@ -115,6 +146,198 @@
   font-size: 1rem;
   transition: color 0.2s;
 }
+
 .user-modal-sair:hover {
   color: #b71c1c;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .user-modal-container {
+    padding: 0.75rem;
+  }
+  
+  .user-modal-content {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .user-modal-close {
+    top: 16px;
+    right: 16px;
+    font-size: 1.75rem;
+  }
+  
+  .user-modal-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-modal-title {
+    font-size: 1.25rem;
+  }
+  
+  .user-modal-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .user-modal-nome {
+    font-size: 1.1rem;
+  }
+  
+  .user-modal-email {
+    font-size: 0.95rem;
+  }
+  
+  .user-modal-bio {
+    font-size: 0.98rem;
+  }
+  
+  .user-modal-empresas {
+    font-size: 0.95rem;
+  }
+  
+  .user-modal-content .btn-green,
+  .user-modal-content .btn-outline,
+  .user-modal-sair {
+    font-size: 0.95rem;
+    padding: 0.75rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-modal-container {
+    padding: 0.5rem;
+  }
+  
+  .user-modal-content {
+    padding: 1.5rem 1rem 1rem 1rem;
+    border-radius: 12px;
+  }
+  
+  .user-modal-close {
+    top: 12px;
+    right: 12px;
+    font-size: 1.5rem;
+  }
+  
+  .user-modal-avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+    margin-bottom: 0.875rem;
+  }
+  
+  .user-modal-title {
+    font-size: 1.125rem;
+  }
+  
+  .user-modal-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-modal-nome {
+    font-size: 1rem;
+  }
+  
+  .user-modal-email {
+    font-size: 0.9rem;
+  }
+  
+  .user-modal-bio {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-modal-empresas {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-modal-content .btn-green,
+  .user-modal-content .btn-outline,
+  .user-modal-sair {
+    font-size: 0.9rem;
+    padding: 0.625rem 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .user-modal-container {
+    padding: 0.25rem;
+  }
+  
+  .user-modal-content {
+    padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+    border-radius: 8px;
+  }
+  
+  .user-modal-close {
+    top: 8px;
+    right: 8px;
+    font-size: 1.25rem;
+  }
+  
+  .user-modal-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .user-modal-title {
+    font-size: 1rem;
+  }
+  
+  .user-modal-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .user-modal-nome {
+    font-size: 0.95rem;
+  }
+  
+  .user-modal-email {
+    font-size: 0.85rem;
+  }
+  
+  .user-modal-bio {
+    font-size: 0.9rem;
+  }
+  
+  .user-modal-empresas {
+    font-size: 0.85rem;
+  }
+  
+  .user-modal-content .btn-green,
+  .user-modal-content .btn-outline,
+  .user-modal-sair {
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+  }
+}
+
+/* ===============================
+   Correções de overflow do modal
+   =============================== */
+.user-modal-content {
+  width: min(400px, calc(100vw - 2rem));
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.user-modal-title,
+.user-modal-subtitle,
+.user-modal-nome,
+.user-modal-email,
+.user-modal-bio {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 } 
